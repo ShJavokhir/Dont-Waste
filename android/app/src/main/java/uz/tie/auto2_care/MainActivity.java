@@ -1,4 +1,4 @@
-package uz.tie.auto2_care;
+package uz.tie.dont_waste;
 
 import io.flutter.embedding.android.FlutterActivity;
 

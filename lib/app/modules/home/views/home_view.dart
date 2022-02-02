@@ -9,13 +9,17 @@ class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('HomeView'),
-        centerTitle: true,
+        iconTheme: Theme.of(context).iconTheme,
+        leading: Icon(
+          Icons.menu_rounded,
+        ),
+        title: Text(
+          'Waste2Cash',
+        ),
       ),
       body: Center(
         child: Text(
           'HomeView is working',
-          style: TextStyle(fontSize: 20),
         ),
       ),
     );

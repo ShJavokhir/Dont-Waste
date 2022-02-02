@@ -1,16 +1,27 @@
-# auto2_care
+# Waste2Cash
 
-A new Flutter project.
+## Use Cases
+- Information about different wastes and how they can be recycled
+- Recyclable market
+    - Sell your wastes
+    - Buy others waste to recycle
+- Waste Pickup
+    - Become a waste pickerx    
+    - Hire a waste picker
+- Recycling machines market
+- Local recycle centers
+- Report unwanted trash
+- Give Feedback
 
-## Getting Started
+## Entities
+- Waste
+    - Id
+    - Name
+    - Type
+    - Price
+    - Order type (buy/sell)
+    - Owner
+    - Location
 
-This project is a starting point for a Flutter application.
+    
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.

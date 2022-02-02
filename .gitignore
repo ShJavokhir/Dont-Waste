@@ -8,6 +8,11 @@
 .buildlog/
 .history
 .svn/
+scraper.py
+forward.py
+ios
+macos
+web
 
 # IntelliJ related
 *.iml
@@ -44,3 +49,5 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+

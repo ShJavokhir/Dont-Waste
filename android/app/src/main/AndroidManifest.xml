@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="uz.tie.auto2_care">
+    package="uz.tie.dont_waste">
    <application
-        android:label="auto2_care"
+        android:label="dont_waste"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
