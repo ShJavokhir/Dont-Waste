@@ -18,24 +18,33 @@ void main() {
           fontFamily: GoogleFonts.comfortaa().fontFamily,
           iconTheme: IconThemeData(color: Colors.black87, size: 20.sp),
           textTheme: TextTheme(
+              bodyText1: TextStyle(
+                  color: Colors.black87,
+                  fontSize: 15.sp,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: GoogleFonts.comfortaa().fontFamily),
               bodyText2: TextStyle(
-                  fontSize: 12.sp,
+                  fontSize: 14.sp,
                   fontWeight: FontWeight.bold,
                   color: Colors.black87,
                   fontFamily: GoogleFonts.comfortaa().fontFamily)),
           primaryColor: Colors.grey,
           appBarTheme: AppBarTheme(
+            iconTheme: IconThemeData(color: Colors.black87, size: 15.sp),
             systemOverlayStyle: SystemUiOverlayStyle(
-              statusBarColor: Colors.red,
+              statusBarColor: Colors.white,
+              systemNavigationBarColor: Colors.red,
+              systemNavigationBarIconBrightness: Brightness.dark,
+              systemNavigationBarDividerColor: Colors.red,
               statusBarIconBrightness: Brightness.dark,
               statusBarBrightness: Brightness.light,
             ),
             backgroundColor: Colors.transparent,
             elevation: 0,
-            centerTitle: true,
+            //centerTitle: true,
             titleTextStyle: TextStyle(
                 color: Colors.black87,
-                fontSize: 15.sp,
+                fontSize: 18.sp,
                 fontWeight: FontWeight.w600,
                 fontFamily: GoogleFonts.comfortaa().fontFamily),
           ),

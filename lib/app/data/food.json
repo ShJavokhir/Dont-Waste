@@ -1,0 +1,11 @@
+{
+    "title": "Hamburger",
+    "description": "description",
+    "location": "Tashkent",
+    "latitude": 1.4,
+    "altitude": 2.5,
+    "owner_id": 123,
+    "owner_name": "Jamshid",
+    "price": 123.3,
+    "quantity": 5.5
+}

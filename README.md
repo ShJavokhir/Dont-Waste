@@ -1,27 +1,24 @@
-# Waste2Cash
+# FeedMe
 
 ## Use Cases
-- Information about different wastes and how they can be recycled
-- Recyclable market
-    - Sell your wastes
-    - Buy others waste to recycle
-- Waste Pickup
-    - Become a waste pickerx    
-    - Hire a waste picker
-- Recycling machines market
-- Local recycle centers
-- Report unwanted trash
-- Give Feedback
+
+- Finding foods those are going to expiry soon
+- Post foods those are going to expiry soon for cheaper price, instead of wasting
+- Donate food
+- Add your products to app with their expiry date, so you will not waste them
+- User authentication
 
 ## Entities
-- Waste
-    - Id
-    - Name
-    - Type
-    - Price
-    - Order type (buy/sell)
-    - Owner
-    - Location
+
+- Post
+    -  id
+    -  title
+    -  description
+    -  location
+    -  price
+    -  author
+    -  phone number
+
 
     
 

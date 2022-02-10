@@ -20,5 +20,9 @@ dev_dependencies:
     sdk: flutter
 
 flutter: 
+  assets:
+      - assets/images/burger.png
+      - assets/images/lunch.png
+      - assets/images/map.jpeg
   uses-material-design: true
 

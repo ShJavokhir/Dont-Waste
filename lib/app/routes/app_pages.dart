@@ -1,5 +1,11 @@
 import 'package:get/get.dart';
 
+import '../modules/choice_view/bindings/choice_view_binding.dart';
+import '../modules/choice_view/views/choice_view_view.dart';
+import '../modules/food_market/bindings/food_market_binding.dart';
+import '../modules/food_market/views/food_market_view.dart';
+import '../modules/food_preview/bindings/food_preview_binding.dart';
+import '../modules/food_preview/views/food_preview_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 
@@ -8,13 +14,28 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.HOME;
+  static const INITIAL = Routes.CHOICE_VIEW;
 
   static final routes = [
     GetPage(
       name: _Paths.HOME,
       page: () => HomeView(),
       binding: HomeBinding(),
+    ),
+    GetPage(
+      name: _Paths.CHOICE_VIEW,
+      page: () => ChoiceViewView(),
+      binding: ChoiceViewBinding(),
+    ),
+    GetPage(
+      name: _Paths.FOOD_MARKET,
+      page: () => FoodMarketView(),
+      binding: FoodMarketBinding(),
+    ),
+    GetPage(
+      name: _Paths.FOOD_PREVIEW,
+      page: () => FoodPreviewView(),
+      binding: FoodPreviewBinding(),
     ),
   ];
 }
