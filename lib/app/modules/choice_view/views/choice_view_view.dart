@@ -1,3 +1,5 @@
+import 'package:dont_waste/app/modules/become_sponsor/bindings/become_sponsor_binding.dart';
+import 'package:dont_waste/app/modules/become_sponsor/views/become_sponsor_view.dart';
 import 'package:dont_waste/app/modules/food_market/views/food_market_view.dart';
 import 'package:dont_waste/app/widgets/choice_card.dart';
 import 'package:dont_waste/app/widgets/divider.dart';
@@ -39,7 +41,7 @@ class ChoiceViewView extends GetView<ChoiceViewController> {
                 text: 'Become a sponsor',
                 imageUrl: 'assets/images/lunch.png',
                 callback: () {
-                  print("hi");
+                  Get.to(BecomeSponsorView());
                 },
               ),
               //ChoiceCard()

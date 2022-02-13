@@ -10,6 +10,7 @@ class FoodPreviewView extends GetView<FoodPreviewController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
           //automaticallyImplyLeading: false,
           title: Container(
@@ -77,7 +78,7 @@ class FoodPreviewView extends GetView<FoodPreviewController> {
                                       Icon(
                                         Icons.location_on_rounded,
                                         size: 17.sp,
-                                        color: Colors.white70,
+                                        color: Colors.white,
                                       ),
                                       SizedBox(
                                         width: 5,
@@ -87,9 +88,9 @@ class FoodPreviewView extends GetView<FoodPreviewController> {
                                           'Tashkent',
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
-                                              //fontSize: 11.sp,
-                                              color: Colors.white70,
-                                              fontWeight: FontWeight.normal),
+                                            //fontSize: 11.sp,
+                                            color: Colors.white,
+                                          ),
                                         ),
                                       )
                                     ],
@@ -113,7 +114,7 @@ class FoodPreviewView extends GetView<FoodPreviewController> {
                                       Icon(
                                         Icons.attach_money_rounded,
                                         size: 17.sp,
-                                        color: Colors.white70,
+                                        color: Colors.white,
                                       ),
                                       SizedBox(
                                         width: 5,
@@ -123,9 +124,9 @@ class FoodPreviewView extends GetView<FoodPreviewController> {
                                           '15000 SUM',
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
-                                              //fontSize: 11.sp,
-                                              color: Colors.white70,
-                                              fontWeight: FontWeight.normal),
+                                            //fontSize: 11.sp,
+                                            color: Colors.white,
+                                          ),
                                         ),
                                       )
                                     ],

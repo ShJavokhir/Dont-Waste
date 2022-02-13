@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/become_sponsor/bindings/become_sponsor_binding.dart';
+import '../modules/become_sponsor/views/become_sponsor_view.dart';
 import '../modules/choice_view/bindings/choice_view_binding.dart';
 import '../modules/choice_view/views/choice_view_view.dart';
 import '../modules/food_market/bindings/food_market_binding.dart';
@@ -36,6 +38,11 @@ class AppPages {
       name: _Paths.FOOD_PREVIEW,
       page: () => FoodPreviewView(),
       binding: FoodPreviewBinding(),
+    ),
+    GetPage(
+      name: _Paths.BECOME_SPONSOR,
+      page: () => BecomeSponsorView(),
+      binding: BecomeSponsorBinding(),
     ),
   ];
 }

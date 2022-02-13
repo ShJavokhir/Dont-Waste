@@ -14,6 +14,7 @@ class FoodMarketView extends GetView<FoodMarketController> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.white,
         extendBody: true,
         extendBodyBehindAppBar: true,
         appBar: AppBar(
