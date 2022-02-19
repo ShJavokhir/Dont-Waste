@@ -4,6 +4,7 @@ import 'package:dont_waste/app/data/constants/constants.dart';
 import 'package:dont_waste/app/modules/food_preview/views/food_preview_view.dart';
 import 'package:dont_waste/app/widgets/single_food_order.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sizer/sizer.dart';
 import 'package:get/get.dart';
 
@@ -70,11 +71,25 @@ class FoodMarketView extends GetView<FoodMarketController> {
                   physics: BouncingScrollPhysics(
                       parent: AlwaysScrollableScrollPhysics()),
                   children: [
+                    Container(
+                      width: 100,
+                      height: 100,
+                      child: GoogleMap(
+                        initialCameraPosition: CameraPosition(
+                          target: const LatLng(45.521563, -122.677433),
+                          zoom: 11.0,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 10),
                     SingleFoodOrder(
                       title: 'Delicious food3',
                       onPressed: () {
                         Get.to(FoodPreviewView());
                       },
+                    ),
+                    SizedBox(
+                      height: 10,
                     ),
                     SingleFoodOrder(
                       title: 'Delicious food7',
@@ -82,11 +97,17 @@ class FoodMarketView extends GetView<FoodMarketController> {
                         Get.to(FoodPreviewView());
                       },
                     ),
+                    SizedBox(
+                      height: 10,
+                    ),
                     SingleFoodOrder(
                       title: 'Delicious food',
                       onPressed: () {
                         Get.to(FoodPreviewView());
                       },
+                    ),
+                    SizedBox(
+                      height: 10,
                     ),
                     SingleFoodOrder(
                       title: 'Delicious food4',

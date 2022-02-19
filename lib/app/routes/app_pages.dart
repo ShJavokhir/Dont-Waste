@@ -30,19 +30,21 @@ class AppPages {
       binding: ChoiceViewBinding(),
     ),
     GetPage(
-      name: _Paths.FOOD_MARKET,
-      page: () => FoodMarketView(),
-      binding: FoodMarketBinding(),
-    ),
+        name: _Paths.FOOD_MARKET,
+        page: () => FoodMarketView(),
+        binding: FoodMarketBinding(),
+
+        //opaque: true,
+        transition: Transition.leftToRightWithFade),
     GetPage(
-      name: _Paths.FOOD_PREVIEW,
-      page: () => FoodPreviewView(),
-      binding: FoodPreviewBinding(),
-    ),
+        name: _Paths.FOOD_PREVIEW,
+        page: () => FoodPreviewView(),
+        binding: FoodPreviewBinding(),
+        transition: Transition.rightToLeftWithFade),
     GetPage(
-      name: _Paths.BECOME_SPONSOR,
-      page: () => BecomeSponsorView(),
-      binding: BecomeSponsorBinding(),
-    ),
+        name: _Paths.BECOME_SPONSOR,
+        page: () => BecomeSponsorView(),
+        binding: BecomeSponsorBinding(),
+        transition: Transition.leftToRightWithFade),
   ];
 }

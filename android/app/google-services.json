@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "151258726208",
+    "project_id": "food-waste-uz",
+    "storage_bucket": "food-waste-uz.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:151258726208:android:8aa205735f5e8ed82904a5",
+        "android_client_info": {
+          "package_name": "uz.tie.dont_waste"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "151258726208-pakhfau304c5inhh5jiifngsq8kke2mk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3FdqwOVxwCQA-ANgKjT6ja3P_E5wV8MI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "151258726208-pakhfau304c5inhh5jiifngsq8kke2mk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

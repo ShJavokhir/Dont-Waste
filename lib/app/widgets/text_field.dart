@@ -37,7 +37,7 @@ class CustomTextField extends StatelessWidget {
           //Type TextField
           width: double.infinity,
           height: isMultipleLine ? 150 : 60,
-          alignment: isMultipleLine ? Alignment.topLeft : Alignment.topCenter,
+          alignment: isMultipleLine ? Alignment.topLeft : Alignment.centerLeft,
           decoration: BoxDecoration(
             color: black4,
             borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0),

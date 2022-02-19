@@ -1,35 +1,39 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Food {
   String? title;
   String? description;
-  String? location;
-  double? latitude;
-  double? altitude;
-  int? ownerId;
+  GeoPoint? location;
+  DocumentReference<Map<String, dynamic>>? owner;
   String? ownerName;
   double? price;
   double? quantity;
+  String? phone_number;
+  String? photo_url;
+  int? views;
 
   Food(
       {this.title,
       this.description,
       this.location,
-      this.latitude,
-      this.altitude,
-      this.ownerId,
-      this.ownerName,
+      this.owner,
       this.price,
-      this.quantity});
+      this.quantity,
+      this.phone_number,
+      this.photo_url,
+      this.views});
 
   Food.fromJson(Map<String, dynamic> json) {
     title = json['title'];
     description = json['description'];
     location = json['location'];
-    latitude = json['latitude'];
-    altitude = json['altitude'];
-    ownerId = json['owner_id'];
-    ownerName = json['owner_name'];
+    owner = json['owner'];
+
     price = json['price'];
     quantity = json['quantity'];
+    phone_number = json['phone_number'];
+    photo_url = json['photo_url'];
+    views = json['views'];
   }
 
   Map<String, dynamic> toJson() {
@@ -37,12 +41,12 @@ class Food {
     data['title'] = title;
     data['description'] = description;
     data['location'] = location;
-    data['latitude'] = latitude;
-    data['altitude'] = altitude;
-    data['owner_id'] = ownerId;
-    data['owner_name'] = ownerName;
+    data['owner'] = owner;
     data['price'] = price;
     data['quantity'] = quantity;
+    data['phone_number'] = phone_number;
+    data['photo_url'] = photo_url;
+    data['views'] = views;
     return data;
   }
 }

@@ -27,21 +27,23 @@ class ChoiceViewView extends GetView<ChoiceViewController> {
                 text: 'Find food',
                 imageUrl: 'assets/images/burger.png',
                 callback: () {
-                  Get.to(FoodMarketView());
+                  //Get.to(() => FoodMarketView());
+                  Get.toNamed("/food-market");
                 },
               ),
               SizedBox(
-                height: 80,
+                height: 50,
               ),
               CustomDivider(text: "OR"),
               SizedBox(
-                height: 80,
+                height: 50,
               ),
               ChoiceCard(
                 text: 'Become a sponsor',
                 imageUrl: 'assets/images/lunch.png',
                 callback: () {
-                  Get.to(BecomeSponsorView());
+                  //Get.to(() => BecomeSponsorView());
+                  Get.toNamed("/become-sponsor");
                 },
               ),
               //ChoiceCard()

@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
@@ -7,14 +9,24 @@ class ChoiceCard extends StatelessWidget {
   final void Function() callback;
   ChoiceCard(
       {required this.text, required this.imageUrl, required this.callback}) {}
+  @override
+  void initState() {
+    //Firebase.initializeApp();
+    //super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+    // Firebase.initializeApp().whenComplete(() {
+    //   print("completed");
+    //   //setState(() {});
+    // });
+
     return Center(
       child: Container(
         alignment: Alignment.center,
         width: 60.w,
-        height: 25.h,
+        height: 30.h,
         decoration: BoxDecoration(
           color: Colors.white,
           boxShadow: [
