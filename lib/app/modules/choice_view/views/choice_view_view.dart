@@ -3,6 +3,7 @@ import 'package:dont_waste/app/modules/become_sponsor/views/become_sponsor_view.
 import 'package:dont_waste/app/modules/food_market/views/food_market_view.dart';
 import 'package:dont_waste/app/widgets/choice_card.dart';
 import 'package:dont_waste/app/widgets/divider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -26,7 +27,14 @@ class ChoiceViewView extends GetView<ChoiceViewController> {
               ChoiceCard(
                 text: 'Find food',
                 imageUrl: 'assets/images/burger.png',
-                callback: () {
+                callback: () async{
+                  // await FirebaseAuth.instance.verifyPhoneNumber(
+                  //   phoneNumber: '+998901756001',
+                  //   verificationCompleted: (PhoneAuthCredential credential) {},
+                  //   verificationFailed: (FirebaseAuthException e) {},
+                  //   codeSent: (String verificationId, int? resendToken) {},
+                  //   codeAutoRetrievalTimeout: (String verificationId) {},
+                  // );
                   //Get.to(() => FoodMarketView());
                   Get.toNamed("/food-market");
                 },

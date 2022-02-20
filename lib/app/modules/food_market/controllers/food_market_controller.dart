@@ -8,26 +8,14 @@ class FoodMarketController extends GetxController {
 
   final count = 0.obs;
   late FirebaseFirestore firestore;
+  final foods = <Food>[].obs;
 
   @override
-  void onInit() {
+  void onInit() async {
     print("hello");
     firestore = FirebaseFirestore.instance;
-    // firestore.collection("test").doc("test").set({
-    //   "test": "test",
-    // });
-    print("hello");
-    firestore
-        .collection("posts")
-        .doc("rsJ2ZXEUR4zpaVmyOzXR")
-        .get()
-        .then((value) {
-      //if(value.data() != null)
-      Food food = Food.fromJson(value.data()!);
-      print(food.phone_number);
-      //print((value["location"] as GeoPoint));
-      //print(value["location"]);
-    });
+    foods.value = await fetchFoods();
+    //print("look " + foods.value[0].price.toString());
     super.onInit();
   }
 
@@ -39,4 +27,16 @@ class FoodMarketController extends GetxController {
   @override
   void onClose() {}
   void increment() => count.value++;
+
+  Future<List<Food>> fetchFoods() async {
+    final List<Food> foods = [];
+    await firestore.collection("posts").get().then((value) {
+      //print(value.size);
+      value.docs.forEach((element) {
+        final food = Food.fromJson(element.data());
+        foods.add(food);
+      });
+    });
+    return foods;
+  }
 }

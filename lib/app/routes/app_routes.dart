@@ -8,6 +8,7 @@ abstract class Routes {
   static const FOOD_MARKET = _Paths.FOOD_MARKET;
   static const FOOD_PREVIEW = _Paths.FOOD_PREVIEW;
   static const BECOME_SPONSOR = _Paths.BECOME_SPONSOR;
+  static const AUTHENTICATION = _Paths.AUTHENTICATION;
 }
 
 abstract class _Paths {
@@ -17,4 +18,5 @@ abstract class _Paths {
   static const FOOD_MARKET = '/food-market';
   static const FOOD_PREVIEW = '/food-preview';
   static const BECOME_SPONSOR = '/become-sponsor';
+  static const AUTHENTICATION = '/authentication';
 }

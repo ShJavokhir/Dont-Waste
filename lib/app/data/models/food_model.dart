@@ -11,6 +11,7 @@ class Food {
   String? phone_number;
   String? photo_url;
   int? views;
+  String? city;
 
   Food(
       {this.title,
@@ -21,14 +22,15 @@ class Food {
       this.quantity,
       this.phone_number,
       this.photo_url,
-      this.views});
+      this.views,
+      this.city});
 
   Food.fromJson(Map<String, dynamic> json) {
     title = json['title'];
     description = json['description'];
     location = json['location'];
     owner = json['owner'];
-
+    city = json['city'];
     price = json['price'];
     quantity = json['quantity'];
     phone_number = json['phone_number'];
@@ -47,6 +49,7 @@ class Food {
     data['phone_number'] = phone_number;
     data['photo_url'] = photo_url;
     data['views'] = views;
+    data['city'] = city;
     return data;
   }
 }

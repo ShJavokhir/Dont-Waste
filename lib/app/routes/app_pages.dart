@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/authentication/bindings/authentication_binding.dart';
+import '../modules/authentication/views/authentication_view.dart';
 import '../modules/become_sponsor/bindings/become_sponsor_binding.dart';
 import '../modules/become_sponsor/views/become_sponsor_view.dart';
 import '../modules/choice_view/bindings/choice_view_binding.dart';
@@ -46,5 +48,10 @@ class AppPages {
         page: () => BecomeSponsorView(),
         binding: BecomeSponsorBinding(),
         transition: Transition.leftToRightWithFade),
+    GetPage(
+      name: _Paths.AUTHENTICATION,
+      page: () => AuthenticationView(),
+      binding: AuthenticationBinding(),
+    ),
   ];
 }

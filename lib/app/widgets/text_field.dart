@@ -6,12 +6,15 @@ import 'package:sizer/sizer.dart';
 class CustomTextField extends StatelessWidget {
   final String hint;
   final bool isMultipleLine;
+  final String defaultText;
   void Function(String) onChanged;
 
   CustomTextField(
       {required this.hint,
       required this.onChanged,
-      this.isMultipleLine = false});
+      this.isMultipleLine = false,
+      this.defaultText = ""
+      });
 
   @override
   Widget build(BuildContext context) {
@@ -43,9 +46,11 @@ class CustomTextField extends StatelessWidget {
             borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
           ),
           child: TextField(
+
             maxLines: isMultipleLine ? 6 : 1,
             onChanged: onChanged,
             decoration: InputDecoration(
+              hintText: defaultText,
               border: InputBorder.none,
             ),
             style: TextStyle(

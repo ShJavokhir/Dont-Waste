@@ -5,8 +5,10 @@ import 'package:sizer/sizer.dart';
 
 class SingleFoodOrder extends StatelessWidget {
   final String title;
+  final double price;
   final void Function() onPressed;
-  SingleFoodOrder({required this.onPressed, required this.title});
+  SingleFoodOrder(
+      {required this.onPressed, required this.title, required this.price});
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +97,7 @@ class SingleFoodOrder extends StatelessWidget {
                         width: 5,
                       ),
                       Text(
-                        '12500 sum',
+                        price.toString(),
                         style: TextStyle(
                             fontSize: 11.sp,
                             color: Colors.black54,

@@ -1,6 +1,7 @@
 import 'package:dont_waste/app/data/constants/colors.dart';
 import 'package:dont_waste/app/data/constants/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sizer/sizer.dart';
 import 'package:get/get.dart';
 
@@ -142,19 +143,36 @@ class FoodPreviewView extends GetView<FoodPreviewController> {
                       ),
                       Expanded(
                         flex: 1,
-                        child: Container(
-                          decoration: BoxDecoration(
-                              //color: yellow1,
-                              borderRadius: BorderRadius.circular(24)),
-                          child: ClipRRect(
-                            borderRadius:
-                                BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
-                            child: Image.asset(
-                              'assets/images/map.jpeg',
-                              width: double.infinity,
-                              height: double.infinity,
-                              fit: BoxFit.cover,
-                              alignment: Alignment.center,
+                        child: GestureDetector(
+                          // onTap: () {
+                          //   print("hello");
+                          // },
+                          child: Container(
+                            decoration: BoxDecoration(
+                                //color: yellow1,
+                                borderRadius: BorderRadius.circular(24)),
+                            child: ClipRRect(
+                              borderRadius:
+                                  BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
+                              child: GoogleMap(
+                                compassEnabled: false,
+                                indoorViewEnabled: true,
+                                zoomControlsEnabled: false,
+                                //liteModeEnabled: true,
+                                onTap: (LatLang) {
+                                  //should show on map
+                                  print("showing map");
+                                },
+                                //liteModeEnabled: true,
+                                zoomGesturesEnabled: false,
+                                rotateGesturesEnabled: false,
+                                scrollGesturesEnabled: false,
+                                mapType: MapType.normal,
+                                initialCameraPosition: CameraPosition(
+                                  target: const LatLng(45.521563, -122.677433),
+                                  zoom: 11.0,
+                                ),
+                              ),
                             ),
                           ),
                         ),
