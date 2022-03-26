@@ -12,6 +12,7 @@ import 'package:url_launcher/url_launcher.dart';
 class FoodPreviewView extends GetView<FoodPreviewController> {
   @override
   Widget build(BuildContext context) {
+    //print("debug" + controller.foodModel.photo_url);
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(

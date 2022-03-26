@@ -1,18 +1,23 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dont_waste/app/data/constants/colors.dart';
 import 'package:dont_waste/app/data/models/food_model.dart';
 import 'package:dont_waste/app/widgets/custom_loader_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:uuid/uuid.dart';
 
 class BecomeSponsorController extends GetxController {
   //TODO: Implement BecomeSponsorController
-
+  XFile? image;
+  final didImageSelected = false.obs;
   final title = "".obs;
   final description = "".obs;
   final quantity = 0.0.obs;
@@ -57,6 +62,19 @@ class BecomeSponsorController extends GetxController {
     )));
   }
 
+  Future<void> pickImage() async{
+    print("Picking image");
+    await ImagePicker().pickImage(
+        source: ImageSource.gallery).then((value) => {
+          if(value != null) image = value,
+    print("image picked"),
+          didImageSelected.value = true
+    }).catchError((onError){
+      Get.snackbar("Error", onError.toString());
+    });
+    print("image picking finished");
+
+  }
   Future<void> upload() async {
     showDialog(
       barrierDismissible: false,
@@ -70,16 +88,53 @@ class BecomeSponsorController extends GetxController {
         // );
       },
     );
+    var imageUrl = "no";
+    if(image != null){
+
+      //print(image.path);
+      // print("Uploading image");
+      // firebase_storage.UploadTask uploadTask;
+      //
+      // firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance
+      //     .ref()
+      //     .child('postImages')
+      //     .child('/${Uuid().v4()}.jpg');
+      //
+      // final metadata = firebase_storage.SettableMetadata(
+      //     contentType: 'image/jpeg',
+      //     customMetadata: {'picked-file-path': image!.path});
+      //
+      // uploadTask = ref.putFile(File(image!.path), metadata);
+      // await Future.value(uploadTask);
+
+      firebase_storage.FirebaseStorage storage =
+      await firebase_storage.FirebaseStorage.instance;
+      print("Instance got");
+      int ced = await image!.length();
+      await firebase_storage.FirebaseStorage.instance
+          .ref('postImages/${Uuid().v4()}.jpg')
+          .putFile(File(image!.path))
+          .then((p0) async {
+           imageUrl = await p0.ref.getDownloadURL();
+      });
+      print("Image url: " + imageUrl);
+      // StorageTaskSnapshot snapshot = await storage
+      //     .ref()
+      //     .child("admins/$adminId.png")
+      //     .putFile(uiData.profileImage)
+      //     .onComplete;
+      // print("2");
+    }
+
     final food = Food();
     food.title = title.value;
     food.description = description.value;
     food.location = GeoPoint(latitude.value, longitude.value);
-    food.phone_number = phoneNumber.value;
+    food.phone_number = phoneNumber.value==""?FirebaseAuth.instance.currentUser!.phoneNumber:phoneNumber.value;
     food.price = price.value;
     food.quantity = quantity.value;
     food.views = 0;
-    food.photo_url =
-        "https://cdn.pixabay.com/photo/2015/04/08/13/13/food-712665_1280.jpg";
+    food.photo_url = imageUrl==""?null: imageUrl;
     //final coordinates = Coordinates(latitude.value, longitude.value);
     List<Placemark> placemarks =
         await placemarkFromCoordinates(latitude.value, longitude.value);
@@ -87,9 +142,12 @@ class BecomeSponsorController extends GetxController {
     //final addresses = await Geocoder.local.findAddressesFromCoordinates(coordinates);
     //final first = addresses.first;
     food.city = placemarks[0].country;
+    food.postedTimestamp = DateTime.now().millisecondsSinceEpoch;
+    food.userId = FirebaseAuth.instance.currentUser!.uid;
     //print(placemarks[0].country);
     //print(placemarks[1].);
     final firestore = FirebaseFirestore.instance;
+
     firestore.collection("posts").add(food.toJson()).then((value) async {
       Get.back();
       Get.back();

@@ -7,6 +7,7 @@ import 'package:dont_waste/app/widgets/custom_error_dialog.dart';
 import 'package:dont_waste/app/widgets/custom_info_dialog.dart';
 import 'package:dont_waste/app/widgets/custom_loader_dialog.dart';
 import 'package:dont_waste/app/widgets/text_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -124,6 +125,55 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                     ),
                   ],
                 ),
+                SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child: Text(
+                    "Image",
+                    //controller.longitude.value.toString(),
+                    style: TextStyle(
+                      color: Colors.black54,
+                      fontWeight: FontWeight.normal,
+                      fontSize: 14.sp,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                GestureDetector(
+                  onTap: (){
+                    controller.pickImage();
+                  },
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    //Type TextField
+                    width: double.infinity,
+                    height: 60,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: black4,
+                      borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Obx(() => Icon(!controller.didImageSelected.value?Icons.image:Icons.done, color: !controller.didImageSelected.value?yellow1:Colors.green,)),
+                        SizedBox(width: 8,),
+                        Obx( () =>
+                           Text(!controller.didImageSelected.value?"Select image":"Image selected", style: TextStyle(
+                            color: !controller.didImageSelected.value?yellow1:Colors.green,
+                            fontSize: 14.sp,
+                          ),)
+
+                        )
+                      ],
+                    )
+                  ),
+                ),
+                //image here
                 SizedBox(
                   height: 20,
                 ),
@@ -602,6 +652,7 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                   height: 20,
                 ),
                 CustomTextField(
+                  defaultText: FirebaseAuth.instance.currentUser!.phoneNumber.toString(),
                     hint: "Phone number",
                     isMultipleLine: false,
                     onChanged: (text) {

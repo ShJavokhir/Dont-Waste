@@ -14,6 +14,10 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   //GlobalBindings().dependencies();
   await Firebase.initializeApp();
+  print("main");
+  print(FirebaseAuth.instance.currentUser!.uid);
+  print(FirebaseAuth.instance.currentUser!.phoneNumber);
+
   //FirebaseAuth.instance.signOut();
   runApp(Sizer(
     builder: (context, orientation, deviceType) {

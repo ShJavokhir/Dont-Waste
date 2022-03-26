@@ -13,6 +13,8 @@ class Food {
   String? photo_url;
   int? views;
   String? city;
+  String? userId;
+  int? postedTimestamp;
 
   Food(
       {this.title,
@@ -24,7 +26,10 @@ class Food {
       this.phone_number,
       this.photo_url,
       this.views,
-      this.city});
+      this.city,
+      this.userId,
+        this.postedTimestamp
+      });
 
   Food.fromJson(Map<String, dynamic> json) {
     title = json['title'];
@@ -37,6 +42,8 @@ class Food {
     phone_number = json['phone_number'];
     photo_url = json['photo_url'];
     views = json['views'];
+    userId = json['userId'];
+    postedTimestamp = json['postedTimestamp'];
   }
 
   Map<String, dynamic> toJson() {
@@ -51,6 +58,8 @@ class Food {
     data['photo_url'] = photo_url;
     data['views'] = views;
     data['city'] = city;
+    data['userId'] = userId;
+    data['postedTimestamp'] = postedTimestamp;
     return data;
   }
 }

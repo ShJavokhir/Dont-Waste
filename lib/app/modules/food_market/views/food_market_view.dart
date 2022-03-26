@@ -92,6 +92,7 @@ class FoodMarketView extends GetView<FoodMarketController> {
                           title: e.title ?? "null",
                           price: e.price ?? 0,
                           location: e.city ?? "Uzbekistan",
+                          photo_url: e.photo_url,
                           onPressed: () {
                             FoodPreviewBinding().dependencies();
                             Get.find<FoodPreviewController>().foodModel = e;

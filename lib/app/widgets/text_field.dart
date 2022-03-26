@@ -46,7 +46,6 @@ class CustomTextField extends StatelessWidget {
             borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
           ),
           child: TextField(
-
             maxLines: isMultipleLine ? 6 : 1,
             onChanged: onChanged,
             decoration: InputDecoration(

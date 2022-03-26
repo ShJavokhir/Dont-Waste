@@ -8,13 +8,16 @@ class SingleFoodOrder extends StatelessWidget {
   final String title;
   final double price;
   final String location;
+  final String? photo_url;
   final void Function() onPressed;
   SingleFoodOrder(
       {required this.id,
       required this.onPressed,
       required this.title,
       required this.price,
-      required this.location});
+      required this.location,
+        this.photo_url
+      });
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +46,7 @@ class SingleFoodOrder extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
                     child: Image.network(
-                      'https://cdn.pixabay.com/photo/2015/04/08/13/13/food-712665_1280.jpg',
+                      photo_url ?? 'https://cdn.pixabay.com/photo/2015/04/08/13/13/food-712665_1280.jpg',
                       fit: BoxFit.cover,
                     ),
                   ),
