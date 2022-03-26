@@ -1,5 +1,7 @@
 import 'package:dont_waste/app/modules/become_sponsor/bindings/become_sponsor_binding.dart';
 import 'package:dont_waste/app/modules/become_sponsor/views/become_sponsor_view.dart';
+import 'package:dont_waste/app/modules/food_market/bindings/food_market_binding.dart';
+import 'package:dont_waste/app/modules/food_market/controllers/food_market_controller.dart';
 import 'package:dont_waste/app/modules/food_market/views/food_market_view.dart';
 import 'package:dont_waste/app/widgets/choice_card.dart';
 import 'package:dont_waste/app/widgets/divider.dart';
@@ -36,6 +38,10 @@ class ChoiceViewView extends GetView<ChoiceViewController> {
                   //   codeAutoRetrievalTimeout: (String verificationId) {},
                   // );
                   //Get.to(() => FoodMarketView());
+                  FoodMarketBinding().dependencies();
+                  await Get.find<FoodMarketController>().setFoods();
+
+                  //await Future.delayed(Duration(seconds: 2));
                   Get.toNamed("/food-market");
                 },
               ),

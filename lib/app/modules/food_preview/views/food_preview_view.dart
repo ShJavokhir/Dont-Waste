@@ -1,3 +1,4 @@
+import 'package:dont_waste/app/core/utils/map_utility.dart';
 import 'package:dont_waste/app/data/constants/colors.dart';
 import 'package:dont_waste/app/data/constants/constants.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,7 @@ import 'package:sizer/sizer.dart';
 import 'package:get/get.dart';
 
 import '../controllers/food_preview_controller.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class FoodPreviewView extends GetView<FoodPreviewController> {
   @override
@@ -17,9 +19,9 @@ class FoodPreviewView extends GetView<FoodPreviewController> {
           title: Container(
             width: double.infinity,
             child: Hero(
-              tag: 'Delicious food' + '_foodTitleTag',
+              tag: controller.foodModel.id + '_foodTitleTag',
               child: Text(
-                "Delicious hamburger",
+                controller.foodModel.title ?? "null",
                 style: Theme.of(context).textTheme.bodyText2,
               ),
             ),
@@ -27,8 +29,11 @@ class FoodPreviewView extends GetView<FoodPreviewController> {
           centerTitle: true,
         ),
         floatingActionButton: FloatingActionButton(
-          heroTag: 'Delicious food_floatingButton',
-          onPressed: () {},
+          heroTag: controller.foodModel.id + '_floatingButton',
+          onPressed: () {
+
+            launch('tel://${controller.foodModel.phone_number!.replaceFirst("+", "")}');
+          },
           backgroundColor: yellow1,
           splashColor: Colors.white,
           child: Icon(Icons.call),
@@ -42,12 +47,13 @@ class FoodPreviewView extends GetView<FoodPreviewController> {
                 Container(
                   padding: EdgeInsets.all(18),
                   child: Hero(
-                    tag: 'Delicious food' + 'foodImageTag',
+                    tag: controller.foodModel.id + 'foodImageTag',
                     child: ClipRRect(
                       borderRadius:
                           BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
                       child: Image.network(
-                        'https://cdn.pixabay.com/photo/2015/04/08/13/13/food-712665_1280.jpg',
+                        controller.foodModel.photo_url ??
+                            'https://cdn.pixabay.com/photo/2015/04/08/13/13/food-712665_1280.jpg',
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -86,7 +92,7 @@ class FoodPreviewView extends GetView<FoodPreviewController> {
                                       ),
                                       Expanded(
                                         child: Text(
-                                          'Tashkent',
+                                          controller.foodModel.city!,
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                             //fontSize: 11.sp,
@@ -122,7 +128,9 @@ class FoodPreviewView extends GetView<FoodPreviewController> {
                                       ),
                                       Expanded(
                                         child: Text(
-                                          '15000 SUM',
+                                          controller.foodModel.price
+                                                  .toString() +
+                                              ' SUM',
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                             //fontSize: 11.sp,
@@ -155,13 +163,157 @@ class FoodPreviewView extends GetView<FoodPreviewController> {
                               borderRadius:
                                   BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
                               child: GoogleMap(
+                                mapToolbarEnabled: false,
+                                tiltGesturesEnabled: false,
+    liteModeEnabled: true,
+                                markers: {
+                                  Marker(
+                                    consumeTapEvents: false,
+                                      flat: false,
+                                      alpha: 0.8,
+                                      onTap: (){},
+                                      position: (LatLng(
+                                          controller.foodModel.location!.latitude,
+                                          controller.foodModel.location!.longitude)),
+                                      markerId: MarkerId("Location")
+                                  )
+                                },
                                 compassEnabled: false,
-                                indoorViewEnabled: true,
+                                indoorViewEnabled: false,
                                 zoomControlsEnabled: false,
                                 //liteModeEnabled: true,
                                 onTap: (LatLang) {
                                   //should show on map
                                   print("showing map");
+                                  showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                            title: Text(
+                                              "Food location",
+                                              style: TextStyle(fontSize: 18.sp),
+                                              textAlign: TextAlign.center,
+                                            ),
+                                            insetPadding: EdgeInsets.zero,
+                                            contentPadding: EdgeInsets.all(15),
+                                            actionsPadding: EdgeInsets.symmetric(
+                                                vertical: 0, horizontal: 5),
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(BORDER_RADIUS_1 * 1.0))),
+                                            content: Builder(
+                                              builder: (context) {
+                                                // Get available height and width of the build area of this widget. Make a choice depending on the size.
+                                                var height =
+                                                    MediaQuery.of(context).size.height;
+                                                var width = MediaQuery.of(context).size.width;
+
+                                                return Container(
+                                                  //padding: EdgeInsets.all(50),
+                                                  //height: 50.h,
+                                                  width: 85.w,
+                                                  height: 40.h,
+                                                  child: Expanded(child: LayoutBuilder(
+                                                      builder: (BuildContext context,
+                                                          BoxConstraints constraints) {
+                                                        return Stack(
+                                                            alignment: Alignment(0.0, 0.0),
+                                                            children: <Widget>[
+                                                              Container(
+                                                                  padding: EdgeInsets.all(15),
+                                                                  width: double.infinity,
+                                                                  //height: 100,
+                                                                  decoration: BoxDecoration(
+                                                                    color: black4,
+                                                                    borderRadius:
+                                                                    BorderRadius.circular(
+                                                                        BORDER_RADIUS_1 *
+                                                                            1.0),
+                                                                  ),
+                                                                  child: ClipRRect(
+                                                                    borderRadius:
+                                                                    BorderRadius.circular(
+                                                                        BORDER_RADIUS_1 *
+                                                                            1.0),
+                                                                    child: GoogleMap(
+                                                                      markers: {
+                                                                        Marker(
+                                                                            position: (LatLng(
+                                                                            controller.foodModel.location!.latitude,
+                                                                            controller.foodModel.location!.longitude)),
+                                                                          markerId: MarkerId("Location")
+                                                                        )
+                                                                      },
+                                                                      myLocationButtonEnabled:
+                                                                      true,
+                                                                      myLocationEnabled: true,
+
+                                                                      initialCameraPosition:
+                                                                      CameraPosition(
+                                                                        target: LatLng(
+                                                                            controller.foodModel.location!.latitude,
+                                                                            controller.foodModel.location!.longitude),
+                                                                        zoom: 13.0,
+                                                                      ),
+                                                                    ),
+                                                                  )),
+
+                                                            ]);
+                                                      })),
+                                                );
+                                              },
+                                            ),
+                                            actions: [
+                                              Row(
+                                                children: [
+                                                  Expanded(
+                                                    flex: 1,
+                                                    child: ElevatedButton(
+                                                      onPressed: () async{
+                                                        // controller.isLocationSelected.value =
+                                                        // true;
+                                                        // controller.moveCamera();
+                                                        // //print(controller.longitude.value.toString());
+                                                        Navigator.of(context).pop();
+                                                        //controller.foodModel.location.latitude
+                                                        MapUtils.openMap(controller.foodModel.location!.latitude, controller.foodModel.location!.longitude).catchError((onError)  {
+                                                          print(onError.toString());
+                                                          Get.snackbar("Error", onError.toString());
+                                                        });
+
+                                                      },
+                                                      child: Container(
+                                                          padding: EdgeInsets.all(15),
+                                                          //width: double.infinity,
+                                                          alignment: Alignment.center,
+                                                          child: Text(
+                                                            "Show directions",
+                                                            style: TextStyle(
+                                                                color: Colors.black87,
+                                                                fontSize: 15.sp),
+                                                          )),
+                                                      style: ElevatedButton.styleFrom(
+                                                        //padding: EdgeInsets.all(20),
+
+                                                        elevation: 0,
+                                                        shape: RoundedRectangleBorder(
+                                                          borderRadius: BorderRadius.circular(
+                                                              BORDER_RADIUS_1 * 1.0),
+                                                        ),
+                                                        shadowColor: Colors.transparent,
+                                                        //side: BorderSide(width: 1, color: Colors.green),
+                                                        primary: green2,
+                                                        // <-- Button color
+                                                        onPrimary:
+                                                        Colors.white, // <-- Splash color
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              )
+                                            ]);
+                                      });
+
                                 },
                                 //liteModeEnabled: true,
                                 zoomGesturesEnabled: false,
@@ -169,8 +321,10 @@ class FoodPreviewView extends GetView<FoodPreviewController> {
                                 scrollGesturesEnabled: false,
                                 mapType: MapType.normal,
                                 initialCameraPosition: CameraPosition(
-                                  target: const LatLng(45.521563, -122.677433),
-                                  zoom: 11.0,
+                                  target: LatLng(
+                                      controller.foodModel.location!.latitude,
+                                      controller.foodModel.location!.longitude),
+                                  zoom: 13.0,
                                 ),
                               ),
                             ),
@@ -214,7 +368,7 @@ class FoodPreviewView extends GetView<FoodPreviewController> {
                                 BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
                           ),
                           child: Text(
-                            '+998 901234567',
+                            controller.foodModel.phone_number!,
                             textAlign: TextAlign.center,
                             style: TextStyle(fontSize: 12.sp),
                           ),
@@ -257,7 +411,7 @@ class FoodPreviewView extends GetView<FoodPreviewController> {
                                 BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
                           ),
                           child: Text(
-                            '1.25 kg',
+                            controller.foodModel.quantity!.toString(),
                             textAlign: TextAlign.center,
                             style: TextStyle(fontSize: 12.sp),
                           ),
@@ -291,7 +445,7 @@ class FoodPreviewView extends GetView<FoodPreviewController> {
                           BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
                     ),
                     child: Text(
-                      'Very delicious stake. It will expiry in 72 hours, please contact us before that time',
+                      controller.foodModel.description!.toString(),
                       textAlign: TextAlign.left,
                       style: TextStyle(fontSize: 12.sp),
                     ),

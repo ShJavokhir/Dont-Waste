@@ -35,19 +35,25 @@ class AppPages {
         name: _Paths.FOOD_MARKET,
         page: () => FoodMarketView(),
         binding: FoodMarketBinding(),
-
+        transitionDuration: Duration(milliseconds: 400),
         //opaque: true,
-        transition: Transition.leftToRightWithFade),
+        transition: Transition.leftToRight),
     GetPage(
         name: _Paths.FOOD_PREVIEW,
         page: () => FoodPreviewView(),
         binding: FoodPreviewBinding(),
-        transition: Transition.rightToLeftWithFade),
+        transitionDuration: Duration(milliseconds: 400),
+        //showCupertinoParallax: true,
+        //showCupertinoParallax: true,
+        transition: Transition.leftToRightWithFade),
     GetPage(
         name: _Paths.BECOME_SPONSOR,
         page: () => BecomeSponsorView(),
         binding: BecomeSponsorBinding(),
-        transition: Transition.leftToRightWithFade),
+        transition: Transition.leftToRight,
+        transitionDuration: Duration(milliseconds: 400)
+        //transition: Transition.leftToRightWithFade
+        ),
     GetPage(
       name: _Paths.AUTHENTICATION,
       page: () => AuthenticationView(),

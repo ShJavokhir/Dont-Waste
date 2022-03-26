@@ -5,6 +5,7 @@ import 'package:dont_waste/app/data/constants/constants.dart';
 import 'package:dont_waste/app/widgets/custom_comfirmation_dialog.dart';
 import 'package:dont_waste/app/widgets/custom_error_dialog.dart';
 import 'package:dont_waste/app/widgets/custom_info_dialog.dart';
+import 'package:dont_waste/app/widgets/custom_loader_dialog.dart';
 import 'package:dont_waste/app/widgets/text_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,6 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sizer/sizer.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
-
 import '../controllers/become_sponsor_controller.dart';
 
 class BecomeSponsorView extends GetView<BecomeSponsorController> {
@@ -99,12 +99,12 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                           hint: "Qantity",
                           isMultipleLine: false,
                           onChanged: (text) {
-                            if(text.isNumericOnly){
+                            if (text.isNumericOnly) {
                               controller.quantity.value = double.parse(text);
-                            }else{
-                              Get.snackbar("Error", "Quantity should be number");
+                            } else {
+                              Get.snackbar(
+                                  "Error", "Quantity should be number");
                             }
-
                           }),
                     ),
                     SizedBox(
@@ -115,9 +115,9 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                           hint: "Price",
                           isMultipleLine: false,
                           onChanged: (text) {
-                            if(text.isNumericOnly){
+                            if (text.isNumericOnly) {
                               controller.price.value = double.parse(text);
-                            }else{
+                            } else {
                               Get.snackbar("Error", "Price should be number");
                             }
                           }),
@@ -552,21 +552,16 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                                     //liteModeEnabled: true,
                                   ),
                                   Positioned(
-                                    top: (constraints.maxHeight -
-                                        25.sp) /
-                                        2,
-                                    right: (constraints.maxWidth -
-                                        25.sp) /
-                                        2,
-                                    child: Container(
-                                      width: 25.sp,
-                                      height: 25.sp,
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        border: Border.all(color: Colors.red, width: 3)
-                                      ),
-                                    )
-                                  )
+                                      top: (constraints.maxHeight - 25.sp) / 2,
+                                      right: (constraints.maxWidth - 25.sp) / 2,
+                                      child: Container(
+                                        width: 25.sp,
+                                        height: 25.sp,
+                                        decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            border: Border.all(
+                                                color: Colors.red, width: 3)),
+                                      ))
                                 ],
                               );
                             }),
@@ -659,13 +654,15 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                       child: ElevatedButton(
                         onPressed: () {
                           showDialog(
+                            barrierDismissible: false,
                             context: context,
                             builder: (BuildContext context) {
-                              return CustomComfirmationDialog(
-                                onCancel: () {},
-                                onConfirm: () {},
-                                text: "wtf are u doin here ?",
-                              );
+                              return CustomLoaderDialog();
+                              // return CustomComfirmationDialog(
+                              //   onCancel: () {},
+                              //   onConfirm: () {},
+                              //   text: "test",
+                              // );
                             },
                           );
                         },

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Food {
+  late String id;
   String? title;
   String? description;
   GeoPoint? location;

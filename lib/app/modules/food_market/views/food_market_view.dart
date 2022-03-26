@@ -3,6 +3,8 @@ import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dont_waste/app/data/constants/constants.dart';
 import 'package:dont_waste/app/data/models/food_model.dart';
+import 'package:dont_waste/app/modules/food_preview/bindings/food_preview_binding.dart';
+import 'package:dont_waste/app/modules/food_preview/controllers/food_preview_controller.dart';
 import 'package:dont_waste/app/modules/food_preview/views/food_preview_view.dart';
 import 'package:dont_waste/app/widgets/single_food_order.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +23,14 @@ class FoodMarketView extends GetView<FoodMarketController> {
         extendBody: true,
         extendBodyBehindAppBar: true,
         appBar: AppBar(
+          actions: [
+            IconButton(icon: Icon(Icons.menu), onPressed: (){
+
+            },),
+          ],
+          leading: IconButton(icon: Icon(Icons.arrow_back_ios), onPressed: (){
+            Get.back();
+          },),
           backgroundColor: Colors.transparent,
           automaticallyImplyLeading: false,
           title: Container(
@@ -75,10 +85,19 @@ class FoodMarketView extends GetView<FoodMarketController> {
                       parent: AlwaysScrollableScrollPhysics()),
                   children: [
                     ...controller.foods.value.map((e) {
-                      return SingleFoodOrder(
-                        title: e.title ?? "null",
-                        price: e.price ?? 0,
-                        onPressed: () {},
+                      return Padding(
+                        padding: EdgeInsets.only(bottom: 15),
+                        child: SingleFoodOrder(
+                          id: e.id,
+                          title: e.title ?? "null",
+                          price: e.price ?? 0,
+                          location: e.city ?? "Uzbekistan",
+                          onPressed: () {
+                            FoodPreviewBinding().dependencies();
+                            Get.find<FoodPreviewController>().foodModel = e;
+                            Get.toNamed("/food-preview");
+                          },
+                        ),
                       );
                     }).toList()
                   ],

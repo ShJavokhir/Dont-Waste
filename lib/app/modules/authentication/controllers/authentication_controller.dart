@@ -1,5 +1,6 @@
 import 'package:dont_waste/app/data/constants/colors.dart';
 import 'package:dont_waste/app/data/constants/constants.dart';
+import 'package:dont_waste/app/widgets/custom_loader_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -35,18 +36,55 @@ class AuthenticationController extends GetxController {
     } else {
       print("Not signed in yet");
     }
+    showDialog(
+      barrierDismissible: false,
+      context: Get.context!,
+      builder: (BuildContext context) {
+        return CustomLoaderDialog();
+        // return CustomComfirmationDialog(
+        //   onCancel: () {},
+        //   onConfirm: () {},
+        //   text: "test",
+        // );
+      },
+    );
     await auth.verifyPhoneNumber(
       timeout: Duration(seconds: 90),
       phoneNumber: phoneNumber.value,
+
       verificationCompleted: (PhoneAuthCredential credential) async {
-        Get.snackbar("Info", "Succesfully authenticated");
+        print("verification completed");
+        Get.offAllNamed('/choice-view');
+
+        Get.snackbar(
+          "Info",
+          "Succesfully authenticated",
+          colorText: Colors.white,
+          margin: EdgeInsets.fromLTRB(10, 30, 10, 10),
+          progressIndicatorBackgroundColor: Colors.green,
+          barBlur: 0,
+          dismissDirection: DismissDirection.horizontal,
+          duration: Duration(milliseconds: 2500),
+
+          //instantInit: true,
+          //shouldIconPulse: true,
+          animationDuration: Duration(milliseconds: 300),
+          icon: Icon(
+            Icons.done,
+            color: Colors.green,
+            size: 35,
+          ),
+          snackPosition: SnackPosition.TOP,
+          backgroundColor: yellow1,
+        );
         await auth.signInWithCredential(credential);
       },
       verificationFailed: (FirebaseAuthException e) {
         Get.snackbar("Error", "Verification failed");
       },
       codeSent: (String verificationId, int? resendToken) {
-        Get.snackbar("Info", "Verification code has succesfully sent");
+        Get.back();
+
         showModalBottomSheet(
             isDismissible: false,
             shape: RoundedRectangleBorder(
@@ -144,6 +182,27 @@ class AuthenticationController extends GetxController {
                 ),
               );
             });
+        Get.snackbar(
+          "Info",
+          "Verfication code has successfully sent",
+          colorText: Colors.white,
+          margin: EdgeInsets.fromLTRB(10, 30, 10, 10),
+          progressIndicatorBackgroundColor: Colors.green,
+          barBlur: 0,
+          dismissDirection: DismissDirection.horizontal,
+          duration: Duration(milliseconds: 2500),
+
+          //instantInit: true,
+          //shouldIconPulse: true,
+          animationDuration: Duration(milliseconds: 300),
+          icon: Icon(
+            Icons.done,
+            color: Colors.green,
+            size: 35,
+          ),
+          snackPosition: SnackPosition.TOP,
+          backgroundColor: yellow1,
+        );
       },
       codeAutoRetrievalTimeout: (String verificationId) {
         Get.snackbar("Info", "Verification code timed out");

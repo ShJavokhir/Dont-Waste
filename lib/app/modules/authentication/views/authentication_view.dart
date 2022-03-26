@@ -15,6 +15,7 @@ class AuthenticationView extends GetView<AuthenticationController> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          elevation: 0.4,
           backgroundColor: Colors.white,
           automaticallyImplyLeading: false,
           title: Text("Become a sponsor",
@@ -24,7 +25,9 @@ class AuthenticationView extends GetView<AuthenticationController> {
         body: Container(
           color: Colors.white,
           padding: EdgeInsets.symmetric(horizontal: 18, vertical: 40),
-          child: Column(children: [
+          child: Column(
+
+              children: [
             CustomTextField(
               hint: "Phone number",
               onChanged: (phoneNumber) {
