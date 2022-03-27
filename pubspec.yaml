@@ -22,6 +22,7 @@ dependencies:
   firebase_storage: ^10.2.9
   image_picker: ^0.8.4+11
   uuid: ^3.0.6
+  easy_localization: ^3.0.0
 
 dev_dependencies: 
   flutter_lints: ^1.0.0
@@ -34,5 +35,8 @@ flutter:
       - assets/images/burger.png
       - assets/images/lunch.png
       - assets/images/map.jpeg
+      - assets/langs/uz-UZ.json
+      - assets/langs/ru-RU.json
+      - assets/langs/en-EN.json
   uses-material-design: true
 

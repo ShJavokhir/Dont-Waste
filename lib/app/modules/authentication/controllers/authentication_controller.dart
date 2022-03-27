@@ -4,7 +4,9 @@ import 'package:dont_waste/app/widgets/custom_loader_dialog.dart';
 import 'package:dont_waste/app/widgets/snackbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide Trans;
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:sizer/sizer.dart';
 
 class AuthenticationController extends GetxController {
@@ -30,11 +32,11 @@ class AuthenticationController extends GetxController {
 
   Future<void> authenticate() async {
     if(phoneNumber.value == ""){
-      showErrorSnackbar("Please enter phone number");
+      showErrorSnackbar("write_phone_number".tr());
       return;
     }
     if(!phoneNumber.value.contains("+")){
-      showErrorSnackbar("Phone number should start with + (plus)");
+      showErrorSnackbar("start_with_plus");
       return;
     }
 
@@ -69,8 +71,8 @@ class AuthenticationController extends GetxController {
         Get.offAllNamed('/choice-view');
 
         Get.snackbar(
-          "Info",
-          "Succesfully authenticated",
+          "into".tr(),
+          "succ_auth".tr(),
           colorText: Colors.white,
           margin: EdgeInsets.fromLTRB(10, 30, 10, 10),
           progressIndicatorBackgroundColor: Colors.green,
@@ -94,7 +96,7 @@ class AuthenticationController extends GetxController {
       verificationFailed: (FirebaseAuthException e) {
         Get.back();
 
-        showErrorSnackbar("Verification failed: " + e.toString());
+        showErrorSnackbar("verification_failed".tr() +  " : " + e.toString());
       },
       codeSent: (String verificationId, int? resendToken) {
         Get.back();
@@ -123,7 +125,7 @@ class AuthenticationController extends GetxController {
                     child: Column(
                       children: [
                         SizedBox(height: 20,),
-                        Text("Please enter verificatoin code sent to your phone number", textAlign: TextAlign.center,),
+                        Text("enter_otp".tr(), textAlign: TextAlign.center,),
                         SizedBox(height: 30,),
                         Container(
                           padding: EdgeInsets.symmetric(horizontal: 20),
@@ -144,7 +146,7 @@ class AuthenticationController extends GetxController {
                             },
                             decoration: InputDecoration(
 
-                              hintText: 'Verification code',
+                              hintText: 'ver_code'.tr(),
 
                               border: InputBorder.none,
                             ),
@@ -173,7 +175,7 @@ class AuthenticationController extends GetxController {
                               Get.offAndToNamed('/choice-view');
                               print("Signed in");
                             } else {
-                              showErrorSnackbar("Unexpected error happened");
+                              showErrorSnackbar("unexpected_err".tr());
                             }
 
                             //controller.authenticate();
@@ -184,7 +186,7 @@ class AuthenticationController extends GetxController {
                               //width: double.infinity,
                               alignment: Alignment.center,
                               child: Text(
-                                "Verify",
+                                "verify".tr(),
                                 style: TextStyle(fontSize: 15.sp),
                               )),
                           style: ElevatedButton.styleFrom(
@@ -203,8 +205,8 @@ class AuthenticationController extends GetxController {
               );
             });
         Get.snackbar(
-          "Info",
-          "Verfication code has successfully sent",
+          "info".tr(),
+          "code_sent_succ".tr(),
           colorText: Colors.white,
           margin: EdgeInsets.fromLTRB(10, 30, 10, 10),
           progressIndicatorBackgroundColor: Colors.green,
@@ -225,7 +227,7 @@ class AuthenticationController extends GetxController {
         );
       },
       codeAutoRetrievalTimeout: (String verificationId) {
-        Get.snackbar("Info", "Verification code timed out");
+        Get.snackbar("info".tr(), "otp_timed_out".tr());
       },
     );
   }

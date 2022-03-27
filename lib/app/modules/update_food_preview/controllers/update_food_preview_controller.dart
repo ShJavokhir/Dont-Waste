@@ -9,7 +9,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide Trans;
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
@@ -24,6 +26,7 @@ class UpdateFoodPreviewController extends GetxController {
   final price = 0.0.obs;
   final phoneNumber = "".obs;
   //41.338622, 69.334240
+  final isDonation = false.obs;
   final latitude = 41.338622.obs;
   final longitude = 69.334240.obs;
   final isLocationSelected = false.obs;
@@ -41,7 +44,7 @@ class UpdateFoodPreviewController extends GetxController {
   void onReady() {
     latitude.value = oldFood.location!.latitude;
     longitude.value = oldFood.location!.longitude;
-
+    isDonation.value = oldFood.isDonation??false;
     super.onReady();
   }
 
@@ -62,7 +65,7 @@ class UpdateFoodPreviewController extends GetxController {
       print("image picked"),
       didImageSelected.value = true
     }).catchError((onError){
-      Get.snackbar("Error", onError.toString());
+      Get.snackbar("error".tr(), onError.toString());
     });
     print("image picking finished");
 
@@ -75,6 +78,7 @@ class UpdateFoodPreviewController extends GetxController {
     if(quantity.value != 0) updatedElements['quantity'] = quantity.value;
     if(isLocationSelected.value) updatedElements['location'] = GeoPoint(latitude.value, longitude.value);
     if(phoneNumber.value != "") updatedElements['phoneNumber'] = phoneNumber.value;
+    updatedElements["isDonation"] = isDonation.value;
 
     print("updatedElements before send: " + updatedElements.entries.toList().toString());
     showDialog(
@@ -94,8 +98,8 @@ class UpdateFoodPreviewController extends GetxController {
       Get.back();
       Get.back();
       Get.snackbar(
-        "Info",
-        "Successfully updated",
+        "info".tr(),
+        "succ_updated".tr(),
         colorText: Colors.white,
         margin: EdgeInsets.fromLTRB(10, 30, 10, 10),
         progressIndicatorBackgroundColor: Colors.green,
@@ -117,8 +121,8 @@ class UpdateFoodPreviewController extends GetxController {
     }).catchError((onError){
       Get.back();
       Get.snackbar(
-        "Error",
-        "Error while posting: " + onError.toString(),
+        "error".tr(),
+        "err_while_updating".tr() + onError.toString(),
         colorText: Colors.white,
         margin: EdgeInsets.fromLTRB(10, 30, 10, 10),
 

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:easy_localization/easy_localization.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dont_waste/app/data/constants/colors.dart';
@@ -9,7 +10,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide Trans;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
@@ -18,6 +19,7 @@ class BecomeSponsorController extends GetxController {
   //TODO: Implement BecomeSponsorController
   XFile? image;
   final didImageSelected = false.obs;
+  final isDonation = false.obs;
   final title = "".obs;
   final description = "".obs;
   final quantity = 0.0.obs;
@@ -134,6 +136,8 @@ class BecomeSponsorController extends GetxController {
     food.price = price.value;
     food.quantity = quantity.value;
     food.views = 0;
+    food.isDonation = isDonation.value;
+    food.ownerName = FirebaseAuth.instance.currentUser?.displayName;
     food.photo_url = imageUrl==""?null: imageUrl;
     //final coordinates = Coordinates(latitude.value, longitude.value);
     List<Placemark> placemarks =
@@ -152,8 +156,8 @@ class BecomeSponsorController extends GetxController {
       Get.back();
       Get.back();
       Get.snackbar(
-        "Info",
-        "Successfully posted",
+        "info".tr(),
+        "succ_posted".tr(),
         colorText: Colors.white,
         margin: EdgeInsets.fromLTRB(10, 30, 10, 10),
         progressIndicatorBackgroundColor: Colors.green,
@@ -175,8 +179,8 @@ class BecomeSponsorController extends GetxController {
     }).catchError((onError) {
       Get.back();
       Get.snackbar(
-        "Error",
-        "Unexpected error while posting",
+        "error".tr(),
+        "err_while_posting".tr(),
         colorText: Colors.white,
         margin: EdgeInsets.fromLTRB(10, 30, 10, 10),
 

@@ -12,9 +12,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sizer/sizer.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide Trans;
 import 'package:permission_handler/permission_handler.dart';
 import '../controllers/become_sponsor_controller.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class BecomeSponsorView extends GetView<BecomeSponsorController> {
   @override
@@ -58,7 +59,7 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                   // ),
                   Hero(
                       tag: 'assets/images/lunch.pngchoice',
-                      child: Text("Become a sponsor",
+                      child: Text("become_sponsor".tr(),
                           style: Theme.of(context).textTheme.bodyText1)),
                 ],
               ),
@@ -76,7 +77,7 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                   height: 20,
                 ),
                 CustomTextField(
-                    hint: "Title",
+                    hint: "title".tr(),
                     isMultipleLine: false,
                     onChanged: (text) {
                       controller.title.value = text;
@@ -85,7 +86,7 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                   height: 20,
                 ),
                 CustomTextField(
-                    hint: "Description",
+                    hint: "description".tr(),
                     isMultipleLine: true,
                     onChanged: (text) {
                       controller.description.value = text;
@@ -93,35 +94,79 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                 SizedBox(
                   height: 20,
                 ),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  // margin:
+                  // EdgeInsets.symmetric(horizontal: DEFAULT_PADDING * 1.0),
+                  height: 60,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: black4,
+                    borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
+                  ),
+                  child: Row(
+                    children: [
+                      Text(
+                        "Donation",
+                        style: TextStyle(fontSize: 12.sp),
+                      ),
+                      Spacer(),
+                      Container(
+                        //padding: EdgeInsets.symmetric(horizontal: 10),
+                        alignment: Alignment.center,
+                        height: double.infinity,
+                        //width: 150,
+                        child: Obx(
+                          ()=> CupertinoSwitch(
+                            onChanged: (value){
+                              controller.isDonation.value = value;
+                            },
+                            value: controller.isDonation.value,
+                            activeColor: yellow1,
+                            //activeTrackColor: Colors.yellow,
+                            //inactiveThumbColor: Colors.redAccent,
+                            //inactiveTrackColor: Colors.orange,
+                          ),
+                        )
+                      )
+                    ],
+                  ),
+                ),
+                SizedBox(height: 20,),
                 Row(
                   children: [
                     Flexible(
                       child: CustomTextField(
-                          hint: "Qantity",
+                          hint: "quantity".tr(),
                           isMultipleLine: false,
                           onChanged: (text) {
                             if (text.isNumericOnly) {
                               controller.quantity.value = double.parse(text);
                             } else {
                               Get.snackbar(
-                                  "Error", "Quantity should be number");
+                                  "error".tr(), "qnt_shoud_be_number".tr());
                             }
                           }),
                     ),
                     SizedBox(
                       width: 10,
                     ),
-                    Flexible(
-                      child: CustomTextField(
-                          hint: "Price",
-                          isMultipleLine: false,
-                          onChanged: (text) {
-                            if (text.isNumericOnly) {
-                              controller.price.value = double.parse(text);
-                            } else {
-                              Get.snackbar("Error", "Price should be number");
-                            }
-                          }),
+                    Obx(
+                      ()=> Visibility(
+                        visible: !controller.isDonation.value,
+                        child: Flexible(
+                          child: CustomTextField(
+                              hint: "price".tr(),
+                              isMultipleLine: false,
+                              onChanged: (text) {
+                                if (text.isNumericOnly) {
+                                  controller.price.value = double.parse(text);
+                                } else {
+                                  Get.snackbar("error".tr(), "prc_should_be_number".tr());
+                                }
+                              }),
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -131,7 +176,7 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   child: Text(
-                    "Image",
+                    "photo".tr(),
                     //controller.longitude.value.toString(),
                     style: TextStyle(
                       color: Colors.black54,
@@ -163,7 +208,7 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                         Obx(() => Icon(!controller.didImageSelected.value?Icons.image:Icons.done, color: !controller.didImageSelected.value?yellow1:Colors.green,)),
                         SizedBox(width: 8,),
                         Obx( () =>
-                           Text(!controller.didImageSelected.value?"Select image":"Image selected", style: TextStyle(
+                           Text(!controller.didImageSelected.value?"select_image".tr():"image_selected".tr(), style: TextStyle(
                             color: !controller.didImageSelected.value?yellow1:Colors.green,
                             fontSize: 14.sp,
                           ),)
@@ -180,7 +225,7 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   child: Text(
-                    "Joylashuv",
+                    "location".tr(),
                     //controller.longitude.value.toString(),
                     style: TextStyle(
                       color: Colors.black54,
@@ -197,15 +242,15 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                     var status = await Permission.locationWhenInUse.status;
                     await Permission.locationWhenInUse.request();
                     if (status.isDenied) {
-                      Get.snackbar("Error",
-                          "Location permission is denied. Please allow location services for this app");
+                      Get.snackbar("error".tr(),
+                          "location_perm_denied".tr());
                       // We didn't ask for permission yet or the permission has been denied before but not permanently.
                     }
 
 // You can can also directly ask the permission about its status.
                     if (await Permission.location.isRestricted) {
-                      Get.snackbar("Error",
-                          "Location permission is denied. Please allow location services for this app");
+                      Get.snackbar("error".tr(),
+                          "location_perm_denied".tr());
                       // The OS restricts access, for example because of parental controls.
                     }
                     //should show on map
@@ -214,7 +259,7 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                         builder: (BuildContext context) {
                           return AlertDialog(
                               title: Text(
-                                "Food location",
+                                "location".tr(),
                                 style: TextStyle(fontSize: 18.sp),
                                 textAlign: TextAlign.center,
                               ),
@@ -325,7 +370,7 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                                             //width: double.infinity,
                                             alignment: Alignment.center,
                                             child: Text(
-                                              "Select",
+                                              "select".tr(),
                                               style: TextStyle(
                                                   color: Colors.black87,
                                                   fontSize: 15.sp),
@@ -396,16 +441,16 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                                       await Permission.locationWhenInUse
                                           .request();
                                       if (status.isDenied) {
-                                        Get.snackbar("Error",
-                                            "Location permission is denied. Please allow location services for this app");
+                                        Get.snackbar("error".tr(),
+                                            "location_perm_denied".tr());
                                         // We didn't ask for permission yet or the permission has been denied before but not permanently.
                                       }
 
 // You can can also directly ask the permission about its status.
                                       if (await Permission
                                           .location.isRestricted) {
-                                        Get.snackbar("Error",
-                                            "Location permission is denied. Please allow location services for this app");
+                                        Get.snackbar("error".tr(),
+                                            "location_perm_denied".tr());
                                         // The OS restricts access, for example because of parental controls.
                                       }
                                       //should show on map
@@ -414,7 +459,7 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                                           builder: (BuildContext context) {
                                             return AlertDialog(
                                                 title: Text(
-                                                  "Food location",
+                                                  "location",
                                                   style: TextStyle(
                                                       fontSize: 18.sp),
                                                   textAlign: TextAlign.center,
@@ -561,7 +606,7 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                                                                   Alignment
                                                                       .center,
                                                               child: Text(
-                                                                "Select",
+                                                                "select".tr(),
                                                                 style: TextStyle(
                                                                     color: Colors
                                                                         .black87,
@@ -636,7 +681,7 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                                   SizedBox(
                                     width: 5,
                                   ),
-                                  Text("Select location",
+                                  Text("select_location".tr(),
                                       style: TextStyle(color: Colors.black87)),
                                 ],
                               )),
@@ -652,7 +697,7 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                 ),
                 CustomTextField(
                   defaultText: FirebaseAuth.instance.currentUser!.phoneNumber.toString(),
-                    hint: "Phone number",
+                    hint: "phone_number".tr(),
                     isMultipleLine: false,
                     onChanged: (text) {
                       controller.phoneNumber.value = text;
@@ -681,7 +726,7 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                             //width: double.infinity,
                             alignment: Alignment.center,
                             child: Text(
-                              "Post",
+                              "post".tr(),
                               style: TextStyle(fontSize: 15.sp),
                             )),
                         style: ElevatedButton.styleFrom(
@@ -721,7 +766,7 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                             //width: double.infinity,
                             alignment: Alignment.center,
                             child: Text(
-                              "Cancel",
+                              "cancel".tr(),
                               style: TextStyle(fontSize: 15.sp),
                             )),
                         style: ElevatedButton.styleFrom(

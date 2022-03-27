@@ -2,6 +2,8 @@ import 'package:dont_waste/app/data/constants/colors.dart';
 import 'package:dont_waste/app/data/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:easy_localization/easy_localization.dart';
+
 
 class CustomInfoDialog extends StatelessWidget {
   final String text;
@@ -12,7 +14,7 @@ class CustomInfoDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
         title: Text(
-          "Info",
+          "info".tr(),
           style: TextStyle(fontSize: 18.sp),
           textAlign: TextAlign.center,
         ),
@@ -32,19 +34,21 @@ class CustomInfoDialog extends StatelessWidget {
               //padding: EdgeInsets.all(50),
               //height: 50.h,
               width: 85.w,
-              child: Container(
-                padding: EdgeInsets.all(15),
-                width: double.infinity,
-                //height: 100,
-                decoration: BoxDecoration(
-                  color: black4,
-                  borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
-                ),
-                child: Text(
-                  text,
-                  style: TextStyle(
-                    color: Colors.black87,
-                    fontSize: 14.sp,
+              child: Expanded(
+                child: Container(
+                  padding: EdgeInsets.all(15),
+                  width: double.infinity,
+                  //height: 100,
+                  decoration: BoxDecoration(
+                    color: black4,
+                    borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
+                  ),
+                  child: Text(
+                    text,
+                    style: TextStyle(
+                      color: Colors.black87,
+                      fontSize: 14.sp,
+                    ),
                   ),
                 ),
               ),
@@ -65,7 +69,7 @@ class CustomInfoDialog extends StatelessWidget {
                       //width: double.infinity,
                       alignment: Alignment.center,
                       child: Text(
-                        "Ok",
+                        "ok".tr(),
                         style:
                             TextStyle(color: Colors.black87, fontSize: 15.sp),
                       )),

@@ -15,6 +15,7 @@ class Food {
   String? city;
   String? userId;
   int? postedTimestamp;
+  bool? isDonation = false;
 
   Food(
       {this.title,
@@ -28,6 +29,7 @@ class Food {
       this.views,
       this.city,
       this.userId,
+        this.isDonation=false,
         this.postedTimestamp
       });
 
@@ -44,6 +46,7 @@ class Food {
     views = json['views'];
     userId = json['userId'];
     postedTimestamp = json['postedTimestamp'];
+    isDonation = json['isDonation'];
   }
 
   Map<String, dynamic> toJson() {
@@ -60,6 +63,7 @@ class Food {
     data['city'] = city;
     data['userId'] = userId;
     data['postedTimestamp'] = postedTimestamp;
+    data['isDonation'] = isDonation;
     return data;
   }
 }

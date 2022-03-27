@@ -2,6 +2,7 @@ import 'package:dont_waste/app/data/constants/colors.dart';
 import 'package:dont_waste/app/data/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class CustomComfirmationDialog extends StatelessWidget {
   final String text;
@@ -14,7 +15,7 @@ class CustomComfirmationDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
         title: Text(
-          "Alert",
+          "alert".tr(),
           style: TextStyle(fontSize: 18.sp),
           textAlign: TextAlign.center,
         ),
@@ -65,7 +66,7 @@ class CustomComfirmationDialog extends StatelessWidget {
                       //width: double.infinity,
                       alignment: Alignment.center,
                       child: Text(
-                        "Yes",
+                        "yes".tr(),
                         style:
                             TextStyle(color: Colors.black87, fontSize: 15.sp),
                       )),
@@ -96,7 +97,7 @@ class CustomComfirmationDialog extends StatelessWidget {
                       //width: double.infinity,
                       alignment: Alignment.center,
                       child: Text(
-                        "No",
+                        "no".tr(),
                         style:
                             TextStyle(color: Colors.black87, fontSize: 15.sp),
                       )),

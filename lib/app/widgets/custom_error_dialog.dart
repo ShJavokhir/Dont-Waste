@@ -1,6 +1,8 @@
 import 'package:dont_waste/app/data/constants/colors.dart';
 import 'package:dont_waste/app/data/constants/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:sizer/sizer.dart';
 
 class CustomErrorDialog extends StatelessWidget {
@@ -12,7 +14,7 @@ class CustomErrorDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
         title: Text(
-          "Error",
+          "error".tr(),
           style: TextStyle(fontSize: 18.sp),
           textAlign: TextAlign.center,
         ),
@@ -65,7 +67,7 @@ class CustomErrorDialog extends StatelessWidget {
                       //width: double.infinity,
                       alignment: Alignment.center,
                       child: Text(
-                        "Ok",
+                        "ok".tr(),
                         style:
                             TextStyle(color: Colors.black87, fontSize: 15.sp),
                       )),

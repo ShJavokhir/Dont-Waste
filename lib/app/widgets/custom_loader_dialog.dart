@@ -2,6 +2,8 @@ import 'package:dont_waste/app/data/constants/colors.dart';
 import 'package:dont_waste/app/data/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:easy_localization/easy_localization.dart';
+
 
 class CustomLoaderDialog extends StatelessWidget {
   const CustomLoaderDialog();
@@ -41,7 +43,7 @@ class CustomLoaderDialog extends StatelessWidget {
                         height: 25,
                       ),
                       Text(
-                        'Loading, please wait',
+                        'loading'.tr(),
                       ),
                     ],
                   ),

@@ -1,4 +1,5 @@
 import 'package:url_launcher/url_launcher.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class MapUtils {
   MapUtils._();
@@ -8,7 +9,7 @@ class MapUtils {
         'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude';
     if (await launch(googleUrl)) {
     } else {
-      throw 'Could not open the map.';
+      throw 'could_not_open_map';
     }
   }
 }

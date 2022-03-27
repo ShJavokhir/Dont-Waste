@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:easy_localization/easy_localization.dart';
 
 import 'package:dont_waste/app/core/utils/map_utility.dart';
 import 'package:dont_waste/app/data/constants/colors.dart';
@@ -7,11 +8,12 @@ import 'package:dont_waste/app/modules/update_food_preview/controllers/update_fo
 import 'package:dont_waste/app/widgets/custom_loader_dialog.dart';
 import 'package:dont_waste/app/widgets/text_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:sizer/sizer.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide Trans;
 
 import 'package:url_launcher/url_launcher.dart';
 
@@ -27,7 +29,7 @@ class UpdateFoodPreviewView extends GetView<UpdateFoodPreviewController> {
         appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 0.4,
-          automaticallyImplyLeading: false,
+          //automaticallyImplyLeading: false,
           title: Container(
             child: Container(
               width: double.infinity,
@@ -36,7 +38,7 @@ class UpdateFoodPreviewView extends GetView<UpdateFoodPreviewController> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
 
-                  Text("Update post",
+                  Text("update_post".tr(),
                       style: Theme.of(context).textTheme.bodyText1),
                 ],
               ),
@@ -55,7 +57,7 @@ class UpdateFoodPreviewView extends GetView<UpdateFoodPreviewController> {
                 ),
                 CustomTextField(
                     defaultText: controller.oldFood.title!,
-                    hint: "Title",
+                    hint: "title".tr(),
                     isMultipleLine: false,
                     onChanged: (text) {
                       controller.title.value = text;
@@ -65,7 +67,7 @@ class UpdateFoodPreviewView extends GetView<UpdateFoodPreviewController> {
                 ),
                 CustomTextField(
                   defaultText: controller.oldFood.description!,
-                    hint: "Description",
+                    hint: "description".tr(),
                     isMultipleLine: true,
                     onChanged: (text) {
                       controller.description.value = text;
@@ -73,37 +75,80 @@ class UpdateFoodPreviewView extends GetView<UpdateFoodPreviewController> {
                 SizedBox(
                   height: 20,
                 ),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  // margin:
+                  // EdgeInsets.symmetric(horizontal: DEFAULT_PADDING * 1.0),
+                  height: 60,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: black4,
+                    borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
+                  ),
+                  child: Row(
+                    children: [
+                      Text(
+                        "Donation",
+                        style: TextStyle(fontSize: 12.sp),
+                      ),
+                      Spacer(),
+                      Container(
+                        //padding: EdgeInsets.symmetric(horizontal: 10),
+                          alignment: Alignment.center,
+                          height: double.infinity,
+                          //width: 150,
+                          child: Obx(
+                                ()=> CupertinoSwitch(
+                              onChanged: (value){
+                                controller.isDonation.value = value;
+                              },
+                              value: controller.isDonation.value,
+                              activeColor: yellow1,
+                              //activeTrackColor: Colors.yellow,
+                              //inactiveThumbColor: Colors.redAccent,
+                              //inactiveTrackColor: Colors.orange,
+                            ),
+                          )
+                      )
+                    ],
+                  ),
+                ),
+                SizedBox(height: 20,),
                 Row(
                   children: [
                     Flexible(
                       child: CustomTextField(
                         defaultText: controller.oldFood.quantity!.toString(),
-                          hint: "Qantity",
+                          hint: "quantity".tr(),
                           isMultipleLine: false,
                           onChanged: (text) {
                             if (text.isNumericOnly) {
                               controller.quantity.value = double.parse(text);
                             } else {
                               Get.snackbar(
-                                  "Error", "Quantity should be number");
+                                  "error".tr(), "qnt_shoud_be_number".tr());
                             }
                           }),
                     ),
                     SizedBox(
                       width: 10,
                     ),
-                    Flexible(
-                      child: CustomTextField(
-                        defaultText: controller.oldFood.price!.toString(),
-                          hint: "Price",
-                          isMultipleLine: false,
-                          onChanged: (text) {
-                            if (text.isNumericOnly) {
-                              controller.price.value = double.parse(text);
-                            } else {
-                              Get.snackbar("Error", "Price should be number");
-                            }
-                          }),
+                    Obx(
+                          ()=> Visibility(
+                        visible: !controller.isDonation.value,
+                        child: Flexible(
+                          child: CustomTextField(
+                              hint: "price".tr(),
+                              isMultipleLine: false,
+                              onChanged: (text) {
+                                if (text.isNumericOnly) {
+                                  controller.price.value = double.parse(text);
+                                } else {
+                                  Get.snackbar("error".tr(), "prc_should_be_number".tr());
+                                }
+                              }),
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -115,7 +160,7 @@ class UpdateFoodPreviewView extends GetView<UpdateFoodPreviewController> {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   child: Text(
-                    "Joylashuv",
+                    "location".tr(),
                     //controller.longitude.value.toString(),
                     style: TextStyle(
                       color: Colors.black54,
@@ -132,15 +177,15 @@ class UpdateFoodPreviewView extends GetView<UpdateFoodPreviewController> {
                     var status = await Permission.locationWhenInUse.status;
                     await Permission.locationWhenInUse.request();
                     if (status.isDenied) {
-                      Get.snackbar("Error",
-                          "Location permission is denied. Please allow location services for this app");
+                      Get.snackbar("error".tr(),
+                          "location_perm_denied".tr());
                       // We didn't ask for permission yet or the permission has been denied before but not permanently.
                     }
 
 // You can can also directly ask the permission about its status.
                     if (await Permission.location.isRestricted) {
-                      Get.snackbar("Error",
-                          "Location permission is denied. Please allow location services for this app");
+                      Get.snackbar("error".tr(),
+                          "location_perm_denied".tr());
                       // The OS restricts access, for example because of parental controls.
                     }
                     //should show on map
@@ -149,7 +194,7 @@ class UpdateFoodPreviewView extends GetView<UpdateFoodPreviewController> {
                         builder: (BuildContext context) {
                           return AlertDialog(
                               title: Text(
-                                "Food location",
+                                "location".tr(),
                                 style: TextStyle(fontSize: 18.sp),
                                 textAlign: TextAlign.center,
                               ),
@@ -260,7 +305,7 @@ class UpdateFoodPreviewView extends GetView<UpdateFoodPreviewController> {
                                             //width: double.infinity,
                                             alignment: Alignment.center,
                                             child: Text(
-                                              "Select",
+                                              "select".tr(),
                                               style: TextStyle(
                                                   color: Colors.black87,
                                                   fontSize: 15.sp),
@@ -330,16 +375,16 @@ class UpdateFoodPreviewView extends GetView<UpdateFoodPreviewController> {
                                 await Permission.locationWhenInUse
                                     .request();
                                 if (status.isDenied) {
-                                  Get.snackbar("Error",
-                                      "Location permission is denied. Please allow location services for this app");
+                                  Get.snackbar("error".tr(),
+                                      "location_perm_denied".tr());
                                   // We didn't ask for permission yet or the permission has been denied before but not permanently.
                                 }
 
 // You can can also directly ask the permission about its status.
                                 if (await Permission
                                     .location.isRestricted) {
-                                  Get.snackbar("Error",
-                                      "Location permission is denied. Please allow location services for this app");
+                                  Get.snackbar("error".tr(),
+                                      "location_perm_denied".tr());
                                   // The OS restricts access, for example because of parental controls.
                                 }
                                 //should show on map
@@ -348,7 +393,7 @@ class UpdateFoodPreviewView extends GetView<UpdateFoodPreviewController> {
                                     builder: (BuildContext context) {
                                       return AlertDialog(
                                           title: Text(
-                                            "Food location",
+                                            "location".tr(),
                                             style: TextStyle(
                                                 fontSize: 18.sp),
                                             textAlign: TextAlign.center,
@@ -496,7 +541,7 @@ class UpdateFoodPreviewView extends GetView<UpdateFoodPreviewController> {
                                                         Alignment
                                                             .center,
                                                         child: Text(
-                                                          "Select",
+                                                          "select".tr(),
                                                           style: TextStyle(
                                                               color: Colors
                                                                   .black87,
@@ -586,7 +631,7 @@ class UpdateFoodPreviewView extends GetView<UpdateFoodPreviewController> {
                 ),
                 CustomTextField(
                     defaultText: controller.oldFood.phone_number!,
-                    hint: "Phone number",
+                    hint: "phone_number".tr(),
                     isMultipleLine: false,
                     onChanged: (text) {
                       controller.phoneNumber.value = text;
@@ -615,7 +660,7 @@ class UpdateFoodPreviewView extends GetView<UpdateFoodPreviewController> {
                             //width: double.infinity,
                             alignment: Alignment.center,
                             child: Text(
-                              "Update",
+                              "update_button".tr(),
                               style: TextStyle(fontSize: 15.sp),
                             )),
                         style: ElevatedButton.styleFrom(
@@ -655,7 +700,7 @@ class UpdateFoodPreviewView extends GetView<UpdateFoodPreviewController> {
                             //width: double.infinity,
                             alignment: Alignment.center,
                             child: Text(
-                              "Cancel",
+                              "cancel".tr(),
                               style: TextStyle(fontSize: 15.sp),
                             )),
                         style: ElevatedButton.styleFrom(

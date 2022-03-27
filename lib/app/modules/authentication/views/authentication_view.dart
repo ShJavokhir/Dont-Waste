@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:easy_localization/easy_localization.dart';
 
 import 'package:dont_waste/app/data/constants/colors.dart';
 import 'package:dont_waste/app/data/constants/constants.dart';
@@ -6,7 +7,7 @@ import 'package:dont_waste/app/widgets/text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide Trans;
 
 import '../controllers/authentication_controller.dart';
 
@@ -18,7 +19,7 @@ class AuthenticationView extends GetView<AuthenticationController> {
           elevation: 0.4,
           backgroundColor: Colors.white,
           //automaticallyImplyLeading: false,
-          title: Text("Become a sponsor",
+          title: Text("authentication".tr(),
               style: Theme.of(context).textTheme.bodyText1),
           centerTitle: true,
         ),
@@ -29,7 +30,7 @@ class AuthenticationView extends GetView<AuthenticationController> {
 
               children: [
             CustomTextField(
-              hint: "Phone number",
+              hint: "phone_number",
               onChanged: (phoneNumber) {
                 controller.phoneNumber.value = phoneNumber;
               },
@@ -45,7 +46,7 @@ class AuthenticationView extends GetView<AuthenticationController> {
                   //width: double.infinity,
                   alignment: Alignment.center,
                   child: Text(
-                    "Continue",
+                    "continue",
                     style: TextStyle(fontSize: 15.sp),
                   )),
               style: ElevatedButton.styleFrom(

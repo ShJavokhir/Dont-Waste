@@ -10,8 +10,10 @@ import 'package:dont_waste/app/widgets/single_food_order_for_admin.dart';
 import 'package:dont_waste/app/widgets/text_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:sizer/sizer.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide Trans;
 
 import '../controllers/user_profile_controller.dart';
 
@@ -32,8 +34,8 @@ class UserProfileView extends GetView<UserProfileController> {
               physics: AlwaysScrollableScrollPhysics(),
 
               tabs: [
-                Tab(text: "My Ads", icon: Icon(Icons.apps)),
-                Tab(text: "Settings", icon: Icon(Icons.settings)),
+                Tab(text: "my_posts".tr(), icon: Icon(Icons.apps)),
+                Tab(text: "settings".tr(), icon: Icon(Icons.settings)),
                 // Tab(text: "My Ads", ),
                 // Tab(text: "Settings",),
               ],
@@ -41,7 +43,7 @@ class UserProfileView extends GetView<UserProfileController> {
             backgroundColor: Colors.white,
             elevation: 0.4,
             //automaticallyImplyLeading: false,
-            title: Text("Profile"),
+            title: Text("account".tr()),
             centerTitle: true,
           ),
           body: Container(
@@ -77,7 +79,7 @@ class UserProfileView extends GetView<UserProfileController> {
                           },
                           title: e.title ?? "null",
                           price: e.price ?? 0,
-                          location: e.city ?? "Tashkent",
+                          location: e.city ?? "Uzbekistan",
                           views: e.views ?? 0,
                           photo_url: e.photo_url,
                         ),
@@ -90,7 +92,7 @@ class UserProfileView extends GetView<UserProfileController> {
                         children: [
                           Icon(Icons.insert_emoticon),
                           SizedBox(width: 10,),
-                          Text("You have no any post"),
+                          Text("u_have_no_posts".tr()),
                         ],
                       ),),),
                     ):Container(),
@@ -110,7 +112,7 @@ class UserProfileView extends GetView<UserProfileController> {
                           CustomTextField(
                               defaultText:
                               FirebaseAuth.instance.currentUser!.displayName ?? "",
-                              hint: "Full name",
+                              hint: "full_name".tr(),
                               isMultipleLine: false,
                               onChanged: (text) {
                                 controller.fullName.value = text;
@@ -134,7 +136,7 @@ class UserProfileView extends GetView<UserProfileController> {
                                 Expanded(
                                   flex: 2,
                                   child: Text(
-                                    'User ID:',
+                                    'user_id'.tr(),
                                     style: TextStyle(fontSize: 12.sp),
                                   ),
                                 ),
@@ -177,7 +179,7 @@ class UserProfileView extends GetView<UserProfileController> {
                                   //width: double.infinity,
                                   alignment: Alignment.center,
                                   child: Text(
-                                    "Save",
+                                    "save".tr(),
                                     style: TextStyle(
                                         color: Colors.black87, fontSize: 15.sp),
                                   )),
@@ -204,7 +206,7 @@ class UserProfileView extends GetView<UserProfileController> {
                   TextButton(onPressed: (){
                     controller.signOut();
                   }, child: Text(
-                    "Sign out ?",
+                    "sign_out".tr(),
                     style: TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold),
                   )),
                   SizedBox(height: 15,)

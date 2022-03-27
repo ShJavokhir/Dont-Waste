@@ -11,8 +11,8 @@ import 'package:dont_waste/app/widgets/divider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import 'package:get/get.dart';
-
+import 'package:get/get.dart' hide Trans;
+import 'package:easy_localization/easy_localization.dart';
 import '../controllers/choice_view_controller.dart';
 
 class ChoiceViewView extends GetView<ChoiceViewController> {
@@ -57,7 +57,7 @@ class ChoiceViewView extends GetView<ChoiceViewController> {
 
           },
           ),
-          title: Text('FeedMe'),
+          title: Text("Don't waste"),
           centerTitle: true,
         ),
         body: Container(
@@ -67,7 +67,7 @@ class ChoiceViewView extends GetView<ChoiceViewController> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               ChoiceCard(
-                text: 'Find food',
+                text: "find_food".tr(),
                 imageUrl: 'assets/images/burger.png',
                 callback: () async{
                   // await FirebaseAuth.instance.verifyPhoneNumber(
@@ -88,12 +88,12 @@ class ChoiceViewView extends GetView<ChoiceViewController> {
               SizedBox(
                 height: 50,
               ),
-              CustomDivider(text: "OR"),
+              CustomDivider(text: "or".tr()),
               SizedBox(
                 height: 50,
               ),
               ChoiceCard(
-                text: 'Become a sponsor',
+                text: 'become_sponsor'.tr(),
                 imageUrl: 'assets/images/lunch.png',
                 callback: () {
                   //Get.to(() => BecomeSponsorView());

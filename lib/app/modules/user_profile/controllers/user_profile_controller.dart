@@ -1,10 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dont_waste/app/data/constants/colors.dart';
 import 'package:dont_waste/app/data/models/food_model.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:dont_waste/app/widgets/custom_comfirmation_dialog.dart';
 import 'package:dont_waste/app/widgets/custom_loader_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide Trans;
 import 'package:flutter/material.dart';
 
 class UserProfileController extends GetxController {
@@ -30,8 +31,8 @@ class UserProfileController extends GetxController {
     await FirebaseAuth.instance.currentUser!.updateDisplayName(fullName.value).then((value) {
     Get.back();
       Get.snackbar(
-      "Info",
-      "Successfully updated",
+      "info".tr(),
+      "succ_updated".tr(),
       colorText: Colors.white,
       margin: EdgeInsets.fromLTRB(10, 30, 10, 10),
       progressIndicatorBackgroundColor: Colors.green,
@@ -53,8 +54,8 @@ class UserProfileController extends GetxController {
     }).catchError((onError){
     Get.back();
     Get.snackbar(
-    "Error",
-    "Unexpected error while posting",
+    "error".tr(),
+    "err_while_posting".tr(),
     colorText: Colors.white,
     margin: EdgeInsets.fromLTRB(10, 30, 10, 10),
 

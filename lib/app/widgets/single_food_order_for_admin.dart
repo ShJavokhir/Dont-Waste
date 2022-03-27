@@ -2,6 +2,8 @@ import 'package:dont_waste/app/data/constants/colors.dart';
 import 'package:dont_waste/app/data/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:easy_localization/easy_localization.dart';
+
 
 class SingleFoodOrderForAdmin extends StatelessWidget {
   final String id;
@@ -72,7 +74,7 @@ class SingleFoodOrderForAdmin extends StatelessWidget {
                   child: Row(children: [
                     Icon(Icons.remove_red_eye, color: Colors.white, size: 12.sp,),
                     SizedBox(width: 5,),
-                    Text("views: " + views.toString(), style: TextStyle(color: Colors.white, fontSize: 12.sp),),
+                    Text("views".tr() + views.toString(), style: TextStyle(color: Colors.white, fontSize: 12.sp),),
                   ],),
                 ), right:  20, top: 20,)
               ],
@@ -154,7 +156,7 @@ class SingleFoodOrderForAdmin extends StatelessWidget {
                           child: Container(
                               width: double.infinity,
                               alignment: Alignment.center,
-                              child: Text("View")),
+                              child: Text("view".tr())),
                           style: ElevatedButton.styleFrom(
                             //padding: EdgeInsets.all(20),
                             shape: RoundedRectangleBorder(
@@ -174,7 +176,7 @@ class SingleFoodOrderForAdmin extends StatelessWidget {
                           child: Container(
                               width: double.infinity,
                               alignment: Alignment.center,
-                              child: Text("Edit")),
+                              child: Text("edit".tr())),
                           style: ElevatedButton.styleFrom(
                             //padding: EdgeInsets.all(20),
                             shape: RoundedRectangleBorder(
@@ -194,7 +196,7 @@ class SingleFoodOrderForAdmin extends StatelessWidget {
                           child: Container(
                               width: double.infinity,
                               alignment: Alignment.center,
-                              child: Text("Delete")),
+                              child: Text("delete".tr())),
                           style: ElevatedButton.styleFrom(
                             //padding: EdgeInsets.all(20),
                             shape: RoundedRectangleBorder(

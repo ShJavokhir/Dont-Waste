@@ -4,7 +4,8 @@ import 'package:dont_waste/app/data/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sizer/sizer.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide Trans;
+import 'package:easy_localization/easy_localization.dart';
 
 import '../controllers/food_preview_controller.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -191,7 +192,7 @@ class FoodPreviewView extends GetView<FoodPreviewController> {
                                       builder: (BuildContext context) {
                                         return AlertDialog(
                                             title: Text(
-                                              "Food location",
+                                              "location".tr(),
                                               style: TextStyle(fontSize: 18.sp),
                                               textAlign: TextAlign.center,
                                             ),
@@ -288,7 +289,7 @@ class FoodPreviewView extends GetView<FoodPreviewController> {
                                                           //width: double.infinity,
                                                           alignment: Alignment.center,
                                                           child: Text(
-                                                            "Show directions",
+                                                            "show_map_directions".tr(),
                                                             style: TextStyle(
                                                                 color: Colors.black87,
                                                                 fontSize: 15.sp),
@@ -353,7 +354,7 @@ class FoodPreviewView extends GetView<FoodPreviewController> {
                       Expanded(
                         flex: 1,
                         child: Text(
-                          'Phone number:',
+                          'phone_number2'.tr(),
                           style: TextStyle(fontSize: 12.sp),
                         ),
                       ),
@@ -396,7 +397,7 @@ class FoodPreviewView extends GetView<FoodPreviewController> {
                       Expanded(
                         flex: 1,
                         child: Text(
-                          'Quantity:',
+                          'quantity2'.tr(),
                           style: TextStyle(fontSize: 12.sp),
                         ),
                       ),

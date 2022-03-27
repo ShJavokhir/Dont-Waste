@@ -1,7 +1,9 @@
+import 'package:dont_waste/app/core/utils/datetime_utility.dart';
 import 'package:dont_waste/app/data/constants/colors.dart';
 import 'package:dont_waste/app/data/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class SingleFoodOrder extends StatelessWidget {
   final String id;
@@ -9,6 +11,9 @@ class SingleFoodOrder extends StatelessWidget {
   final double price;
   final String location;
   final String? photo_url;
+  final int? postedTimestamp;
+  final bool isDonation;
+
   final void Function() onPressed;
   SingleFoodOrder(
       {required this.id,
@@ -16,7 +21,9 @@ class SingleFoodOrder extends StatelessWidget {
       required this.title,
       required this.price,
       required this.location,
-        this.photo_url
+        required this.isDonation,
+        this.photo_url,
+        required this.postedTimestamp
       });
 
   @override
@@ -63,12 +70,14 @@ class SingleFoodOrder extends StatelessWidget {
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0)),
                 child: Column(
+
                   children: [
                     SizedBox(height: 10),
                     Hero(
                       tag: id + '_foodTitleTag',
                       child: Text(
                         title,
+                        textAlign: TextAlign.left,
                         overflow: TextOverflow.ellipsis,
                         style: Theme.of(context).textTheme.bodyText2,
                         maxLines: 2,
@@ -77,11 +86,57 @@ class SingleFoodOrder extends StatelessWidget {
                     Expanded(
                       child: Container(),
                     ),
+                    Visibility(
+                      visible: !isDonation,
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.attach_money_rounded,
+                            size: 12.sp,
+                            color: Colors.black87,
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            price.toString(),
+                            style: TextStyle(
+                                fontSize: 11.sp,
+                                color: Colors.black87,
+                                fontWeight: FontWeight.bold),
+                          )
+                        ],
+                      ),
+                    ),
+                    Visibility(
+                      visible: isDonation,
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.attach_money_rounded,
+                            size: 13.sp,
+                            color: Colors.redAccent,
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            "free".tr(),
+                            style: TextStyle(
+                                fontSize: 12.sp,
+                                color: Colors.redAccent,
+                                fontWeight: FontWeight.bold),
+                          )
+                        ],
+                      ),
+                    ),
+
+                    SizedBox(height: 10),
                     Row(
                       children: [
                         Icon(
                           Icons.location_on_rounded,
-                          size: 11.sp,
+                          size: 9.sp,
                           color: Colors.black54,
                         ),
                         SizedBox(
@@ -90,27 +145,27 @@ class SingleFoodOrder extends StatelessWidget {
                         Text(
                           location,
                           style: TextStyle(
-                              fontSize: 11.sp,
+                              fontSize: 9.sp,
                               color: Colors.black54,
                               fontWeight: FontWeight.normal),
                         )
                       ],
                     ),
-                    SizedBox(height: 5),
+                    SizedBox(height: 5,),
                     Row(
                       children: [
                         Icon(
-                          Icons.attach_money_rounded,
-                          size: 11.sp,
+                          Icons.calendar_today_rounded,
+                          size: 9.sp,
                           color: Colors.black54,
                         ),
                         SizedBox(
                           width: 5,
                         ),
                         Text(
-                          price.toString(),
+                          DateTimeUtility.getReadableTime(postedTimestamp),
                           style: TextStyle(
-                              fontSize: 11.sp,
+                              fontSize: 9.sp,
                               color: Colors.black54,
                               fontWeight: FontWeight.normal),
                         )
@@ -119,14 +174,14 @@ class SingleFoodOrder extends StatelessWidget {
                     SizedBox(
                       height: 5,
                     ),
-                    Hero(
+                    !isDonation?Hero(
                       tag: id + '_floatingButton',
                       child: ElevatedButton(
                         onPressed: onPressed,
                         child: Container(
                             width: double.infinity,
                             alignment: Alignment.center,
-                            child: Text("Buy")),
+                            child: Text("buy_button".tr())),
                         style: ElevatedButton.styleFrom(
                           //padding: EdgeInsets.all(20),
                           shape: RoundedRectangleBorder(
@@ -135,6 +190,25 @@ class SingleFoodOrder extends StatelessWidget {
                           ),
                           //side: BorderSide(width: 1, color: Colors.green),
                           primary: yellow1, // <-- Button color
+                          onPrimary: Colors.white, // <-- Splash color
+                        ),
+                      ),
+                    ):Hero(
+                      tag: id + '_floatingButton',
+                      child: ElevatedButton(
+                        onPressed: onPressed,
+                        child: Container(
+                            width: double.infinity,
+                            alignment: Alignment.center,
+                            child: Text("get_donation".tr())),
+                        style: ElevatedButton.styleFrom(
+                          //padding: EdgeInsets.all(20),
+                          shape: RoundedRectangleBorder(
+                            borderRadius:
+                            BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
+                          ),
+                          //side: BorderSide(width: 1, color: Colors.green),
+                          primary: Colors.redAccent, // <-- Button color
                           onPrimary: Colors.white, // <-- Splash color
                         ),
                       ),
