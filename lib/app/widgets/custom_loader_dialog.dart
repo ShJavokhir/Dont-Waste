@@ -19,35 +19,33 @@ class CustomLoaderDialog extends StatelessWidget {
           // var height = MediaQuery.of(context).size.height;
           // var width = MediaQuery.of(context).size.width;
 
-          return Expanded(
+          return Container(
+            //padding: EdgeInsets.all(50),
+            //width: 85.w,
             child: Container(
-              //padding: EdgeInsets.all(50),
-              //width: 85.w,
-              child: Container(
-                  padding: EdgeInsets.all(15),
-                  //width: double.infinity,
-                  height: 200,
-                  decoration: BoxDecoration(
-                    color: black4,
-                    borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
+                padding: EdgeInsets.all(15),
+                //width: double.infinity,
+                height: 200,
+                decoration: BoxDecoration(
+                  color: black4,
+                  borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
+                ),
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      CircularProgressIndicator(
+                        color: yellow1,
+                      ),
+                      SizedBox(
+                        height: 25,
+                      ),
+                      Text(
+                        'Loading, please wait',
+                      ),
+                    ],
                   ),
-                  child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        CircularProgressIndicator(
-                          color: yellow1,
-                        ),
-                        SizedBox(
-                          height: 25,
-                        ),
-                        Text(
-                          'Loading, please wait',
-                        ),
-                      ],
-                    ),
-                  )),
-            ),
+                )),
           );
         },
       ),

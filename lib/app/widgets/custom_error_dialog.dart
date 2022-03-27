@@ -32,21 +32,19 @@ class CustomErrorDialog extends StatelessWidget {
               //padding: EdgeInsets.all(50),
               //height: 50.h,
               width: 85.w,
-              child: Expanded(
-                child: Container(
-                  padding: EdgeInsets.all(15),
-                  width: double.infinity,
-                  //height: 100,
-                  decoration: BoxDecoration(
-                    color: red2,
-                    borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
-                  ),
-                  child: Text(
-                    text,
-                    style: TextStyle(
-                      color: Colors.black87,
-                      fontSize: 14.sp,
-                    ),
+              child: Container(
+                padding: EdgeInsets.all(15),
+                width: double.infinity,
+                //height: 100,
+                decoration: BoxDecoration(
+                  color: red2,
+                  borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
+                ),
+                child: Text(
+                  text,
+                  style: TextStyle(
+                    color: Colors.black87,
+                    fontSize: 14.sp,
                   ),
                 ),
               ),

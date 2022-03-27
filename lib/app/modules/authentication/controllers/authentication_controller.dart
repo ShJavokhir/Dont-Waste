@@ -1,6 +1,7 @@
 import 'package:dont_waste/app/data/constants/colors.dart';
 import 'package:dont_waste/app/data/constants/constants.dart';
 import 'package:dont_waste/app/widgets/custom_loader_dialog.dart';
+import 'package:dont_waste/app/widgets/snackbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -28,6 +29,17 @@ class AuthenticationController extends GetxController {
   void onClose() {}
 
   Future<void> authenticate() async {
+    if(phoneNumber.value == ""){
+      showErrorSnackbar("Please enter phone number");
+      return;
+    }
+    if(!phoneNumber.value.contains("+")){
+      showErrorSnackbar("Phone number should start with + (plus)");
+      return;
+    }
+
+
+
 
     final auth = FirebaseAuth.instance;
     if (auth.currentUser != null) {
@@ -80,7 +92,9 @@ class AuthenticationController extends GetxController {
         await auth.signInWithCredential(credential);
       },
       verificationFailed: (FirebaseAuthException e) {
-        Get.snackbar("Error", "Verification failed");
+        Get.back();
+
+        showErrorSnackbar("Verification failed: " + e.toString());
       },
       codeSent: (String verificationId, int? resendToken) {
         Get.back();
@@ -147,13 +161,19 @@ class AuthenticationController extends GetxController {
                             PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: verificationId, smsCode: verificationCode.value);
 
                             // Sign the user in (or link) with the credential
-                            await auth.signInWithCredential(credential);
+                            try{
+                              await auth.signInWithCredential(credential);
+                            }catch(err){
+                              showErrorSnackbar(err.toString(), timeout: 4500);
+                              return;
+                            }
+
                             if (auth.currentUser != null) {
                               // signed in
                               Get.offAndToNamed('/choice-view');
                               print("Signed in");
                             } else {
-                              Get.snackbar("Error", "Unexpected error happened");
+                              showErrorSnackbar("Unexpected error happened");
                             }
 
                             //controller.authenticate();

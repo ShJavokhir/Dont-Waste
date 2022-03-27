@@ -214,7 +214,7 @@ class FoodPreviewView extends GetView<FoodPreviewController> {
                                                   //height: 50.h,
                                                   width: 85.w,
                                                   height: 40.h,
-                                                  child: Expanded(child: LayoutBuilder(
+                                                  child: LayoutBuilder(
                                                       builder: (BuildContext context,
                                                           BoxConstraints constraints) {
                                                         return Stack(
@@ -260,7 +260,7 @@ class FoodPreviewView extends GetView<FoodPreviewController> {
                                                                   )),
 
                                                             ]);
-                                                      })),
+                                                      }),
                                                 );
                                               },
                                             ),

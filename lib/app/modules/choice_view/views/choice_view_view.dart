@@ -6,6 +6,7 @@ import 'package:dont_waste/app/modules/food_market/views/food_market_view.dart';
 import 'package:dont_waste/app/modules/user_profile/bindings/user_profile_binding.dart';
 import 'package:dont_waste/app/modules/user_profile/controllers/user_profile_controller.dart';
 import 'package:dont_waste/app/widgets/choice_card.dart';
+import 'package:dont_waste/app/widgets/custom_loader_dialog.dart';
 import 'package:dont_waste/app/widgets/divider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +22,25 @@ class ChoiceViewView extends GetView<ChoiceViewController> {
         appBar: AppBar(
           leading: IconButton(
             icon: Icon(Icons.account_circle, size: 20.sp,), onPressed: ()async {
+
+            // showDialog(
+            //   barrierDismissible: false,
+            //   context: context,
+            //   builder: (BuildContext context) {
+            //     return CustomLoaderDialog();
+            //     // return CustomComfirmationDialog(
+            //     //   onCancel: () {},
+            //     //   onConfirm: () {},
+            //     //   text: "test",
+            //     // );
+            //   },
+            // );
+            //
+            // await Future.delayed(Duration(milliseconds: 3500));
+            // Get.back();
+            // return;
+
+
             final auth = FirebaseAuth.instance;
             //auth.signOut();
             if (auth.currentUser != null) {

@@ -82,7 +82,18 @@ class UserProfileView extends GetView<UserProfileController> {
                           photo_url: e.photo_url,
                         ),
                       );
-                    }).toList()
+                    }).toList(),
+                    controller.foods.value.length == 0?Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 0, vertical: 20),
+                      child: Container(child: Center(child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.insert_emoticon),
+                          SizedBox(width: 10,),
+                          Text("You have no any post"),
+                        ],
+                      ),),),
+                    ):Container(),
                   ],
                 ),
               ),

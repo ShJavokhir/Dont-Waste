@@ -28,7 +28,7 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
         appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 0.4,
-          automaticallyImplyLeading: false,
+          //automaticallyImplyLeading: false,
           title: Container(
             child: Container(
               width: double.infinity,
@@ -237,7 +237,7 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                                     //height: 50.h,
                                     width: 85.w,
                                     height: 40.h,
-                                    child: Expanded(child: LayoutBuilder(
+                                    child: LayoutBuilder(
                                         builder: (BuildContext context,
                                             BoxConstraints constraints) {
                                       return Stack(
@@ -303,7 +303,7 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                                               ),
                                             )
                                           ]);
-                                    })),
+                                    }),
                                   );
                                 },
                               ),
@@ -448,90 +448,89 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                                                       //height: 50.h,
                                                       width: 85.w,
                                                       height: 40.h,
-                                                      child: Expanded(child:
-                                                          LayoutBuilder(builder:
-                                                              (BuildContext
-                                                                      context,
-                                                                  BoxConstraints
-                                                                      constraints) {
+                                                      child: LayoutBuilder(builder:
+                                                          (BuildContext
+                                                                  context,
+                                                              BoxConstraints
+                                                                  constraints) {
                                                         return Stack(
-                                                            alignment:
-                                                                Alignment(
-                                                                    0.0, 0.0),
-                                                            children: <Widget>[
-                                                              Container(
-                                                                  padding:
-                                                                      EdgeInsets
-                                                                          .all(
-                                                                              15),
-                                                                  width: double
-                                                                      .infinity,
-                                                                  //height: 100,
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    color:
-                                                                        black4,
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(BORDER_RADIUS_1 *
-                                                                            1.0),
-                                                                  ),
-                                                                  child:
-                                                                      ClipRRect(
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(BORDER_RADIUS_1 *
-                                                                            1.0),
-                                                                    child:
-                                                                        GoogleMap(
-                                                                      myLocationButtonEnabled:
-                                                                          true,
-                                                                      myLocationEnabled:
-                                                                          true,
-                                                                      onCameraMove:
-                                                                          (onCameraMove) {
-                                                                        print(
-                                                                            "hello 2");
-                                                                        controller
-                                                                            .longitude
-                                                                            .value = onCameraMove.target.longitude;
-                                                                        controller
-                                                                            .latitude
-                                                                            .value = onCameraMove.target.latitude;
+                                                        alignment:
+                                                            Alignment(
+                                                                0.0, 0.0),
+                                                        children: <Widget>[
+                                                          Container(
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .all(
+                                                                          15),
+                                                              width: double
+                                                                  .infinity,
+                                                              //height: 100,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                color:
+                                                                    black4,
+                                                                borderRadius:
+                                                                    BorderRadius.circular(BORDER_RADIUS_1 *
+                                                                        1.0),
+                                                              ),
+                                                              child:
+                                                                  ClipRRect(
+                                                                borderRadius:
+                                                                    BorderRadius.circular(BORDER_RADIUS_1 *
+                                                                        1.0),
+                                                                child:
+                                                                    GoogleMap(
+                                                                  myLocationButtonEnabled:
+                                                                      true,
+                                                                  myLocationEnabled:
+                                                                      true,
+                                                                  onCameraMove:
+                                                                      (onCameraMove) {
+                                                                    print(
+                                                                        "hello 2");
+                                                                    controller
+                                                                        .longitude
+                                                                        .value = onCameraMove.target.longitude;
+                                                                    controller
+                                                                        .latitude
+                                                                        .value = onCameraMove.target.latitude;
 
-                                                                        print(onCameraMove
-                                                                            .target
-                                                                            .latitude
-                                                                            .toString());
-                                                                        // print(onCameraMove.target.longitude.toString());
-                                                                      },
-                                                                      initialCameraPosition:
-                                                                          CameraPosition(
-                                                                        target: LatLng(
-                                                                            controller.latitude.value,
-                                                                            controller.longitude.value),
-                                                                        zoom:
-                                                                            13.0,
-                                                                      ),
-                                                                    ),
-                                                                  )),
-                                                              Positioned(
-                                                                top: (constraints
-                                                                            .maxHeight -
-                                                                        25.sp) /
-                                                                    2,
-                                                                right: (constraints
-                                                                            .maxWidth -
-                                                                        25.sp) /
-                                                                    2,
-                                                                child: Icon(
-                                                                  Icons
-                                                                      .person_pin_circle,
-                                                                  size: 25.sp,
-                                                                  color:
-                                                                      yellow1,
+                                                                    print(onCameraMove
+                                                                        .target
+                                                                        .latitude
+                                                                        .toString());
+                                                                    // print(onCameraMove.target.longitude.toString());
+                                                                  },
+                                                                  initialCameraPosition:
+                                                                      CameraPosition(
+                                                                    target: LatLng(
+                                                                        controller.latitude.value,
+                                                                        controller.longitude.value),
+                                                                    zoom:
+                                                                        13.0,
+                                                                  ),
                                                                 ),
-                                                              )
-                                                            ]);
-                                                      })),
+                                                              )),
+                                                          Positioned(
+                                                            top: (constraints
+                                                                        .maxHeight -
+                                                                    25.sp) /
+                                                                2,
+                                                            right: (constraints
+                                                                        .maxWidth -
+                                                                    25.sp) /
+                                                                2,
+                                                            child: Icon(
+                                                              Icons
+                                                                  .person_pin_circle,
+                                                              size: 25.sp,
+                                                              color:
+                                                                  yellow1,
+                                                            ),
+                                                          )
+                                                        ]);
+                                                      }),
                                                     );
                                                   },
                                                 ),
