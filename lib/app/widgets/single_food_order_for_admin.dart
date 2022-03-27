@@ -10,6 +10,7 @@ class SingleFoodOrderForAdmin extends StatelessWidget {
   final int views;
   final String location;
   final String? photo_url;
+  final void Function() onView;
   final void Function() onEdit;
   final void Function() onDelete;
 
@@ -17,6 +18,7 @@ class SingleFoodOrderForAdmin extends StatelessWidget {
       {required this.id,
         required this.onEdit,
         required this.onDelete,
+        required this.onView,
         required this.title,
         required this.price,
         required this.location,
@@ -146,7 +148,26 @@ class SingleFoodOrderForAdmin extends StatelessWidget {
                   ),
                   Row(
                     children: [
-
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: onView,
+                          child: Container(
+                              width: double.infinity,
+                              alignment: Alignment.center,
+                              child: Text("View")),
+                          style: ElevatedButton.styleFrom(
+                            //padding: EdgeInsets.all(20),
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                              BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
+                            ),
+                            //side: BorderSide(width: 1, color: Colors.green),
+                            primary: Colors.lightBlueAccent, // <-- Button color
+                            onPrimary: Colors.white, // <-- Splash color
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 10,),
                       Expanded(
                         child: ElevatedButton(
                           onPressed: onEdit,

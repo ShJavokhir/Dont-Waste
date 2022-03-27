@@ -17,7 +17,7 @@ class AuthenticationView extends GetView<AuthenticationController> {
         appBar: AppBar(
           elevation: 0.4,
           backgroundColor: Colors.white,
-          automaticallyImplyLeading: false,
+          //automaticallyImplyLeading: false,
           title: Text("Become a sponsor",
               style: Theme.of(context).textTheme.bodyText1),
           centerTitle: true,

@@ -10,6 +10,7 @@ abstract class Routes {
   static const BECOME_SPONSOR = _Paths.BECOME_SPONSOR;
   static const AUTHENTICATION = _Paths.AUTHENTICATION;
   static const USER_PROFILE = _Paths.USER_PROFILE;
+  static const UPDATE_FOOD_PREVIEW = _Paths.UPDATE_FOOD_PREVIEW;
 }
 
 abstract class _Paths {
@@ -21,4 +22,5 @@ abstract class _Paths {
   static const BECOME_SPONSOR = '/become-sponsor';
   static const AUTHENTICATION = '/authentication';
   static const USER_PROFILE = '/user-profile';
+  static const UPDATE_FOOD_PREVIEW = '/update-food-preview';
 }

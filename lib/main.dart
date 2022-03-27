@@ -15,10 +15,10 @@ void main() async {
   //GlobalBindings().dependencies();
   await Firebase.initializeApp();
   print("main");
-  print(FirebaseAuth.instance.currentUser!.uid);
-  print(FirebaseAuth.instance.currentUser!.phoneNumber);
-
+  //print(FirebaseAuth.instance.currentUser!.uid);
+  //print(FirebaseAuth.instance.currentUser!.phoneNumber);
   //FirebaseAuth.instance.signOut();
+  //print(FirebaseAuth.instance.currentUser!.uid);
   runApp(Sizer(
     builder: (context, orientation, deviceType) {
       return GetMaterialApp(

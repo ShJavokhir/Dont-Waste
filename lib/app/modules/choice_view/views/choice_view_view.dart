@@ -21,10 +21,20 @@ class ChoiceViewView extends GetView<ChoiceViewController> {
         appBar: AppBar(
           leading: IconButton(
             icon: Icon(Icons.account_circle, size: 20.sp,), onPressed: ()async {
-            UserProfileBinding().dependencies();
-            await Get.find<UserProfileController>().setFoods();
-           // Get.toNamed("/food-preview");
+            final auth = FirebaseAuth.instance;
+            //auth.signOut();
+            if (auth.currentUser != null) {
+              // signed in
+              UserProfileBinding().dependencies();
+              await Get.find<UserProfileController>().setFoods();
+              // Get.toNamed("/food-preview");
               Get.toNamed('/user-profile');
+              //print("Signed");
+            } else {
+              print("Not signed in yet");
+              Get.toNamed("/authentication");
+            }
+
           },
           ),
           title: Text('FeedMe'),

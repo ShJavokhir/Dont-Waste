@@ -1,4 +1,3 @@
-import 'package:dont_waste/app/modules/user_profile/bindings/user_profile_binding.dart';
 import 'package:get/get.dart';
 
 import '../modules/authentication/bindings/authentication_binding.dart';
@@ -13,6 +12,9 @@ import '../modules/food_preview/bindings/food_preview_binding.dart';
 import '../modules/food_preview/views/food_preview_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/update_food_preview/bindings/update_food_preview_binding.dart';
+import '../modules/update_food_preview/views/update_food_preview_view.dart';
+import '../modules/user_profile/bindings/user_profile_binding.dart';
 import '../modules/user_profile/views/user_profile_view.dart';
 
 part 'app_routes.dart';
@@ -65,6 +67,11 @@ class AppPages {
       name: _Paths.USER_PROFILE,
       page: () => UserProfileView(),
       binding: UserProfileBinding(),
+    ),
+    GetPage(
+      name: _Paths.UPDATE_FOOD_PREVIEW,
+      page: () => UpdateFoodPreviewView(),
+      binding: UpdateFoodPreviewBinding(),
     ),
   ];
 }
