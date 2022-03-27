@@ -206,7 +206,8 @@ class UserProfileView extends GetView<UserProfileController> {
                   }, child: Text(
                     "Sign out ?",
                     style: TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold),
-                  ))
+                  )),
+                  SizedBox(height: 15,)
                 ],
               ),
             ]),
