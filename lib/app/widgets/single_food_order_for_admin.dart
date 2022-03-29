@@ -11,7 +11,7 @@ class SingleFoodOrderForAdmin extends StatelessWidget {
   final double price;
   final int views;
   final String location;
-  final String? photo_url;
+  final String photoUrl;
   final void Function() onView;
   final void Function() onEdit;
   final void Function() onDelete;
@@ -25,7 +25,7 @@ class SingleFoodOrderForAdmin extends StatelessWidget {
         required this.price,
         required this.location,
         required this.views,
-        this.photo_url
+        required this.photoUrl
       });
 
   @override
@@ -55,10 +55,10 @@ class SingleFoodOrderForAdmin extends StatelessWidget {
                     tag: id + 'foodImageTag',
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
-                      child: Image.network(
-                        photo_url ?? 'https://cdn.pixabay.com/photo/2015/04/08/13/13/food-712665_1280.jpg',
+                      child: photoUrl.contains("http")?Image.network(
+                        photoUrl,
                         fit: BoxFit.cover,
-                      ),
+                      ):Image.asset('assets/images/default-photo.png',),
                     ),
                   ),
                 ),

@@ -30,7 +30,7 @@ class AuthenticationView extends GetView<AuthenticationController> {
 
               children: [
             CustomTextField(
-              hint: "phone_number",
+              hint: "phone_number".tr(),
               onChanged: (phoneNumber) {
                 controller.phoneNumber.value = phoneNumber;
               },
@@ -46,7 +46,7 @@ class AuthenticationView extends GetView<AuthenticationController> {
                   //width: double.infinity,
                   alignment: Alignment.center,
                   child: Text(
-                    "continue",
+                    "continue".tr(),
                     style: TextStyle(fontSize: 15.sp),
                   )),
               style: ElevatedButton.styleFrom(

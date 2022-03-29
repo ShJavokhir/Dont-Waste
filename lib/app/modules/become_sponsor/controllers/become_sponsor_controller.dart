@@ -10,6 +10,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
+import 'package:geoflutterfire/geoflutterfire.dart';
 import 'package:get/get.dart' hide Trans;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
@@ -131,6 +132,8 @@ class BecomeSponsorController extends GetxController {
     final food = Food();
     food.title = title.value;
     food.description = description.value;
+    GeoFirePoint myLocation = GeoFirePoint(latitude.value, longitude.value);
+
     food.location = GeoPoint(latitude.value, longitude.value);
     food.phone_number = phoneNumber.value==""?FirebaseAuth.instance.currentUser!.phoneNumber:phoneNumber.value;
     food.price = price.value;

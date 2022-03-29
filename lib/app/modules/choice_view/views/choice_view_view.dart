@@ -20,6 +20,40 @@ class ChoiceViewView extends GetView<ChoiceViewController> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          actions: [
+              PopupMenuButton<String>(
+                icon: Icon(Icons.language_sharp),
+                onSelected: (String opt) {
+                  if (opt == "UZ") {
+                    final locale = Locale("uz", "UZ");
+                    context.setLocale(locale);
+                    Get.updateLocale(locale);
+                  } else if (opt == "RU") {
+                    final locale =(Locale("ru", "RU"));
+                    context.setLocale(locale);
+                    Get.updateLocale(locale);
+                  } else if (opt == "EN") {
+                    final locale =(Locale("en", "EN"));
+                    context.setLocale(locale);
+                    Get.updateLocale(locale);
+                  }
+
+                  //Get.offAndToNamed('/choice-view');
+
+                },
+                itemBuilder: (BuildContext context) {
+                  return {'UZ', 'RU', 'EN'}.map((String choice) {
+                    return PopupMenuItem<String>(
+                      value: choice,
+                      child: ListTile(
+                        leading: Image.asset('assets/images/$choice.png', height: 30, width: 30,),
+                        title: Text(choice),
+                      ),
+                    );
+                  }).toList();
+                },
+              ),
+          ],
           leading: IconButton(
             icon: Icon(Icons.account_circle, size: 20.sp,), onPressed: ()async {
 

@@ -23,6 +23,7 @@ class UserProfileView extends GetView<UserProfileController> {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+
           backgroundColor: Colors.white,
           appBar: AppBar(
             bottom: TabBar(
@@ -30,7 +31,6 @@ class UserProfileView extends GetView<UserProfileController> {
               //automaticIndicatorColorAdjustment: true,
               unselectedLabelColor: Colors.black26,
               labelColor: yellow1,
-
               physics: AlwaysScrollableScrollPhysics(),
 
               tabs: [
@@ -81,7 +81,7 @@ class UserProfileView extends GetView<UserProfileController> {
                           price: e.price ?? 0,
                           location: e.city ?? "Uzbekistan",
                           views: e.views ?? 0,
-                          photo_url: e.photo_url,
+                          photoUrl: e.photo_url ?? "no",
                         ),
                       );
                     }).toList(),

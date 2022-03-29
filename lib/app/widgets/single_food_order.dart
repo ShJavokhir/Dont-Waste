@@ -10,7 +10,7 @@ class SingleFoodOrder extends StatelessWidget {
   final String title;
   final double price;
   final String location;
-  final String? photo_url;
+  final String photo_url;
   final int? postedTimestamp;
   final bool isDonation;
 
@@ -22,7 +22,7 @@ class SingleFoodOrder extends StatelessWidget {
       required this.price,
       required this.location,
         required this.isDonation,
-        this.photo_url,
+        required this.photo_url,
         required this.postedTimestamp
       });
 
@@ -52,10 +52,11 @@ class SingleFoodOrder extends StatelessWidget {
                   tag: id + 'foodImageTag',
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
-                    child: Image.network(
-                      photo_url ?? 'https://cdn.pixabay.com/photo/2015/04/08/13/13/food-712665_1280.jpg',
+                    child: photo_url.contains("http")?Image.network(
+                      photo_url,
                       fit: BoxFit.cover,
-                    ),
+                      isAntiAlias: false,
+                    ):Image.asset('assets/images/default-photo.png', fit: BoxFit.cover,),
                   ),
                 ),
               ),
@@ -91,7 +92,7 @@ class SingleFoodOrder extends StatelessWidget {
                       child: Row(
                         children: [
                           Icon(
-                            Icons.attach_money_rounded,
+                            Icons.money_rounded,
                             size: 12.sp,
                             color: Colors.black87,
                           ),

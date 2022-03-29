@@ -11,6 +11,7 @@ abstract class Routes {
   static const AUTHENTICATION = _Paths.AUTHENTICATION;
   static const USER_PROFILE = _Paths.USER_PROFILE;
   static const UPDATE_FOOD_PREVIEW = _Paths.UPDATE_FOOD_PREVIEW;
+  static const NEARBY_FOODS = _Paths.NEARBY_FOODS;
 }
 
 abstract class _Paths {
@@ -23,4 +24,5 @@ abstract class _Paths {
   static const AUTHENTICATION = '/authentication';
   static const USER_PROFILE = '/user-profile';
   static const UPDATE_FOOD_PREVIEW = '/update-food-preview';
+  static const NEARBY_FOODS = '/nearby-foods';
 }

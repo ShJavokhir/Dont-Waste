@@ -36,7 +36,7 @@ class AuthenticationController extends GetxController {
       return;
     }
     if(!phoneNumber.value.contains("+")){
-      showErrorSnackbar("start_with_plus");
+      showErrorSnackbar("start_with_plus".tr());
       return;
     }
 

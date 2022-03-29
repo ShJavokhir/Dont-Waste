@@ -748,18 +748,7 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                       flex: 1,
                       child: ElevatedButton(
                         onPressed: () {
-                          showDialog(
-                            barrierDismissible: false,
-                            context: context,
-                            builder: (BuildContext context) {
-                              return CustomLoaderDialog();
-                              // return CustomComfirmationDialog(
-                              //   onCancel: () {},
-                              //   onConfirm: () {},
-                              //   text: "test",
-                              // );
-                            },
-                          );
+                          Get.back();
                         },
                         child: Container(
                             padding: EdgeInsets.all(15),

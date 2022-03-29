@@ -12,6 +12,8 @@ import '../modules/food_preview/bindings/food_preview_binding.dart';
 import '../modules/food_preview/views/food_preview_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/nearby-foods/bindings/nearby_foods_binding.dart';
+import '../modules/nearby-foods/views/nearby_foods_view.dart';
 import '../modules/update_food_preview/bindings/update_food_preview_binding.dart';
 import '../modules/update_food_preview/views/update_food_preview_view.dart';
 import '../modules/user_profile/bindings/user_profile_binding.dart';
@@ -72,6 +74,11 @@ class AppPages {
       name: _Paths.UPDATE_FOOD_PREVIEW,
       page: () => UpdateFoodPreviewView(),
       binding: UpdateFoodPreviewBinding(),
+    ),
+    GetPage(
+      name: _Paths.NEARBY_FOODS,
+      page: () => NearbyFoodsView(),
+      binding: NearbyFoodsBinding(),
     ),
   ];
 }

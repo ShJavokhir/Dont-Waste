@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:dont_waste/app/data/constants/colors.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -82,6 +83,68 @@ class FoodMarketView extends GetView<FoodMarketController> {
                   physics: BouncingScrollPhysics(
                       parent: AlwaysScrollableScrollPhysics()),
                   children: [
+                    // SizedBox(
+                    //   height: 20,
+                    // ),
+                    Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                        onTap: (){
+                          //open nearby foods page
+                          Get.toNamed("/nearby-foods");
+                        },
+                        splashColor: Colors.yellow,
+                        highlightColor: Colors.transparent,
+                        child: Container(
+                          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                          // margin:
+                          // EdgeInsets.symmetric(horizontal: DEFAULT_PADDING * 1.0),
+                          height: 60,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: green2,
+                            borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 0.4),
+                          ),
+                          child: Row(
+                            //mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Icon(Icons.image_search_rounded),
+                              SizedBox(width: 10,),
+                              Text(
+                                "See nearby foods",
+                                style: TextStyle(fontSize: 12.sp),
+                              ),
+                              Spacer(),
+                              Icon(Icons.keyboard_arrow_right_rounded)
+                              // Expanded(
+                              //   flex: 5,
+                              //   child: Container(
+                              //     padding: EdgeInsets.symmetric(horizontal: 10),
+                              //     alignment: Alignment.center,
+                              //     height: double.infinity,
+                              //     width: 150,
+                              //     decoration: BoxDecoration(
+                              //       color: Colors.white70,
+                              //       borderRadius:
+                              //       BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
+                              //     ),
+                              //     child: FittedBox(
+                              //       child: Text(
+                              //         "Test",
+                              //         textAlign: TextAlign.center,
+                              //
+                              //       ),
+                              //     ),
+                              //   ),
+                              // )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
                     ...controller.foods.value.map((e) {
                       return Padding(
                         padding: EdgeInsets.only(bottom: 15),
@@ -92,7 +155,7 @@ class FoodMarketView extends GetView<FoodMarketController> {
                           title: e.title ?? "null",
                           price: e.price ?? 0,
                           location: e.city ?? "Uzbekistan",
-                          photo_url: e.photo_url,
+                          photo_url: e.photo_url ?? "no",
                           onPressed: () {
                             FoodPreviewBinding().dependencies();
                             Get.find<FoodPreviewController>().foodModel = e;
