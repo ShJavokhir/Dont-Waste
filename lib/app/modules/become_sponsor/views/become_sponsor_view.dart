@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:dont_waste/app/data/constants/colors.dart';
 import 'package:dont_waste/app/data/constants/constants.dart';
+import 'package:dont_waste/app/modules/food_market/bindings/food_market_binding.dart';
 import 'package:dont_waste/app/widgets/custom_comfirmation_dialog.dart';
 import 'package:dont_waste/app/widgets/custom_error_dialog.dart';
 import 'package:dont_waste/app/widgets/custom_info_dialog.dart';
@@ -107,7 +108,7 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                   child: Row(
                     children: [
                       Text(
-                        "Donation",
+                        "is_donation".tr(),
                         style: TextStyle(fontSize: 12.sp),
                       ),
                       Spacer(),
@@ -725,9 +726,12 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                             padding: EdgeInsets.all(15),
                             //width: double.infinity,
                             alignment: Alignment.center,
-                            child: Text(
-                              "post".tr(),
-                              style: TextStyle(fontSize: 15.sp),
+                            child: FittedBox(
+                              child: Text(
+                                "post".tr(),
+                                textAlign: TextAlign.center,
+                                style: TextStyle(fontSize: 15.sp),
+                              ),
                             )),
                         style: ElevatedButton.styleFrom(
                           //padding: EdgeInsets.all(20),
@@ -754,9 +758,12 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                             padding: EdgeInsets.all(15),
                             //width: double.infinity,
                             alignment: Alignment.center,
-                            child: Text(
-                              "cancel".tr(),
-                              style: TextStyle(fontSize: 15.sp),
+                            child: FittedBox(
+                              child: Text(
+                                "cancel".tr(),
+                                textAlign: TextAlign.center,
+                                style: TextStyle(fontSize: 15.sp),
+                              ),
                             )),
                         style: ElevatedButton.styleFrom(
                           //padding: EdgeInsets.all(20),
@@ -772,6 +779,7 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                     ),
                   ],
                 ),
+                SizedBox(height: 10,),
               ]),
         ),
       ),

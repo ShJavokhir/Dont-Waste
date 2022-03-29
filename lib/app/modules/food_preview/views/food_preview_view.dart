@@ -53,11 +53,10 @@ class FoodPreviewView extends GetView<FoodPreviewController> {
                     child: ClipRRect(
                       borderRadius:
                           BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
-                      child: Image.network(
-                        controller.foodModel.photo_url ??
-                            'https://cdn.pixabay.com/photo/2015/04/08/13/13/food-712665_1280.jpg',
+                      child: controller.foodModel.photo_url!.contains("http")?Image.network(
+                        controller.foodModel.photo_url!,
                         fit: BoxFit.cover,
-                      ),
+                      ):Image.asset('assets/images/default-photo.png',),
                     ),
                   ),
                 ),

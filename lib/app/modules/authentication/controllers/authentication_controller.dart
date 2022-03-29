@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dont_waste/app/data/constants/colors.dart';
 import 'package:dont_waste/app/data/constants/constants.dart';
 import 'package:dont_waste/app/widgets/custom_loader_dialog.dart';
@@ -46,7 +47,7 @@ class AuthenticationController extends GetxController {
     final auth = FirebaseAuth.instance;
     if (auth.currentUser != null) {
       // signed in
-      Get.offAndToNamed("/choice-view");
+      Get.offAllNamed("/frame");
     } else {
       print("Not signed in yet");
     }
@@ -68,8 +69,11 @@ class AuthenticationController extends GetxController {
 
       verificationCompleted: (PhoneAuthCredential credential) async {
         print("verification completed");
-        Get.offAllNamed('/choice-view');
-
+        Get.offAllNamed("/frame");
+        print("Metadata: " + auth.currentUser!.metadata.creationTime!.millisecondsSinceEpoch.toString());
+        if((auth.currentUser!.metadata.creationTime!.millisecondsSinceEpoch - DateTime.now().millisecondsSinceEpoch).abs() < 300000){
+          FirebaseFirestore.instance.collection("app").doc("statistics").update({"totalUsers": FieldValue.increment(1)});
+        }
         Get.snackbar(
           "into".tr(),
           "succ_auth".tr(),
@@ -172,7 +176,8 @@ class AuthenticationController extends GetxController {
 
                             if (auth.currentUser != null) {
                               // signed in
-                              Get.offAndToNamed('/choice-view');
+                              Get.offAllNamed("/frame");
+
                               print("Signed in");
                             } else {
                               showErrorSnackbar("unexpected_err".tr());
@@ -227,7 +232,7 @@ class AuthenticationController extends GetxController {
         );
       },
       codeAutoRetrievalTimeout: (String verificationId) {
-        Get.snackbar("info".tr(), "otp_timed_out".tr());
+        //Get.snackbar("info".tr(), "otp_timed_out".tr());
       },
     );
   }

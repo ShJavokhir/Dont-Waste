@@ -138,12 +138,15 @@ class OnMapSingleFoodOrder extends StatelessWidget {
               SizedBox(
                 width: 5,
               ),
-              Text(
-                DateTimeUtility.getReadableTime(postedTimestamp),
-                style: TextStyle(
-                    fontSize: 9.sp,
-                    color: Colors.black54,
-                    fontWeight: FontWeight.normal),
+              FittedBox(
+                child: Text(
+                  DateTimeUtility.getReadableTime(postedTimestamp),
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                      fontSize: 9.sp,
+                      color: Colors.black54,
+                      fontWeight: FontWeight.normal),
+                ),
               )
             ],
           ),

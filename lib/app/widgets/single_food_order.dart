@@ -78,6 +78,7 @@ class SingleFoodOrder extends StatelessWidget {
                       tag: id + '_foodTitleTag',
                       child: Text(
                         title,
+
                         textAlign: TextAlign.left,
                         overflow: TextOverflow.ellipsis,
                         style: Theme.of(context).textTheme.bodyText2,

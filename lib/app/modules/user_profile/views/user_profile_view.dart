@@ -21,12 +21,14 @@ class UserProfileView extends GetView<UserProfileController> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
+
       length: 2,
       child: Scaffold(
 
           backgroundColor: Colors.white,
           appBar: AppBar(
             bottom: TabBar(
+
               indicatorColor: yellow1,
               //automaticIndicatorColorAdjustment: true,
               unselectedLabelColor: Colors.black26,
@@ -111,7 +113,7 @@ class UserProfileView extends GetView<UserProfileController> {
                           ),
                           CustomTextField(
                               defaultText:
-                              FirebaseAuth.instance.currentUser!.displayName ?? "",
+                              FirebaseAuth.instance.currentUser!=null?FirebaseAuth.instance.currentUser!.displayName ?? "":"null",
                               hint: "full_name".tr(),
                               isMultipleLine: false,
                               onChanged: (text) {
@@ -154,7 +156,7 @@ class UserProfileView extends GetView<UserProfileController> {
                                     ),
                                     child: FittedBox(
                                       child: Text(
-                                        FirebaseAuth.instance.currentUser!.uid,
+                                        FirebaseAuth.instance.currentUser!=null?FirebaseAuth.instance.currentUser!.uid:"null",
                                         textAlign: TextAlign.center,
 
                                       ),

@@ -36,6 +36,18 @@ class NearbyFoodsController extends GetxController {
   late FirebaseFirestore firestore;
   @override
   void onInit()async {
+    // showDialog(
+    //   barrierDismissible: false,
+    //   context: Get.context!,
+    //   builder: (BuildContext context) {
+    //     return CustomLoaderDialog();
+    //     // return CustomComfirmationDialog(
+    //     //   onCancel: () {},
+    //     //   onConfirm: () {},
+    //     //   text: "test",
+    //     // );
+    //   },
+    // );
     firestore = FirebaseFirestore.instance;
     // showDialog(
     //   barrierDismissible: false,
@@ -70,7 +82,7 @@ class NearbyFoodsController extends GetxController {
           // );
         },
       ).then((value) => {
-        Get.back()
+        Get.back(),
       });
     });
 
@@ -145,6 +157,7 @@ class NearbyFoodsController extends GetxController {
     //
     // Stream<List<DocumentSnapshot>> stream = geo.collection(collectionRef:
     // collectionReference).within(center: center, radius: radius, field: field);
+    // Get.back();
     super.onInit();
   }
 
@@ -154,47 +167,37 @@ class NearbyFoodsController extends GetxController {
     super.onReady();
   }
   Future<List<Food>> fetchFoods() async {
-    print("Fetch foods function");
+
     final List<Food> foods = [];
 
-    GeoFirePoint center = geo.point(latitude: usersLocation!.latitude,longitude: usersLocation!.longitude);
-    print("users location: " + usersLocation!.latitude.toString() + " " + usersLocation!.longitude.toString());
-    // get the collection reference or query
-    var collectionReference = FirebaseFirestore.instance.collection("posts");
-
-
-    double radius = 10000;
-    String field = 'location';
-
-    Stream<List<DocumentSnapshot>> stream =  geo.collection(collectionRef:
-    collectionReference).within(center: center, radius: radius, field: field);
-
-    stream.listen((List<DocumentSnapshot> documentList) {
-      print("listeningg " + documentList.length.toString());
-
-      documentList.forEach((element) {
-        print("yea boi");
-      });
-    });
-
-    stream.forEach((element2) {
-      print("Fetch foods function first loop");
-      for (var element in element2) {
-        print("Fetch foods function second loop");
-        final food = Food.fromJson(element.data() as Map<String, dynamic>);
+    //GeoFirePoint position = geo.point(latitude: usersLocation!.latitude,longitude: usersLocation!.longitude);
+    //usersLocation;
+    QuerySnapshot querySnapshot;
+    double lat = 0.0144927536231884;
+    double lon = 0.0181818181818182;
+    double distance = 2000*0.000621371;
+    double lowerLat = usersLocation!.latitude - (lat * distance);
+    double lowerLon = usersLocation!.longitude - (lon * distance);
+    double greaterLat = usersLocation!.latitude + (lat * distance);
+    double greaterLon = usersLocation!.longitude + (lon * distance);
+    GeoPoint lesserGeopoint = GeoPoint(lowerLat,lowerLon);
+    GeoPoint greaterGeopoint = GeoPoint(greaterLat,greaterLon);
+    // querySnapshot = await usersRef
+    //     .get();
+    await firestore.collection("posts").where("location", isGreaterThan: lesserGeopoint)
+        .where("location", isLessThan: greaterGeopoint)
+        .limit(100)
+        .get().then((value) {
+      //print(value.size);
+      value.docs.forEach((element) {
+        final food = Food.fromJson(element.data());
         food.id = element.id;
         print("Setting ids");
         print(food.id);
         //print(food.id);
         foods.add(food);
-      }
+      });
     });
-    // await firestore.collection("posts").get().then((value) {
-    //   //print(value.size);
-    //   value.docs.forEach((element) {
-    //
-    //   });
-    // });
     return foods;
   }
   @override

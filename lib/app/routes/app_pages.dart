@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/about/bindings/about_binding.dart';
+import '../modules/about/views/about_view.dart';
 import '../modules/authentication/bindings/authentication_binding.dart';
 import '../modules/authentication/views/authentication_view.dart';
 import '../modules/become_sponsor/bindings/become_sponsor_binding.dart';
@@ -10,6 +12,8 @@ import '../modules/food_market/bindings/food_market_binding.dart';
 import '../modules/food_market/views/food_market_view.dart';
 import '../modules/food_preview/bindings/food_preview_binding.dart';
 import '../modules/food_preview/views/food_preview_view.dart';
+import '../modules/frame/bindings/frame_binding.dart';
+import '../modules/frame/views/frame_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/nearby-foods/bindings/nearby_foods_binding.dart';
@@ -24,7 +28,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.CHOICE_VIEW;
+  static const INITIAL = Routes.FRAME;
 
   static final routes = [
     GetPage(
@@ -79,6 +83,16 @@ class AppPages {
       name: _Paths.NEARBY_FOODS,
       page: () => NearbyFoodsView(),
       binding: NearbyFoodsBinding(),
+    ),
+    GetPage(
+      name: _Paths.FRAME,
+      page: () => FrameView(),
+      binding: FrameBinding(),
+    ),
+    GetPage(
+      name: _Paths.ABOUT,
+      page: () => AboutView(),
+      binding: AboutBinding(),
     ),
   ];
 }

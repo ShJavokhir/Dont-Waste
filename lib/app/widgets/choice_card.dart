@@ -60,6 +60,7 @@ class ChoiceCard extends StatelessWidget {
                       tag: imageUrl + "choice",
                       child: Text(
                         text,
+                        textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.bodyText1,
                       ))
                 ],

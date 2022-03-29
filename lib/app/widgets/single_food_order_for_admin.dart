@@ -156,7 +156,7 @@ class SingleFoodOrderForAdmin extends StatelessWidget {
                           child: Container(
                               width: double.infinity,
                               alignment: Alignment.center,
-                              child: Text("view".tr())),
+                              child: Text("view".tr(), overflow: TextOverflow.ellipsis)),
                           style: ElevatedButton.styleFrom(
                             //padding: EdgeInsets.all(20),
                             shape: RoundedRectangleBorder(
@@ -176,7 +176,7 @@ class SingleFoodOrderForAdmin extends StatelessWidget {
                           child: Container(
                               width: double.infinity,
                               alignment: Alignment.center,
-                              child: Text("edit".tr())),
+                              child: Text("edit".tr(), overflow: TextOverflow.ellipsis, )),
                           style: ElevatedButton.styleFrom(
                             //padding: EdgeInsets.all(20),
                             shape: RoundedRectangleBorder(
@@ -196,7 +196,7 @@ class SingleFoodOrderForAdmin extends StatelessWidget {
                           child: Container(
                               width: double.infinity,
                               alignment: Alignment.center,
-                              child: Text("delete".tr())),
+                              child: Text("delete".tr(), overflow: TextOverflow.ellipsis,)),
                           style: ElevatedButton.styleFrom(
                             //padding: EdgeInsets.all(20),
                             shape: RoundedRectangleBorder(

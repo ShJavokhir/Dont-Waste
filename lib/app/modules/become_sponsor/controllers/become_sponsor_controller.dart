@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:dont_waste/app/modules/frame/controllers/frame_controller.dart';
+import 'package:dont_waste/app/widgets/snackbar.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -10,7 +12,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
-import 'package:geoflutterfire/geoflutterfire.dart';
 import 'package:get/get.dart' hide Trans;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
@@ -41,16 +42,7 @@ class BecomeSponsorController extends GetxController {
   @override
   void onReady() {
     print("on ready");
-    final auth = FirebaseAuth.instance;
-    //auth.signOut();
-    if (auth.currentUser != null) {
-      // signed in
 
-      print("Signed");
-    } else {
-      print("Not signed in yet");
-      Get.offAndToNamed("/authentication");
-    }
     super.onReady();
   }
 
@@ -79,6 +71,19 @@ class BecomeSponsorController extends GetxController {
 
   }
   Future<void> upload() async {
+    if(title.value == ""){
+      showErrorSnackbar("Please write the title");
+      return;
+    }
+    if(description.value == ""){
+      showErrorSnackbar("Please write the description");
+      return;
+    }
+    if(quantity.value == 0.0){
+      showErrorSnackbar("Please write the quantity");
+      return;
+    }
+
     showDialog(
       barrierDismissible: false,
       context: Get.context!,
@@ -132,8 +137,6 @@ class BecomeSponsorController extends GetxController {
     final food = Food();
     food.title = title.value;
     food.description = description.value;
-    GeoFirePoint myLocation = GeoFirePoint(latitude.value, longitude.value);
-
     food.location = GeoPoint(latitude.value, longitude.value);
     food.phone_number = phoneNumber.value==""?FirebaseAuth.instance.currentUser!.phoneNumber:phoneNumber.value;
     food.price = price.value;
@@ -157,7 +160,9 @@ class BecomeSponsorController extends GetxController {
 
     firestore.collection("posts").add(food.toJson()).then((value) async {
       Get.back();
-      Get.back();
+      Get.find<FrameController>().changeTabIndex(0);
+      Get.delete<BecomeSponsorController>();
+
       Get.snackbar(
         "info".tr(),
         "succ_posted".tr(),
@@ -179,6 +184,7 @@ class BecomeSponsorController extends GetxController {
         snackPosition: SnackPosition.TOP,
         backgroundColor: yellow1,
       );
+      FirebaseFirestore.instance.collection("app").doc("statistics").update({"totalPosts": FieldValue.increment(1)});
     }).catchError((onError) {
       Get.back();
       Get.snackbar(

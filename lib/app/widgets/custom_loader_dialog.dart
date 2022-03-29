@@ -44,6 +44,7 @@ class CustomLoaderDialog extends StatelessWidget {
                       ),
                       Text(
                         'loading'.tr(),
+                        textAlign: TextAlign.center,
                       ),
                     ],
                   ),

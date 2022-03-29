@@ -13,8 +13,8 @@ class UserProfileController extends GetxController {
   final fullName = "".obs;
   late FirebaseFirestore firestore;
   final foods = <Food>[].obs;
-
   Future<void> saveFullName()async {
+
     //FirebaseAuth.instance.currentUser!.displayName = fullName.value;
     showDialog(
       barrierDismissible: false,
@@ -140,8 +140,8 @@ class UserProfileController extends GetxController {
 
               await setFoods();
               Get.snackbar(
-                "Info",
-                "Post succesfully deleted",
+                "info".tr(),
+                "post_deleted_successfully".tr(),
                 colorText: Colors.white,
                 margin: EdgeInsets.fromLTRB(10, 30, 10, 10),
                 progressIndicatorBackgroundColor: Colors.green,
@@ -163,8 +163,8 @@ class UserProfileController extends GetxController {
               //setState();
             }).catchError((onError){
               Get.snackbar(
-                "Error",
-                "Unexpected error while deleting: " + onError.toString(),
+                "error".tr(),
+                "error_while_deleting_post".tr() + onError.toString(),
                 colorText: Colors.white,
                 margin: EdgeInsets.fromLTRB(10, 30, 10, 10),
 
@@ -186,7 +186,7 @@ class UserProfileController extends GetxController {
             });
 
           },
-          text: "Are you sure to delete your post ?",
+          text: "confirm_delete_post".tr(),
         );
       },
     );
@@ -207,10 +207,10 @@ class UserProfileController extends GetxController {
           onConfirm: () async{
             Get.back();
             FirebaseAuth.instance.signOut().then((value)async {
-              Get.offAllNamed('/choice-view');
+              Get.offAllNamed('/frame');
               Get.snackbar(
-                "Info",
-                "Successfully signed out",
+                "info".tr(),
+                "succesfully_signed_out".tr(),
                 colorText: Colors.white,
                 margin: EdgeInsets.fromLTRB(10, 30, 10, 10),
                 progressIndicatorBackgroundColor: Colors.green,
@@ -232,8 +232,8 @@ class UserProfileController extends GetxController {
               //setState();
             }).catchError((onError){
               Get.snackbar(
-                "Error",
-                "Unexpected error while signing out: " + onError.toString(),
+                "error".tr(),
+                "unexpected_error_happened".tr() + onError.toString(),
                 colorText: Colors.white,
                 margin: EdgeInsets.fromLTRB(10, 30, 10, 10),
 
@@ -255,7 +255,7 @@ class UserProfileController extends GetxController {
             });
 
           },
-          text: "Are you sure to sign out from your account ?",
+          text: "are_u_sure_to_sign_out".tr(),
         );
       },
     );

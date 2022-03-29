@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:dont_waste/app/data/constants/colors.dart';
+import 'package:dont_waste/app/data/constants/constants.dart';
 import 'package:dont_waste/app/modules/food_preview/bindings/food_preview_binding.dart';
 import 'package:dont_waste/app/modules/food_preview/controllers/food_preview_controller.dart';
 import 'package:dont_waste/app/widgets/onmap_single_food_order.dart';
@@ -96,11 +98,25 @@ class NearbyFoodsView extends GetView<NearbyFoodsController> {
                     () => ListView(
                       physics: BouncingScrollPhysics(
                           parent: AlwaysScrollableScrollPhysics()),
-
                       //shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
                       children: [
                         SizedBox(width: 10,),
+                        Visibility(
+                          visible: controller.foods.length==0,
+                            child: Container(
+
+                              //margin: EdgeInsets.all(20),
+                              decoration: BoxDecoration(
+                                color: red2,
+                                borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
+                              ),
+                              padding: EdgeInsets.symmetric(vertical: 50, horizontal: 20),
+                              width: MediaQuery.of(context).size.width - 20,
+                              alignment: Alignment.center,
+                              child: Text("There is no any foods near you", textAlign: TextAlign.center,),
+
+                            )),
                         ...controller.foods.value.map((e) {
                           return OnMapSingleFoodOrder(id: e.id,
                               isDonation: e.isDonation ?? false,

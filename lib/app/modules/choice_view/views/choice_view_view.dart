@@ -3,6 +3,7 @@ import 'package:dont_waste/app/modules/become_sponsor/views/become_sponsor_view.
 import 'package:dont_waste/app/modules/food_market/bindings/food_market_binding.dart';
 import 'package:dont_waste/app/modules/food_market/controllers/food_market_controller.dart';
 import 'package:dont_waste/app/modules/food_market/views/food_market_view.dart';
+import 'package:dont_waste/app/modules/frame/controllers/frame_controller.dart';
 import 'package:dont_waste/app/modules/user_profile/bindings/user_profile_binding.dart';
 import 'package:dont_waste/app/modules/user_profile/controllers/user_profile_controller.dart';
 import 'package:dont_waste/app/widgets/choice_card.dart';
@@ -54,43 +55,43 @@ class ChoiceViewView extends GetView<ChoiceViewController> {
                 },
               ),
           ],
-          leading: IconButton(
-            icon: Icon(Icons.account_circle, size: 20.sp,), onPressed: ()async {
-
-            // showDialog(
-            //   barrierDismissible: false,
-            //   context: context,
-            //   builder: (BuildContext context) {
-            //     return CustomLoaderDialog();
-            //     // return CustomComfirmationDialog(
-            //     //   onCancel: () {},
-            //     //   onConfirm: () {},
-            //     //   text: "test",
-            //     // );
-            //   },
-            // );
-            //
-            // await Future.delayed(Duration(milliseconds: 3500));
-            // Get.back();
-            // return;
-
-
-            final auth = FirebaseAuth.instance;
-            //auth.signOut();
-            if (auth.currentUser != null) {
-              // signed in
-              UserProfileBinding().dependencies();
-              await Get.find<UserProfileController>().setFoods();
-              // Get.toNamed("/food-preview");
-              Get.toNamed('/user-profile');
-              //print("Signed");
-            } else {
-              print("Not signed in yet");
-              Get.toNamed("/authentication");
-            }
-
-          },
-          ),
+          // leading: IconButton(
+          //   icon: Icon(Icons.account_circle, size: 20.sp,), onPressed: ()async {
+          //
+          //   // showDialog(
+          //   //   barrierDismissible: false,
+          //   //   context: context,
+          //   //   builder: (BuildContext context) {
+          //   //     return CustomLoaderDialog();
+          //   //     // return CustomComfirmationDialog(
+          //   //     //   onCancel: () {},
+          //   //     //   onConfirm: () {},
+          //   //     //   text: "test",
+          //   //     // );
+          //   //   },
+          //   // );
+          //   //
+          //   // await Future.delayed(Duration(milliseconds: 3500));
+          //   // Get.back();
+          //   // return;
+          //
+          //
+          //   final auth = FirebaseAuth.instance;
+          //   //auth.signOut();
+          //   if (auth.currentUser != null) {
+          //     // signed in
+          //     UserProfileBinding().dependencies();
+          //     await Get.find<UserProfileController>().setFoods();
+          //     // Get.toNamed("/food-preview");
+          //     Get.toNamed('/user-profile');
+          //     //print("Signed");
+          //   } else {
+          //     print("Not signed in yet");
+          //     Get.toNamed("/authentication");
+          //   }
+          //
+          // },
+          // ),
           title: Text("Don't waste"),
           centerTitle: true,
         ),
@@ -112,11 +113,12 @@ class ChoiceViewView extends GetView<ChoiceViewController> {
                   //   codeAutoRetrievalTimeout: (String verificationId) {},
                   // );
                   //Get.to(() => FoodMarketView());
-                  FoodMarketBinding().dependencies();
-                  await Get.find<FoodMarketController>().setFoods();
-
-                  //await Future.delayed(Duration(seconds: 2));
-                  Get.toNamed("/food-market");
+                  // FoodMarketBinding().dependencies();
+                  // await Get.find<FoodMarketController>().setFoods();
+                  //
+                  // //await Future.delayed(Duration(seconds: 2));
+                  // Get.toNamed("/food-market");
+                  Get.find<FrameController>().changeTabIndex(1);
                 },
               ),
               SizedBox(
@@ -131,7 +133,8 @@ class ChoiceViewView extends GetView<ChoiceViewController> {
                 imageUrl: 'assets/images/lunch.png',
                 callback: () {
                   //Get.to(() => BecomeSponsorView());
-                  Get.toNamed("/become-sponsor");
+                  //Get.toNamed("/become-sponsor");
+                  Get.find<FrameController>().changeTabIndex(2);
                 },
               ),
               //ChoiceCard()

@@ -46,5 +46,8 @@ flutter:
       - assets/images/default-photo.png
       - assets/google-maps-style.json
       - assets/images/food-delivery.png
+      - assets/images/customer-review.png
+      - assets/images/chat.png
+      - assets/images/operator.png
   uses-material-design: true
 

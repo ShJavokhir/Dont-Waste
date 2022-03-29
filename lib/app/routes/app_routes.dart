@@ -12,6 +12,8 @@ abstract class Routes {
   static const USER_PROFILE = _Paths.USER_PROFILE;
   static const UPDATE_FOOD_PREVIEW = _Paths.UPDATE_FOOD_PREVIEW;
   static const NEARBY_FOODS = _Paths.NEARBY_FOODS;
+  static const FRAME = _Paths.FRAME;
+  static const ABOUT = _Paths.ABOUT;
 }
 
 abstract class _Paths {
@@ -25,4 +27,6 @@ abstract class _Paths {
   static const USER_PROFILE = '/user-profile';
   static const UPDATE_FOOD_PREVIEW = '/update-food-preview';
   static const NEARBY_FOODS = '/nearby-foods';
+  static const FRAME = '/frame';
+  static const ABOUT = '/about';
 }
