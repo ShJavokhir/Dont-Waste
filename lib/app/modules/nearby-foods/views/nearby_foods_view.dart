@@ -9,7 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
-import 'package:get/get.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart' hide Trans;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../controllers/nearby_foods_controller.dart';
@@ -26,7 +27,7 @@ class NearbyFoodsView extends GetView<NearbyFoodsController> {
 
           title: Container(
             child: Container(
-              child: Text("Nearby foods",
+              child: Text("nearby_foods_page".tr(),
                   style: Theme
                       .of(context)
                       .textTheme
@@ -81,7 +82,7 @@ class NearbyFoodsView extends GetView<NearbyFoodsController> {
                       initialCameraPosition:
                       CameraPosition(
                         target: controller.usersLocation!=null?LatLng(controller.usersLocation!.latitude ,controller.usersLocation!.longitude): LatLng(41.300027952448836, 69.24277207425287),
-                        zoom: 13.0,
+                        zoom: 11.5,
                       ),
                     ),
               ),

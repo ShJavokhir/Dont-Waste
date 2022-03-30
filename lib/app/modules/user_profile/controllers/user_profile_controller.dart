@@ -7,6 +7,7 @@ import 'package:dont_waste/app/widgets/custom_loader_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart' hide Trans;
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UserProfileController extends GetxController {
 
@@ -39,7 +40,6 @@ class UserProfileController extends GetxController {
       barBlur: 0,
       dismissDirection: DismissDirection.horizontal,
       duration: Duration(milliseconds: 2500),
-
       //instantInit: true,
       //shouldIconPulse: true,
       animationDuration: Duration(milliseconds: 300),
@@ -58,11 +58,9 @@ class UserProfileController extends GetxController {
     "err_while_posting".tr(),
     colorText: Colors.white,
     margin: EdgeInsets.fromLTRB(10, 30, 10, 10),
-
     barBlur: 0,
     dismissDirection: DismissDirection.horizontal,
     duration: Duration(milliseconds: 200),
-
     //instantInit: true,
     //shouldIconPulse: true,
     animationDuration: Duration(milliseconds: 300),
@@ -78,7 +76,9 @@ class UserProfileController extends GetxController {
   }
 
   @override
-  void onInit() {
+  void onInit()async {
+
+
     //print(FirebaseAuth.instance.currentUser!.uid);
     firestore = FirebaseFirestore.instance;
     super.onInit();
@@ -93,6 +93,7 @@ class UserProfileController extends GetxController {
   void onClose() {}
 
   Future<void> setFoods()async{
+
     showDialog(
       barrierDismissible: false,
       context: Get.context!,
@@ -117,7 +118,7 @@ class UserProfileController extends GetxController {
       value.docs.forEach((element) {
 
         final food = Food.fromJson(element.data());
-        print("1" + food.title!);
+        print("Fetching foods: ${food.isDonation}");
          food.id = element.id;
         //print(food.id);
         foods.add(food);

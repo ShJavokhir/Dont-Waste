@@ -33,7 +33,7 @@ class SingleFoodOrderForAdmin extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(5),
       width: double.infinity,
-      height: 300,
+      height: 400,
       decoration: BoxDecoration(
           color: black4,
           borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0)),
@@ -148,67 +148,95 @@ class SingleFoodOrderForAdmin extends StatelessWidget {
                   SizedBox(
                     height: 5,
                   ),
-                  Row(
+                  Column(
                     children: [
-                      Expanded(
-                        child: ElevatedButton(
-                          onPressed: onView,
-                          child: Container(
-                              width: double.infinity,
-                              alignment: Alignment.center,
-                              child: Text("view".tr(), overflow: TextOverflow.ellipsis)),
-                          style: ElevatedButton.styleFrom(
-                            //padding: EdgeInsets.all(20),
-                            shape: RoundedRectangleBorder(
-                              borderRadius:
-                              BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: ElevatedButton(
+                              onPressed: onView,
+                              child: Container(
+                                  width: double.infinity,
+                                  alignment: Alignment.center,
+                                  child: Text("view".tr(), overflow: TextOverflow.ellipsis)),
+                              style: ElevatedButton.styleFrom(
+                                //padding: EdgeInsets.all(20),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                  BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
+                                ),
+                                //side: BorderSide(width: 1, color: Colors.green),
+                                primary: Colors.lightBlueAccent, // <-- Button color
+                                onPrimary: Colors.white, // <-- Splash color
+                              ),
                             ),
-                            //side: BorderSide(width: 1, color: Colors.green),
-                            primary: Colors.lightBlueAccent, // <-- Button color
-                            onPrimary: Colors.white, // <-- Splash color
                           ),
-                        ),
-                      ),
-                      SizedBox(width: 10,),
-                      Expanded(
-                        child: ElevatedButton(
-                          onPressed: onEdit,
-                          child: Container(
-                              width: double.infinity,
-                              alignment: Alignment.center,
-                              child: Text("edit".tr(), overflow: TextOverflow.ellipsis, )),
-                          style: ElevatedButton.styleFrom(
-                            //padding: EdgeInsets.all(20),
-                            shape: RoundedRectangleBorder(
-                              borderRadius:
-                              BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
+                          SizedBox(width: 10,),
+                          Expanded(
+                            child: ElevatedButton(
+                              onPressed: onView,
+                              child: Container(
+                                  width: double.infinity,
+                                  alignment: Alignment.center,
+                                  child: Text("view".tr(), overflow: TextOverflow.ellipsis)),
+                              style: ElevatedButton.styleFrom(
+                                //padding: EdgeInsets.all(20),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                  BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
+                                ),
+                                //side: BorderSide(width: 1, color: Colors.green),
+                                primary: Colors.lightBlueAccent, // <-- Button color
+                                onPrimary: Colors.white, // <-- Splash color
+                              ),
                             ),
-                            //side: BorderSide(width: 1, color: Colors.green),
-                            primary: Colors.greenAccent, // <-- Button color
-                            onPrimary: Colors.white, // <-- Splash color
                           ),
-                        ),
+
+                        ],
                       ),
-                      SizedBox(width: 10,),
-                      Expanded(
-                        child: ElevatedButton(
-                          onPressed: onDelete,
-                          child: Container(
-                              width: double.infinity,
-                              alignment: Alignment.center,
-                              child: Text("delete".tr(), overflow: TextOverflow.ellipsis,)),
-                          style: ElevatedButton.styleFrom(
-                            //padding: EdgeInsets.all(20),
-                            shape: RoundedRectangleBorder(
-                              borderRadius:
-                              BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: ElevatedButton(
+                              onPressed: onEdit,
+                              child: Container(
+                                  width: double.infinity,
+                                  alignment: Alignment.center,
+                                  child: Text("edit".tr(), overflow: TextOverflow.ellipsis, )),
+                              style: ElevatedButton.styleFrom(
+                                //padding: EdgeInsets.all(20),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                  BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
+                                ),
+                                //side: BorderSide(width: 1, color: Colors.green),
+                                primary: Colors.greenAccent, // <-- Button color
+                                onPrimary: Colors.white, // <-- Splash color
+                              ),
                             ),
-                            //side: BorderSide(width: 1, color: Colors.green),
-                            primary: Colors.redAccent, // <-- Button color
-                            onPrimary: Colors.white, // <-- Splash color
                           ),
-                        ),
-                      ),
+                          SizedBox(width: 10,),
+                          Expanded(
+                            child: ElevatedButton(
+                              onPressed: onDelete,
+                              child: Container(
+                                  width: double.infinity,
+                                  alignment: Alignment.center,
+                                  child: Text("delete".tr(), overflow: TextOverflow.ellipsis,)),
+                              style: ElevatedButton.styleFrom(
+                                //padding: EdgeInsets.all(20),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                  BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
+                                ),
+                                //side: BorderSide(width: 1, color: Colors.green),
+                                primary: Colors.redAccent, // <-- Button color
+                                onPrimary: Colors.white, // <-- Splash color
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
                     ],
                   )
                 ],

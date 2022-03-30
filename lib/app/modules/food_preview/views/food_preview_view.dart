@@ -454,6 +454,7 @@ class FoodPreviewView extends GetView<FoodPreviewController> {
                 )
               ],
             ),
+            SizedBox(height: 15,)
           ],
         ));
   }

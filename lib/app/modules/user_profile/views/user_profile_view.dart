@@ -70,9 +70,12 @@ class UserProfileView extends GetView<UserProfileController> {
                             Get.toNamed("/food-preview");
                           },
                           onEdit: ()async {
+                            print("isDonation before edit: ${e.isDonation} ${e.id}");
                             UpdateFoodPreviewBinding().dependencies();
                             Get.find<UpdateFoodPreviewController>().oldFood = e;
+                            Get.find<UpdateFoodPreviewController>().isDonation.value = e.isDonation ?? false;
                             await Get.toNamed("/update-food-preview");
+                            Get.delete<UpdateFoodPreviewController>();
                             await Future.delayed(Duration(seconds: 2));
                             await controller.setFoods();
                           },

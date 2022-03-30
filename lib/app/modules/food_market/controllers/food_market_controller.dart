@@ -51,7 +51,7 @@ class FoodMarketController extends GetxController {
   Future<List<Food>> fetchFoods() async {
 
     final List<Food> foods = [];
-    await firestore.collection("posts").get().then((value) {
+    await firestore.collection("posts").orderBy('postedTimestamp', descending: true).get().then((value) {
       //print(value.size);
       value.docs.forEach((element) {
         final food = Food.fromJson(element.data());

@@ -1,4 +1,5 @@
 {
+  "app_name": "Don't waste",
   "find_food": "Find food",
   "yesterday": "Yesterday",
   "today_at": "Today at {}",
@@ -66,11 +67,11 @@
   "free": "FREE",
   "get_donation": "Get donation",
   "confirm_delete_post": "Are you sure to delete your post ?",
-  "post_deleted_successfully": "Post deleted successfully",
+  "post_deleted_successfully": "Post deleted successfully !",
   "error_while_deleting_post": "Unexpected error happened while deleting post",
-  "are_u_sure_to_sign_out": "Are you sure to sign out",
+  "are_u_sure_to_sign_out": "Are you sure to sign out ?",
   "unexpected_error_happened": "Unexpected error happened: ",
-  "succesfully_signed_out": "Succesfully signed out",
+  "succesfully_signed_out": "Succesfully signed out !",
   "is_donation": "Donation",
   "see_nearby_foods": "See nearby foods",
   "home_button": "Home",
@@ -82,8 +83,12 @@
   "total_users": "Total users",
   "total_foods": "Total foods",
   "about_team": "About team",
-  "about_team2": "We are total of 3 people in team and Sophomore (2nd year) students in INHA university in Tashkent\n\nAzizullo - Product manager\nValisher - Designer\nJavokhir - Mobile and Backend developer",
-  "app_version": "App version: {}"
+  "about_team2": "We are sophomore students at INHA university in Tashkent\n\nAzizullo - Product manager\nValisher - Designer\nJavokhir - Mobile and Backend developer",
+  "app_version": "App version: {}",
+  "nearby_foods_page": "Nearby foods",
+  "find_food_page": "Food market"
+
+
 
 
 

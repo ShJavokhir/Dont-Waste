@@ -1,11 +1,13 @@
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ChoiceViewController extends GetxController {
   //TODO: Implement ChoiceViewController
 
   final count = 0.obs;
   @override
-  void onInit() {
+  void onInit() async{
+
     super.onInit();
   }
 

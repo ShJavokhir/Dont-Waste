@@ -103,6 +103,7 @@ class UpdateFoodPreviewView extends GetView<UpdateFoodPreviewController> {
                                 controller.isDonation.value = value;
                               },
                               value: controller.isDonation.value,
+                                  
                               activeColor: yellow1,
                               //activeTrackColor: Colors.yellow,
                               //inactiveThumbColor: Colors.redAccent,
@@ -350,10 +351,10 @@ class UpdateFoodPreviewView extends GetView<UpdateFoodPreviewController> {
                           children: [
                             GoogleMap(
                               onMapCreated: (controller) {
-                                this
-                                    .controller
-                                    .controller
-                                    .complete(controller);
+                                // this
+                                //     .controller
+                                //     .controller
+                                //     .complete(controller);
                               },
                               zoomGesturesEnabled: false,
                               rotateGesturesEnabled: false,
@@ -659,9 +660,11 @@ class UpdateFoodPreviewView extends GetView<UpdateFoodPreviewController> {
                             padding: EdgeInsets.all(15),
                             //width: double.infinity,
                             alignment: Alignment.center,
-                            child: Text(
-                              "update_button".tr(),
-                              style: TextStyle(fontSize: 15.sp),
+                            child: FittedBox(
+                              child: Text(
+                                "update_button".tr(),
+                                style: TextStyle(fontSize: 15.sp),
+                              ),
                             )),
                         style: ElevatedButton.styleFrom(
                           //padding: EdgeInsets.all(20),
@@ -699,9 +702,11 @@ class UpdateFoodPreviewView extends GetView<UpdateFoodPreviewController> {
                             padding: EdgeInsets.all(15),
                             //width: double.infinity,
                             alignment: Alignment.center,
-                            child: Text(
-                              "cancel".tr(),
-                              style: TextStyle(fontSize: 15.sp),
+                            child: FittedBox(
+                              child: Text(
+                                "cancel".tr(),
+                                style: TextStyle(fontSize: 15.sp),
+                              ),
                             )),
                         style: ElevatedButton.styleFrom(
                           //padding: EdgeInsets.all(20),

@@ -183,7 +183,7 @@ class SingleFoodOrder extends StatelessWidget {
                         child: Container(
                             width: double.infinity,
                             alignment: Alignment.center,
-                            child: Text("buy_button".tr())),
+                            child: FittedBox(child: Text("buy_button".tr()))),
                         style: ElevatedButton.styleFrom(
                           //padding: EdgeInsets.all(20),
                           shape: RoundedRectangleBorder(
@@ -202,7 +202,7 @@ class SingleFoodOrder extends StatelessWidget {
                         child: Container(
                             width: double.infinity,
                             alignment: Alignment.center,
-                            child: Text("get_donation".tr())),
+                            child: FittedBox(child: Text("get_donation".tr()))),
                         style: ElevatedButton.styleFrom(
                           //padding: EdgeInsets.all(20),
                           shape: RoundedRectangleBorder(

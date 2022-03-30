@@ -44,7 +44,8 @@ class UpdateFoodPreviewController extends GetxController {
   void onReady() {
     latitude.value = oldFood.location!.latitude;
     longitude.value = oldFood.location!.longitude;
-    isDonation.value = oldFood.isDonation??false;
+    print("Came to update food previw with ${oldFood.isDonation}");
+    //isDonation.value = oldFood.isDonation ?? false;
     super.onReady();
   }
 

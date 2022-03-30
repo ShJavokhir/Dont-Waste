@@ -19,24 +19,32 @@ import '../controllers/choice_view_controller.dart';
 class ChoiceViewView extends GetView<ChoiceViewController> {
   @override
   Widget build(BuildContext context) {
+
+    //print("locales-: " + Get.context.loca.currentLocale!.languageCode + " " );
     return Scaffold(
+
         appBar: AppBar(
           actions: [
-              PopupMenuButton<String>(
+
+            PopupMenuButton<String>(
                 icon: Icon(Icons.language_sharp),
                 onSelected: (String opt) {
                   if (opt == "UZ") {
                     final locale = Locale("uz", "UZ");
                     context.setLocale(locale);
+                    EasyLocalization.of(context)!.setLocale(locale);
+                    //EasyLocalization.of(context)!.currentLocale = locale;
                     Get.updateLocale(locale);
                   } else if (opt == "RU") {
                     final locale =(Locale("ru", "RU"));
                     context.setLocale(locale);
                     Get.updateLocale(locale);
+                    EasyLocalization.of(context)!.setLocale(locale);
                   } else if (opt == "EN") {
                     final locale =(Locale("en", "EN"));
                     context.setLocale(locale);
                     Get.updateLocale(locale);
+                    EasyLocalization.of(context)!.setLocale(locale);
                   }
 
                   //Get.offAndToNamed('/choice-view');
@@ -92,7 +100,7 @@ class ChoiceViewView extends GetView<ChoiceViewController> {
           //
           // },
           // ),
-          title: Text("Don't waste"),
+          title: Text("app_name".tr(),style: Theme.of(context).textTheme.bodyText1),
           centerTitle: true,
         ),
         body: Container(
@@ -122,11 +130,11 @@ class ChoiceViewView extends GetView<ChoiceViewController> {
                 },
               ),
               SizedBox(
-                height: 50,
+                height: 40,
               ),
               CustomDivider(text: "or".tr()),
               SizedBox(
-                height: 50,
+                height: 40,
               ),
               ChoiceCard(
                 text: 'become_sponsor'.tr(),

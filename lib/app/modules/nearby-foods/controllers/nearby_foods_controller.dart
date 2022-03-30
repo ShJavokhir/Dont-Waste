@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dont_waste/app/data/constants/constants.dart';
 import 'package:dont_waste/app/data/models/food_model.dart';
 import 'package:dont_waste/app/modules/food_preview/bindings/food_preview_binding.dart';
 import 'package:dont_waste/app/modules/food_preview/controllers/food_preview_controller.dart';
@@ -62,7 +63,7 @@ class NearbyFoodsController extends GetxController {
     //   },
     // );
     await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high).then((value) => {
-      print("device location found"),
+      print("device location found" + '${value.latitude},${value.longitude}'),
       usersLocation = value,
 
 
@@ -104,7 +105,7 @@ class NearbyFoodsController extends GetxController {
         .then((onValue) {
       customIcon = onValue;
     });
-    final Uint8List markerIcon = await getBytesFromAsset('assets/images/food-delivery.png', 150);
+    final Uint8List markerIcon = await getBytesFromAsset('assets/images/food-delivery.png', 100);
 
     //if(customIcon == null) return;
     foods.value.forEach((element) {
@@ -129,7 +130,7 @@ class NearbyFoodsController extends GetxController {
                     color: Colors.transparent, //could change this to Color(0xFF737373),
                     //so you don't have to change MaterialApp canvasColor
                     child: Container(
-                        padding: EdgeInsets.all(30),
+                        padding: EdgeInsets.all(DEFAULT_PADDING * 1.0),
                         decoration:  BoxDecoration(
                             color: Colors.white,
                             borderRadius:  BorderRadius.only(
@@ -175,7 +176,7 @@ class NearbyFoodsController extends GetxController {
     QuerySnapshot querySnapshot;
     double lat = 0.0144927536231884;
     double lon = 0.0181818181818182;
-    double distance = 2000*0.000621371;
+    double distance = 1500*0.000621371;
     double lowerLat = usersLocation!.latitude - (lat * distance);
     double lowerLon = usersLocation!.longitude - (lon * distance);
     double greaterLat = usersLocation!.latitude + (lat * distance);
@@ -184,6 +185,7 @@ class NearbyFoodsController extends GetxController {
     GeoPoint greaterGeopoint = GeoPoint(greaterLat,greaterLon);
     // querySnapshot = await usersRef
     //     .get();
+    //print("location before getting posts: ${usersLocation!.latitude},${usersLocation!.longitude}" );
     await firestore.collection("posts").where("location", isGreaterThan: lesserGeopoint)
         .where("location", isLessThan: greaterGeopoint)
         .limit(100)

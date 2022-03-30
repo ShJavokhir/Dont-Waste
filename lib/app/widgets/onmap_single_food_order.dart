@@ -34,12 +34,11 @@ class OnMapSingleFoodOrder extends StatelessWidget {
       margin: EdgeInsets.all(5),
       decoration: BoxDecoration(
           color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 0.5,
-              blurRadius: 3,
-              offset: Offset(0, 1), // changes position of shadow
+          boxShadow: <BoxShadow>[
+            new BoxShadow(
+              color: Colors.black12,
+              blurRadius: 3.0,
+              offset: new Offset(0.0, 3.0),
             ),
           ],
 
@@ -160,7 +159,7 @@ class OnMapSingleFoodOrder extends StatelessWidget {
               child: Container(
                   width: double.infinity,
                   alignment: Alignment.center,
-                  child: Text("buy_button".tr())),
+                  child: FittedBox(child: Text("buy_button".tr()))),
               style: ElevatedButton.styleFrom(
                 //padding: EdgeInsets.all(20),
                 shape: RoundedRectangleBorder(
@@ -179,7 +178,7 @@ class OnMapSingleFoodOrder extends StatelessWidget {
               child: Container(
                   width: double.infinity,
                   alignment: Alignment.center,
-                  child: Text("get_donation".tr())),
+                  child: FittedBox(child: Text("get_donation".tr()))),
               style: ElevatedButton.styleFrom(
                 //padding: EdgeInsets.all(20),
                 shape: RoundedRectangleBorder(

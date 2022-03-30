@@ -25,6 +25,7 @@ dependencies:
   easy_localization: ^3.0.0
   geoflutterfire: ^3.0.3
   geolocator: ^8.2.0
+  shared_preferences: ^2.0.13
 
 dev_dependencies: 
   flutter_lints: ^1.0.0

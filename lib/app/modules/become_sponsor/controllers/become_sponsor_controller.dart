@@ -60,10 +60,13 @@ class BecomeSponsorController extends GetxController {
   Future<void> pickImage() async{
     print("Picking image");
     await ImagePicker().pickImage(
+      imageQuality: 5,
         source: ImageSource.gallery).then((value) => {
-          if(value != null) image = value,
-    print("image picked"),
-          didImageSelected.value = true
+          if(value != null){
+            image = value,
+            print("image picked"),
+            didImageSelected.value = true
+          }
     }).catchError((onError){
       Get.snackbar("Error", onError.toString());
     });
@@ -83,6 +86,10 @@ class BecomeSponsorController extends GetxController {
       showErrorSnackbar("Please write the quantity");
       return;
     }
+    // if(quantity.value){
+    //   showErrorSnackbar("Please write the quantity");
+    //   return;
+    // }
 
     showDialog(
       barrierDismissible: false,

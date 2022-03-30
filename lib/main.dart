@@ -20,16 +20,20 @@ void main() async {
   //print(FirebaseAuth.instance.currentUser!.phoneNumber);
   //FirebaseAuth.instance.signOut();
   //print(FirebaseAuth.instance.currentUser!.uid);
+  await EasyLocalization.ensureInitialized();
+
   runApp(EasyLocalization(
     path: "assets/langs",
-    saveLocale: true,
+    //fallbackLocale: Locale('en', 'EN'),
     startLocale: Locale('en', 'EN'),
     supportedLocales: [Locale('ru', 'RU'), Locale('uz', 'UZ'), Locale('en', 'EN')],
+    saveLocale: true,
     child: Sizer(
       builder: (context, orientation, deviceType) {
+        //print("locales: " + context.locale.languageCode + " " + context.deviceLocale.languageCode + " " );
+        //print(EasyLocalization.of(context).deviceLocale.languageCode)
         return GetMaterialApp(
-
-          locale: context.locale,
+          //locale: context.locale,
            supportedLocales: context.supportedLocales,
            localizationsDelegates: context.localizationDelegates,
           darkTheme: ThemeData(

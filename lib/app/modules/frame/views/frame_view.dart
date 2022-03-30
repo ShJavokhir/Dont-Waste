@@ -6,7 +6,7 @@ import 'package:dont_waste/app/modules/choice_view/views/choice_view_view.dart';
 import 'package:dont_waste/app/modules/food_market/views/food_market_view.dart';
 import 'package:dont_waste/app/modules/user_profile/views/user_profile_view.dart';
 import 'package:flutter/material.dart';
-
+import 'package:sizer/sizer.dart';
 import 'package:get/get.dart' hide Trans;
 import 'package:easy_localization/easy_localization.dart';
 
@@ -19,7 +19,52 @@ class FrameView extends GetView<FrameController> {
     return GetBuilder<FrameController>(
       builder: (controller) {
         return Scaffold(
-
+          drawer: Drawer(
+            child: Column(
+              //padding: EdgeInsets.zero,
+              children: <Widget>[
+                DrawerHeader(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Image.asset('assets/images/chat.png',
+                        width: 80,
+                        height: 80,),
+                      SizedBox(height: 15,),
+                      Text("app_name".tr(),
+                        style: TextStyle(color: Colors.grey),)
+                    ],
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                  ),
+                ),
+                ListTile(
+                  leading: Icon(Icons.add_to_photos),
+                  title: Text('Add to Photos'),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                ),
+                ListTile(
+                  leading: Icon(Icons.add_alarm),
+                  title: Text('Alarm'),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                ),
+                Spacer(),
+                ListTile(
+                  leading: Icon(Icons.add_alarm),
+                  title: Text('Sign out'),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
+            ),
+          ),
             body: SafeArea(
                 child: _pages[controller.tabIndex]
 
@@ -40,6 +85,9 @@ class FrameView extends GetView<FrameController> {
               ),
               child: BottomNavigationBar(
                 elevation: 20,
+                unselectedLabelStyle: TextStyle(
+                  fontWeight: FontWeight.normal,
+                ),
                 currentIndex: controller.tabIndex,
                 onTap: (index)async{
                   controller.changeTabIndex(index);
@@ -67,14 +115,17 @@ class FrameView extends GetView<FrameController> {
                   //   }
                   // }
                 },
+
                 type: BottomNavigationBarType.fixed, // Fixed
                 backgroundColor: Colors.white, // <-- This works for fixed
                 selectedItemColor: yellow1,
                 unselectedItemColor: Colors.grey,
+                //iconSize: 15.sp,
                 items: [
                   BottomNavigationBarItem(
                     icon: Icon(Icons.home),
                     label: 'home_button'.tr(),
+
                   ),
                   BottomNavigationBarItem(
                     icon: Icon(Icons.shopping_cart),

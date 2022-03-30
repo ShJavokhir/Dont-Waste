@@ -122,7 +122,7 @@ class FoodMarketView extends GetView<FoodMarketController> {
               // ),
               Hero(
                   tag: 'assets/images/burger.pngchoice',
-                  child: Text("Find food",
+                  child: Text("find_food_page".tr(),
                       style: Theme.of(context).textTheme.bodyText1)),
             ],
             ),
@@ -167,9 +167,11 @@ class FoodMarketView extends GetView<FoodMarketController> {
                             children: [
                               Icon(Icons.image_search_rounded),
                               SizedBox(width: 10,),
-                              Text(
-                                "see_nearby_foods".tr(),
-                                style: TextStyle(fontSize: 12.sp),
+                              FittedBox(
+                                child: Text(
+                                  "see_nearby_foods".tr(),
+                                  style: TextStyle(fontSize: 12.sp),
+                                ),
                               ),
                               Spacer(),
                               Icon(Icons.keyboard_arrow_right_rounded)

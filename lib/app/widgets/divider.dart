@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 class CustomDivider extends StatelessWidget {
   final String text;
@@ -6,7 +7,7 @@ class CustomDivider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      //padding: EdgeInsets.symmetric(horizontal: 18),
+      padding: EdgeInsets.symmetric(horizontal: 10),
       width: double.infinity,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -16,26 +17,29 @@ class CustomDivider extends StatelessWidget {
           ),
           Flexible(
             child: Container(
-              height: 5,
+              height: 2,
               width: double.infinity,
               decoration: BoxDecoration(
-                  color: Colors.black87,
+                  color: Colors.black26,
                   borderRadius: BorderRadius.circular(24)),
             ),
           ),
           SizedBox(
             width: 18,
           ),
-          Text(text),
+          Text(text, style: TextStyle(
+            fontSize: 10.sp,
+
+          ),),
           SizedBox(
             width: 18,
           ),
           Flexible(
             child: Container(
-              height: 5,
+              height: 2,
               width: double.infinity,
               decoration: BoxDecoration(
-                  color: Colors.black87,
+                  color: Colors.black26,
                   borderRadius: BorderRadius.circular(24)),
             ),
           ),
