@@ -10,9 +10,7 @@ import '../controllers/frame_controller.dart';
 class FrameBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<FrameController>(
-      () => FrameController(),
-    );
+    Get.put(FrameController());
     Get.lazyPut<ChoiceViewController>(
           () => ChoiceViewController(),
     );

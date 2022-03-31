@@ -15,6 +15,7 @@ class AuthenticationView extends GetView<AuthenticationController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset:false,
         appBar: AppBar(
           elevation: 0.4,
           backgroundColor: Colors.white,
@@ -30,6 +31,7 @@ class AuthenticationView extends GetView<AuthenticationController> {
 
               children: [
             CustomTextField(
+              textInputType: TextInputType.phone,
               hint: "phone_number".tr(),
               onChanged: (phoneNumber) {
                 controller.phoneNumber.value = phoneNumber;

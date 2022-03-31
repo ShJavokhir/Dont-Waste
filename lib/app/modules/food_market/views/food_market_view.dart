@@ -81,55 +81,55 @@ class FoodMarketView extends GetView<FoodMarketController> {
         backgroundColor: Colors.white,
         extendBody: true,
         extendBodyBehindAppBar: true,
-        appBar: AppBar(
-          // actions: [
-          //   IconButton(icon: Icon(Icons.menu), onPressed: (){
-          //
-          //   },),
-          // ],
-          // leading: IconButton(icon: Icon(Icons.arrow_back_ios), onPressed: (){
-          //   Get.back();
-          // },),
-          backgroundColor: Colors.white,
-          elevation: 0.4,
-          // automaticallyImplyLeading: false,
-          title: Container(
-            child: Container(
-            width: double.infinity,
-            child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Hero(
-                tag: 'assets/images/burger.png',
-                child: Image.asset(
-                  'assets/images/burger.png',
-                  alignment: Alignment.center,
-                  height: 50,
-                  width: 50,
-                ),
-              ),
-              SizedBox(width: 10),
-              // Hero(
-              //   tag: 'assets/images/burger.png',
-              //   child: Flexible(
-              //     child: Image.asset(
-              //       'assets/images/burger.png',
-              //       alignment: Alignment.center,
-              //       fit: BoxFit.contain,
-              //     ),
-              //   ),
-              // ),
-              Hero(
-                  tag: 'assets/images/burger.pngchoice',
-                  child: Text("find_food_page".tr(),
-                      style: Theme.of(context).textTheme.bodyText1)),
-            ],
-            ),
-            ),
-          ),
-          centerTitle: false,
-        ),
+        // appBar: AppBar(
+        //   // actions: [
+        //   //   IconButton(icon: Icon(Icons.menu), onPressed: (){
+        //   //
+        //   //   },),
+        //   // ],
+        //   // leading: IconButton(icon: Icon(Icons.arrow_back_ios), onPressed: (){
+        //   //   Get.back();
+        //   // },),
+        //   backgroundColor: Colors.white,
+        //   elevation: 0.4,
+        //   // automaticallyImplyLeading: false,
+        //   title: Container(
+        //     child: Container(
+        //     width: double.infinity,
+        //     child: Row(
+        //     crossAxisAlignment: CrossAxisAlignment.center,
+        //     mainAxisAlignment: MainAxisAlignment.center,
+        //     children: [
+        //       Hero(
+        //         tag: 'assets/images/burger.png',
+        //         child: Image.asset(
+        //           'assets/images/burger.png',
+        //           alignment: Alignment.center,
+        //           height: 50,
+        //           width: 50,
+        //         ),
+        //       ),
+        //       SizedBox(width: 10),
+        //       // Hero(
+        //       //   tag: 'assets/images/burger.png',
+        //       //   child: Flexible(
+        //       //     child: Image.asset(
+        //       //       'assets/images/burger.png',
+        //       //       alignment: Alignment.center,
+        //       //       fit: BoxFit.contain,
+        //       //     ),
+        //       //   ),
+        //       // ),
+        //       Hero(
+        //           tag: 'assets/images/burger.pngchoice',
+        //           child: Text("find_food_page".tr(),
+        //               style: Theme.of(context).textTheme.bodyText1)),
+        //     ],
+        //     ),
+        //     ),
+        //   ),
+        //   centerTitle: false,
+        // ),
         body: Column(children: [
           Expanded(
             child: Container(

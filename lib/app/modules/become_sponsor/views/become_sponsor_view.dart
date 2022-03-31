@@ -27,47 +27,47 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
         backgroundColor: Colors.white,
         extendBody: true,
         extendBodyBehindAppBar: true,
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          elevation: 0.4,
-          //automaticallyImplyLeading: false,
-          title: Container(
-            child: Container(
-              width: double.infinity,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Hero(
-                    tag: 'assets/images/lunch.png',
-                    child: Image.asset(
-                      'assets/images/lunch.png',
-                      alignment: Alignment.center,
-                      height: 40,
-                      width: 40,
-                    ),
-                  ),
-                  SizedBox(width: 10),
-                  // Hero(
-                  //   tag: 'assets/images/burger.png',
-                  //   child: Flexible(
-                  //     child: Image.asset(
-                  //       'assets/images/burger.png',
-                  //       alignment: Alignment.center,
-                  //       fit: BoxFit.contain,
-                  //     ),
-                  //   ),
-                  // ),
-                  Hero(
-                      tag: 'assets/images/lunch.pngchoice',
-                      child: Text("become_sponsor".tr(),
-                          style: Theme.of(context).textTheme.bodyText1)),
-                ],
-              ),
-            ),
-          ),
-          centerTitle: false,
-        ),
+        // appBar: AppBar(
+        //   backgroundColor: Colors.white,
+        //   elevation: 0.4,
+        //   //automaticallyImplyLeading: false,
+        //   title: Container(
+        //     child: Container(
+        //       width: double.infinity,
+        //       child: Row(
+        //         crossAxisAlignment: CrossAxisAlignment.center,
+        //         mainAxisAlignment: MainAxisAlignment.center,
+        //         children: [
+        //           Hero(
+        //             tag: 'assets/images/lunch.png',
+        //             child: Image.asset(
+        //               'assets/images/lunch.png',
+        //               alignment: Alignment.center,
+        //               height: 40,
+        //               width: 40,
+        //             ),
+        //           ),
+        //           SizedBox(width: 10),
+        //           // Hero(
+        //           //   tag: 'assets/images/burger.png',
+        //           //   child: Flexible(
+        //           //     child: Image.asset(
+        //           //       'assets/images/burger.png',
+        //           //       alignment: Alignment.center,
+        //           //       fit: BoxFit.contain,
+        //           //     ),
+        //           //   ),
+        //           // ),
+        //           Hero(
+        //               tag: 'assets/images/lunch.pngchoice',
+        //               child: Text("become_sponsor".tr(),
+        //                   style: Theme.of(context).textTheme.bodyText1)),
+        //         ],
+        //       ),
+        //     ),
+        //   ),
+        //   centerTitle: false,
+        // ),
         body: Container(
           padding: EdgeInsets.symmetric(horizontal: 18),
           child: ListView(
@@ -138,14 +138,15 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                   children: [
                     Flexible(
                       child: CustomTextField(
+                        textInputType: TextInputType.number,
                           hint: "quantity".tr(),
                           isMultipleLine: false,
                           onChanged: (text) {
                             if (text.isNumericOnly) {
                               controller.quantity.value = double.parse(text);
                             } else {
-                              Get.snackbar(
-                                  "error".tr(), "qnt_shoud_be_number".tr());
+                              // Get.snackbar(
+                              //     "error".tr(), "qnt_shoud_be_number".tr());
                             }
                           }),
                     ),
@@ -157,13 +158,14 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                         visible: !controller.isDonation.value,
                         child: Flexible(
                           child: CustomTextField(
+                              textInputType: TextInputType.number,
                               hint: "price".tr(),
                               isMultipleLine: false,
                               onChanged: (text) {
                                 if (text.isNumericOnly) {
                                   controller.price.value = double.parse(text);
                                 } else {
-                                  Get.snackbar("error".tr(), "prc_should_be_number".tr());
+                                  //Get.snackbar("error".tr(), "prc_should_be_number".tr());
                                 }
                               }),
                         ),
@@ -242,6 +244,7 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                   onTap: () async {
                     var status = await Permission.locationWhenInUse.status;
                     await Permission.locationWhenInUse.request();
+                    await Permission.location.request();
                     if (status.isDenied) {
                       Get.snackbar("error".tr(),
                           "location_perm_denied".tr());
@@ -699,6 +702,7 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                 CustomTextField(
                   defaultText: FirebaseAuth.instance.currentUser!.phoneNumber.toString(),
                     hint: "phone_number".tr(),
+                    textInputType: TextInputType.phone,
                     isMultipleLine: false,
                     onChanged: (text) {
                       controller.phoneNumber.value = text;

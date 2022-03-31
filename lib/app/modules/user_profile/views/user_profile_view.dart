@@ -4,6 +4,7 @@ import 'package:dont_waste/app/modules/food_preview/bindings/food_preview_bindin
 import 'package:dont_waste/app/modules/food_preview/controllers/food_preview_controller.dart';
 import 'package:dont_waste/app/modules/update_food_preview/bindings/update_food_preview_binding.dart';
 import 'package:dont_waste/app/modules/update_food_preview/controllers/update_food_preview_controller.dart';
+import 'package:dont_waste/app/widgets/custom_info_dialog.dart';
 import 'package:dont_waste/app/widgets/divider.dart';
 import 'package:dont_waste/app/widgets/single_food_order.dart';
 import 'package:dont_waste/app/widgets/single_food_order_for_admin.dart';
@@ -11,7 +12,7 @@ import 'package:dont_waste/app/widgets/text_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
-
+import 'package:dont_waste/app/modules/frame/views/frame_view.dart';
 import 'package:sizer/sizer.dart';
 import 'package:get/get.dart' hide Trans;
 
@@ -21,33 +22,34 @@ class UserProfileView extends GetView<UserProfileController> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-
+      initialIndex: controller.initialIndex,
       length: 2,
       child: Scaffold(
 
           backgroundColor: Colors.white,
-          appBar: AppBar(
-            bottom: TabBar(
+          bottomSheet: TabBar(
 
-              indicatorColor: yellow1,
-              //automaticIndicatorColorAdjustment: true,
-              unselectedLabelColor: Colors.black26,
-              labelColor: yellow1,
-              physics: AlwaysScrollableScrollPhysics(),
+            indicatorColor: yellow1,
+            //automaticIndicatorColorAdjustment: true,
+            unselectedLabelColor: Colors.black26,
+            labelColor: yellow1,
+            physics: AlwaysScrollableScrollPhysics(),
 
-              tabs: [
-                Tab(text: "my_posts".tr(), icon: Icon(Icons.apps)),
-                Tab(text: "settings".tr(), icon: Icon(Icons.settings)),
-                // Tab(text: "My Ads", ),
-                // Tab(text: "Settings",),
-              ],
-            ),
-            backgroundColor: Colors.white,
-            elevation: 0.4,
-            //automaticallyImplyLeading: false,
-            title: Text("account".tr()),
-            centerTitle: true,
+            tabs: [
+              Tab(text: "my_posts".tr(), icon: Icon(Icons.apps)),
+              Tab(text: "settings".tr(), icon: Icon(Icons.settings)),
+              // Tab(text: "My Ads", ),
+              // Tab(text: "Settings",),
+            ],
           ),
+          // appBar: AppBar(
+          //
+          //   backgroundColor: Colors.white,
+          //   elevation: 0.4,
+          //   //automaticallyImplyLeading: false,
+          //   title: Text("account".tr()),
+          //   centerTitle: true,
+          // ),
           body: Container(
             padding: EdgeInsets.symmetric(horizontal: 18),
             child: TabBarView(children: [
@@ -56,14 +58,22 @@ class UserProfileView extends GetView<UserProfileController> {
                   physics: BouncingScrollPhysics(
                       parent: AlwaysScrollableScrollPhysics()),
                   children: [
+
                     SizedBox(
                       height: 20,
                     ),
                     ...controller.foods.value.map((e) {
                       return Padding(
-                        padding: EdgeInsets.only(bottom: 15),
+                        padding: EdgeInsets.only(bottom: 20),
                         child: SingleFoodOrderForAdmin(
                           id: e.id,
+                          onTop: (){
+                            showDialog(
+                              context: context,
+                              builder: (context) =>
+                                CustomInfoDialog(text: "This feature is cooming soon, be prepared :).\n With the help of this function, you can advertise your foods so many people can discover it")
+                            );
+                          },
                           onView: (){
                             FoodPreviewBinding().dependencies();
                             Get.find<FoodPreviewController>().foodModel = e;
@@ -99,8 +109,10 @@ class UserProfileView extends GetView<UserProfileController> {
                           SizedBox(width: 10,),
                           Text("u_have_no_posts".tr()),
                         ],
+
                       ),),),
                     ):Container(),
+                    SizedBox(height: 70,)
                   ],
                 ),
               ),
@@ -111,9 +123,80 @@ class UserProfileView extends GetView<UserProfileController> {
                         physics: BouncingScrollPhysics(
                             parent: AlwaysScrollableScrollPhysics()),
                         children: [
+
                           SizedBox(
                             height: 20,
                           ),
+
+                          Container(
+
+                            width: double.infinity,
+                            child: ListTile(
+                              leading: Text("language".tr(),style: Theme.of(context).textTheme.titleMedium),
+                              title: DropdownButton<String>(
+                                underline: Container(),
+                                value: context.locale.countryCode,
+                                selectedItemBuilder: (_) {
+                                  return  <String>['EN', 'RU', 'UZ'].map((String choice) {
+                                    return Center(
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.end,
+                                        children: [
+                                          SizedBox(width: 10,),
+                                          Image.asset('assets/images/$choice.png', height: 30, width: 30,),
+                                          SizedBox(width: 15,),
+                                          Text(choice),
+                                          SizedBox(width: 15,),
+                                        ],
+                                      ),
+                                    );
+                                  }).toList();
+                                },
+                                items: <String>['EN', 'RU', 'UZ'].map((String choice) {
+                                  return DropdownMenuItem<String>(
+                                    value: choice,
+                                    child: Row(
+                                      children: [
+                                        Image.asset('assets/images/$choice.png', height: 30, width: 30,),
+                                        SizedBox(width: 15,),
+                                        Text(choice)
+                                      ],
+                                    ),
+                                  );
+                                }).toList(),
+                                onChanged: (opt) {
+
+                                  if (opt == "UZ") {
+                                    final locale = Locale("uz", "UZ");
+                                    context.setLocale(locale);
+                                    EasyLocalization.of(context)!.setLocale(locale);
+                                    //EasyLocalization.of(context)!.currentLocale = locale;
+                                    Get.updateLocale(locale);
+                                  } else if (opt == "RU") {
+                                    final locale =(Locale("ru", "RU"));
+                                    context.setLocale(locale);
+                                    Get.updateLocale(locale);
+                                    EasyLocalization.of(context)!.setLocale(locale);
+                                  } else if (opt == "EN") {
+                                    final locale =(Locale("en", "EN"));
+                                    context.setLocale(locale);
+                                    Get.updateLocale(locale);
+                                    EasyLocalization.of(context)!.setLocale(locale);
+                                  }
+
+                                  //Get.offAndToNamed('/choice-view');
+                                  Get.forceAppUpdate();
+                                  Get.appUpdate();
+                                  //FrameBinding().dependencies();
+                                  //       await Get.find<FoodMarketController>().setFoods();
+
+                                },
+                              ),
+                            ),
+                          ),
+
+                          Divider(),
+                          SizedBox(height: 10,),
                           CustomTextField(
                               defaultText:
                               FirebaseAuth.instance.currentUser!=null?FirebaseAuth.instance.currentUser!.displayName ?? "":"null",
@@ -205,16 +288,18 @@ class UserProfileView extends GetView<UserProfileController> {
                             ),
                           ),
 
+                          SizedBox(height: 20,),
+                          TextButton(onPressed: (){
+                            controller.signOut();
+                          }, child: Text(
+                            "sign_out".tr(),
+                            style: TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold),
+                          )),
+
 
                         ]),
                   ),
-                  TextButton(onPressed: (){
-                    controller.signOut();
-                  }, child: Text(
-                    "sign_out".tr(),
-                    style: TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold),
-                  )),
-                  SizedBox(height: 15,)
+
                 ],
               ),
             ]),

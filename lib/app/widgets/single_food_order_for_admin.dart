@@ -15,6 +15,7 @@ class SingleFoodOrderForAdmin extends StatelessWidget {
   final void Function() onView;
   final void Function() onEdit;
   final void Function() onDelete;
+  final void Function() onTop;
 
   SingleFoodOrderForAdmin(
       {required this.id,
@@ -25,7 +26,8 @@ class SingleFoodOrderForAdmin extends StatelessWidget {
         required this.price,
         required this.location,
         required this.views,
-        required this.photoUrl
+        required this.photoUrl,
+        required this.onTop,
       });
 
   @override
@@ -58,7 +60,7 @@ class SingleFoodOrderForAdmin extends StatelessWidget {
                       child: photoUrl.contains("http")?Image.network(
                         photoUrl,
                         fit: BoxFit.cover,
-                      ):Image.asset('assets/images/default-photo.png',),
+                      ):Image.asset('assets/images/default-photo.png', fit: BoxFit.cover,) ,
                     ),
                   ),
                 ),
@@ -166,7 +168,7 @@ class SingleFoodOrderForAdmin extends StatelessWidget {
                                   BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
                                 ),
                                 //side: BorderSide(width: 1, color: Colors.green),
-                                primary: Colors.lightBlueAccent, // <-- Button color
+                                primary: Colors.blue, // <-- Button color
                                 onPrimary: Colors.white, // <-- Splash color
                               ),
                             ),
@@ -174,11 +176,11 @@ class SingleFoodOrderForAdmin extends StatelessWidget {
                           SizedBox(width: 10,),
                           Expanded(
                             child: ElevatedButton(
-                              onPressed: onView,
+                              onPressed: onTop,
                               child: Container(
                                   width: double.infinity,
                                   alignment: Alignment.center,
-                                  child: Text("view".tr(), overflow: TextOverflow.ellipsis)),
+                                  child: Text("advertising_".tr(), overflow: TextOverflow.ellipsis)),
                               style: ElevatedButton.styleFrom(
                                 //padding: EdgeInsets.all(20),
                                 shape: RoundedRectangleBorder(
@@ -186,7 +188,7 @@ class SingleFoodOrderForAdmin extends StatelessWidget {
                                   BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
                                 ),
                                 //side: BorderSide(width: 1, color: Colors.green),
-                                primary: Colors.lightBlueAccent, // <-- Button color
+                                primary: Colors.deepPurple, // <-- Button color
                                 onPrimary: Colors.white, // <-- Splash color
                               ),
                             ),
@@ -210,7 +212,7 @@ class SingleFoodOrderForAdmin extends StatelessWidget {
                                   BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
                                 ),
                                 //side: BorderSide(width: 1, color: Colors.green),
-                                primary: Colors.greenAccent, // <-- Button color
+                                primary: Colors.green, // <-- Button color
                                 onPrimary: Colors.white, // <-- Splash color
                               ),
                             ),

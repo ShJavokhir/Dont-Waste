@@ -56,7 +56,9 @@ class SingleFoodOrder extends StatelessWidget {
                       photo_url,
                       fit: BoxFit.cover,
                       isAntiAlias: false,
-                    ):Image.asset('assets/images/default-photo.png', fit: BoxFit.cover,),
+                    ):Container(
+                      //margin: EdgeInsets.all(50),
+                        child: Image.asset('assets/images/default-photo.png', fit: BoxFit.cover)),
                   ),
                 ),
               ),

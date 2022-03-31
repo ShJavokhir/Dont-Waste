@@ -30,7 +30,7 @@
   "select_image": "Image selected",
   "image_selected": "Image selected",
   "location": "Location",
-  "location_perm_denied": "Location permission is denied. Please allow location services for this app",
+  "location_perm_denied": "Location permission is denied. Please turn on GPS and allow location services for this app",
   "select": "Select",
   "select_location": "Select location",
   "post": "Post",
@@ -83,11 +83,14 @@
   "total_users": "Total users",
   "total_foods": "Total foods",
   "about_team": "About team",
-  "about_team2": "We are sophomore students at INHA university in Tashkent\n\nAzizullo - Product manager\nValisher - Designer\nJavokhir - Mobile and Backend developer",
+  "about_team2": "We are sophomore students at INHA university in Tashkent\nAzizullo - Product manager\nValisher - Designer\nJavokhir - Mobile and Backend developer",
   "app_version": "App version: {}",
   "nearby_foods_page": "Nearby foods",
-  "find_food_page": "Food market"
-
+  "find_food_page": "Food market",
+  "language": "Language: ",
+  "advertising_": "Advertising",
+  "gps_error": "Please try to turn on GPS and allow location permission for this app from settings",
+  "advertise": "This feature is coming soon, be prepared :).\n With the help of this function, you can advertise your foods so many people can discover it"
 
 
 

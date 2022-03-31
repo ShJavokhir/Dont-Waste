@@ -13,9 +13,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:geoflutterfire/geoflutterfire.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide Trans;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:ui' as ui;
+import 'package:easy_localization/easy_localization.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class NearbyFoodsController extends GetxController {
 
@@ -37,18 +39,7 @@ class NearbyFoodsController extends GetxController {
   late FirebaseFirestore firestore;
   @override
   void onInit()async {
-    // showDialog(
-    //   barrierDismissible: false,
-    //   context: Get.context!,
-    //   builder: (BuildContext context) {
-    //     return CustomLoaderDialog();
-    //     // return CustomComfirmationDialog(
-    //     //   onCancel: () {},
-    //     //   onConfirm: () {},
-    //     //   text: "test",
-    //     // );
-    //   },
-    // );
+
     firestore = FirebaseFirestore.instance;
     // showDialog(
     //   barrierDismissible: false,
@@ -62,6 +53,14 @@ class NearbyFoodsController extends GetxController {
     //     // );
     //   },
     // );
+    var status = await Permission.locationWhenInUse.status;
+    await Permission.locationWhenInUse.request();
+    await Permission.location.request();
+    // if (status.isDenied) {
+    //   Get.snackbar("error".tr(),
+    //       "location_perm_denied".tr());
+    //   // We didn't ask for permission yet or the permission has been denied before but not permanently.
+    // }
     await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high).then((value) => {
       print("device location found" + '${value.latitude},${value.longitude}'),
       usersLocation = value,
@@ -74,7 +73,7 @@ class NearbyFoodsController extends GetxController {
         context: Get.context!,
         builder: (BuildContext context) {
           return CustomErrorDialog(
-          text: error.toString() + " Please try to turn on GPS and allow location permission for this app",
+          text: error.toString() + "gps_error".tr(),
     );
           // return CustomComfirmationDialog(
           //   onCancel: () {},
@@ -87,6 +86,18 @@ class NearbyFoodsController extends GetxController {
       });
     });
 
+    showDialog(
+      barrierDismissible: false,
+      context: Get.context!,
+      builder: (BuildContext context) {
+        return CustomLoaderDialog();
+        // return CustomComfirmationDialog(
+        //   onCancel: () {},
+        //   onConfirm: () {},
+        //   text: "test",
+        // );
+      },
+    );
     // Get.back();
     // Create a geoFirePoint
     // final center = GeoFirePoint(48.85806075757082,2.294355558423788);
@@ -159,6 +170,7 @@ class NearbyFoodsController extends GetxController {
     // Stream<List<DocumentSnapshot>> stream = geo.collection(collectionRef:
     // collectionReference).within(center: center, radius: radius, field: field);
     // Get.back();
+    Get.back();
     super.onInit();
   }
 
@@ -186,8 +198,10 @@ class NearbyFoodsController extends GetxController {
     // querySnapshot = await usersRef
     //     .get();
     //print("location before getting posts: ${usersLocation!.latitude},${usersLocation!.longitude}" );
-    await firestore.collection("posts").where("location", isGreaterThan: lesserGeopoint)
-        .where("location", isLessThan: greaterGeopoint)
+    await firestore.collection("posts")
+    //this should be checked again
+    // .where("location", isGreaterThan: lesserGeopoint)
+        // .where("location", isLessThan: greaterGeopoint)
         .limit(100)
         .get().then((value) {
       //print(value.size);

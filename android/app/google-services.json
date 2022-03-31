@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "151258726208-grod7l09asj109tgb7ihokts4s1vu4j2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "uz.tie.dont_waste",
+            "certificate_hash": "47d69cbb53badda21129766fb87a3749c5262c7e"
+          }
+        },
+        {
           "client_id": "151258726208-pakhfau304c5inhh5jiifngsq8kke2mk.apps.googleusercontent.com",
           "client_type": 3
         }

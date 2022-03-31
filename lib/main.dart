@@ -21,10 +21,13 @@ void main() async {
   //FirebaseAuth.instance.signOut();
   //print(FirebaseAuth.instance.currentUser!.uid);
   await EasyLocalization.ensureInitialized();
-
+  // print(FirebaseAuth.instance.currentUser!.metadata.creationTime!.millisecondsSinceEpoch);
+  // print(DateTime.now().millisecondsSinceEpoch);
+  // print((FirebaseAuth.instance.currentUser!.metadata.creationTime!.millisecondsSinceEpoch - DateTime.now().millisecondsSinceEpoch).abs().toString());
   runApp(EasyLocalization(
     path: "assets/langs",
     //fallbackLocale: Locale('en', 'EN'),
+    fallbackLocale: Locale('en', 'EN'),
     startLocale: Locale('en', 'EN'),
     supportedLocales: [Locale('ru', 'RU'), Locale('uz', 'UZ'), Locale('en', 'EN')],
     saveLocale: true,

@@ -60,7 +60,7 @@ class BecomeSponsorController extends GetxController {
   Future<void> pickImage() async{
     print("Picking image");
     await ImagePicker().pickImage(
-      imageQuality: 5,
+      imageQuality: 50,
         source: ImageSource.gallery).then((value) => {
           if(value != null){
             image = value,
@@ -178,7 +178,7 @@ class BecomeSponsorController extends GetxController {
         progressIndicatorBackgroundColor: Colors.green,
         barBlur: 0,
         dismissDirection: DismissDirection.horizontal,
-        duration: Duration(milliseconds: 2500),
+        duration: Duration(milliseconds: 1350),
 
         //instantInit: true,
         //shouldIconPulse: true,

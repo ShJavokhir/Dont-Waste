@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dont_waste/app/data/constants/colors.dart';
 import 'package:dont_waste/app/data/models/food_model.dart';
+import 'package:dont_waste/app/modules/frame/controllers/frame_controller.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:dont_waste/app/widgets/custom_comfirmation_dialog.dart';
 import 'package:dont_waste/app/widgets/custom_loader_dialog.dart';
@@ -10,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserProfileController extends GetxController {
-
+  int initialIndex = 0;
   final fullName = "".obs;
   late FirebaseFirestore firestore;
   final foods = <Food>[].obs;
@@ -208,7 +209,8 @@ class UserProfileController extends GetxController {
           onConfirm: () async{
             Get.back();
             FirebaseAuth.instance.signOut().then((value)async {
-              Get.offAllNamed('/frame');
+              Get.appUpdate();
+              Get.find<FrameController>().changeTabIndex(0);
               Get.snackbar(
                 "info".tr(),
                 "succesfully_signed_out".tr(),

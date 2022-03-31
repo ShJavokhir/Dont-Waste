@@ -23,86 +23,86 @@ class ChoiceViewView extends GetView<ChoiceViewController> {
     //print("locales-: " + Get.context.loca.currentLocale!.languageCode + " " );
     return Scaffold(
 
-        appBar: AppBar(
-          actions: [
-
-            PopupMenuButton<String>(
-                icon: Icon(Icons.language_sharp),
-                onSelected: (String opt) {
-                  if (opt == "UZ") {
-                    final locale = Locale("uz", "UZ");
-                    context.setLocale(locale);
-                    EasyLocalization.of(context)!.setLocale(locale);
-                    //EasyLocalization.of(context)!.currentLocale = locale;
-                    Get.updateLocale(locale);
-                  } else if (opt == "RU") {
-                    final locale =(Locale("ru", "RU"));
-                    context.setLocale(locale);
-                    Get.updateLocale(locale);
-                    EasyLocalization.of(context)!.setLocale(locale);
-                  } else if (opt == "EN") {
-                    final locale =(Locale("en", "EN"));
-                    context.setLocale(locale);
-                    Get.updateLocale(locale);
-                    EasyLocalization.of(context)!.setLocale(locale);
-                  }
-
-                  //Get.offAndToNamed('/choice-view');
-
-                },
-                itemBuilder: (BuildContext context) {
-                  return {'UZ', 'RU', 'EN'}.map((String choice) {
-                    return PopupMenuItem<String>(
-                      value: choice,
-                      child: ListTile(
-                        leading: Image.asset('assets/images/$choice.png', height: 30, width: 30,),
-                        title: Text(choice),
-                      ),
-                    );
-                  }).toList();
-                },
-              ),
-          ],
-          // leading: IconButton(
-          //   icon: Icon(Icons.account_circle, size: 20.sp,), onPressed: ()async {
-          //
-          //   // showDialog(
-          //   //   barrierDismissible: false,
-          //   //   context: context,
-          //   //   builder: (BuildContext context) {
-          //   //     return CustomLoaderDialog();
-          //   //     // return CustomComfirmationDialog(
-          //   //     //   onCancel: () {},
-          //   //     //   onConfirm: () {},
-          //   //     //   text: "test",
-          //   //     // );
-          //   //   },
-          //   // );
-          //   //
-          //   // await Future.delayed(Duration(milliseconds: 3500));
-          //   // Get.back();
-          //   // return;
-          //
-          //
-          //   final auth = FirebaseAuth.instance;
-          //   //auth.signOut();
-          //   if (auth.currentUser != null) {
-          //     // signed in
-          //     UserProfileBinding().dependencies();
-          //     await Get.find<UserProfileController>().setFoods();
-          //     // Get.toNamed("/food-preview");
-          //     Get.toNamed('/user-profile');
-          //     //print("Signed");
-          //   } else {
-          //     print("Not signed in yet");
-          //     Get.toNamed("/authentication");
-          //   }
-          //
-          // },
-          // ),
-          title: Text("app_name".tr(),style: Theme.of(context).textTheme.bodyText1),
-          centerTitle: true,
-        ),
+        // appBar: AppBar(
+        //   actions: [
+        //
+        //     PopupMenuButton<String>(
+        //         icon: Icon(Icons.language_sharp),
+        //         onSelected: (String opt) {
+        //           if (opt == "UZ") {
+        //             final locale = Locale("uz", "UZ");
+        //             context.setLocale(locale);
+        //             EasyLocalization.of(context)!.setLocale(locale);
+        //             //EasyLocalization.of(context)!.currentLocale = locale;
+        //             Get.updateLocale(locale);
+        //           } else if (opt == "RU") {
+        //             final locale =(Locale("ru", "RU"));
+        //             context.setLocale(locale);
+        //             Get.updateLocale(locale);
+        //             EasyLocalization.of(context)!.setLocale(locale);
+        //           } else if (opt == "EN") {
+        //             final locale =(Locale("en", "EN"));
+        //             context.setLocale(locale);
+        //             Get.updateLocale(locale);
+        //             EasyLocalization.of(context)!.setLocale(locale);
+        //           }
+        //
+        //           //Get.offAndToNamed('/choice-view');
+        //
+        //         },
+        //         itemBuilder: (BuildContext context) {
+        //           return {'UZ', 'RU', 'EN'}.map((String choice) {
+        //             return PopupMenuItem<String>(
+        //               value: choice,
+        //               child: ListTile(
+        //                 leading: Image.asset('assets/images/$choice.png', height: 30, width: 30,),
+        //                 title: Text(choice),
+        //               ),
+        //             );
+        //           }).toList();
+        //         },
+        //       ),
+        //   ],
+        //   // leading: IconButton(
+        //   //   icon: Icon(Icons.account_circle, size: 20.sp,), onPressed: ()async {
+        //   //
+        //   //   // showDialog(
+        //   //   //   barrierDismissible: false,
+        //   //   //   context: context,
+        //   //   //   builder: (BuildContext context) {
+        //   //   //     return CustomLoaderDialog();
+        //   //   //     // return CustomComfirmationDialog(
+        //   //   //     //   onCancel: () {},
+        //   //   //     //   onConfirm: () {},
+        //   //   //     //   text: "test",
+        //   //   //     // );
+        //   //   //   },
+        //   //   // );
+        //   //   //
+        //   //   // await Future.delayed(Duration(milliseconds: 3500));
+        //   //   // Get.back();
+        //   //   // return;
+        //   //
+        //   //
+        //   //   final auth = FirebaseAuth.instance;
+        //   //   //auth.signOut();
+        //   //   if (auth.currentUser != null) {
+        //   //     // signed in
+        //   //     UserProfileBinding().dependencies();
+        //   //     await Get.find<UserProfileController>().setFoods();
+        //   //     // Get.toNamed("/food-preview");
+        //   //     Get.toNamed('/user-profile');
+        //   //     //print("Signed");
+        //   //   } else {
+        //   //     print("Not signed in yet");
+        //   //     Get.toNamed("/authentication");
+        //   //   }
+        //   //
+        //   // },
+        //   // ),
+        //   title: Text("app_name".tr(),style: Theme.of(context).textTheme.bodyText1),
+        //   centerTitle: true,
+        // ),
         body: Container(
           width: double.infinity,
           child: Column(

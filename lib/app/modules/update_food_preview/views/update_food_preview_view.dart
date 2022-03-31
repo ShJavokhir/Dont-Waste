@@ -119,6 +119,7 @@ class UpdateFoodPreviewView extends GetView<UpdateFoodPreviewController> {
                   children: [
                     Flexible(
                       child: CustomTextField(
+                        textInputType: TextInputType.number,
                         defaultText: controller.oldFood.quantity!.toString(),
                           hint: "quantity".tr(),
                           isMultipleLine: false,
@@ -126,8 +127,8 @@ class UpdateFoodPreviewView extends GetView<UpdateFoodPreviewController> {
                             if (text.isNumericOnly) {
                               controller.quantity.value = double.parse(text);
                             } else {
-                              Get.snackbar(
-                                  "error".tr(), "qnt_shoud_be_number".tr());
+                              // Get.snackbar(
+                              //     "error".tr(), "qnt_shoud_be_number".tr());
                             }
                           }),
                     ),
@@ -139,6 +140,7 @@ class UpdateFoodPreviewView extends GetView<UpdateFoodPreviewController> {
                         visible: !controller.isDonation.value,
                         child: Flexible(
                           child: CustomTextField(
+                              textInputType: TextInputType.number,
                               hint: "price".tr(),
                               isMultipleLine: false,
                               onChanged: (text) {
@@ -631,6 +633,7 @@ class UpdateFoodPreviewView extends GetView<UpdateFoodPreviewController> {
                   height: 20,
                 ),
                 CustomTextField(
+                    textInputType: TextInputType.phone,
                     defaultText: controller.oldFood.phone_number!,
                     hint: "phone_number".tr(),
                     isMultipleLine: false,

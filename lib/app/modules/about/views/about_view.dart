@@ -13,12 +13,12 @@ class AboutView extends GetView<AboutController> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          elevation: 0.4,
-          title: Text('about_page_title'.tr()),
-          centerTitle: true,
-        ),
+        // appBar: AppBar(
+        //   backgroundColor: Colors.white,
+        //   elevation: 0.4,
+        //   title: Text('about_page_title'.tr()),
+        //   centerTitle: true,
+        // ),
         body: Container(
           padding: EdgeInsets.fromLTRB(DEFAULT_PADDING * 1.0, 0, DEFAULT_PADDING * 1.0, 0),
           child: ListView(
@@ -113,7 +113,7 @@ class AboutView extends GetView<AboutController> {
                             children: [
 
                               Text("about_team".tr(), style: TextStyle(
-                                  fontSize: 20.sp,
+                                  fontSize: 15.sp,
                                   fontWeight: FontWeight.bold
                               ),),
                               SizedBox(height: 10,),

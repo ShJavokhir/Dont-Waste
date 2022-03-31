@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dont_waste/app/data/constants/colors.dart';
 import 'package:dont_waste/app/data/constants/constants.dart';
+import 'package:dont_waste/app/modules/frame/bindings/frame_binding.dart';
+import 'package:dont_waste/app/modules/frame/controllers/frame_controller.dart';
 import 'package:dont_waste/app/widgets/custom_loader_dialog.dart';
 import 'package:dont_waste/app/widgets/snackbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -47,7 +49,8 @@ class AuthenticationController extends GetxController {
     final auth = FirebaseAuth.instance;
     if (auth.currentUser != null) {
       // signed in
-      Get.offAllNamed("/frame");
+      Get.offAllNamed('/frame');
+
     } else {
       print("Not signed in yet");
     }
@@ -69,11 +72,9 @@ class AuthenticationController extends GetxController {
 
       verificationCompleted: (PhoneAuthCredential credential) async {
         print("verification completed");
-        Get.offAllNamed("/frame");
-        print("Metadata: " + auth.currentUser!.metadata.creationTime!.millisecondsSinceEpoch.toString());
-        if((auth.currentUser!.metadata.creationTime!.millisecondsSinceEpoch - DateTime.now().millisecondsSinceEpoch).abs() < 300000){
-          FirebaseFirestore.instance.collection("app").doc("statistics").update({"totalUsers": FieldValue.increment(1)});
-        }
+
+        //print("Metadata: " + auth.currentUser!.metadata.creationTime!.millisecondsSinceEpoch.toString());
+
         Get.snackbar(
           "into".tr(),
           "succ_auth".tr(),
@@ -96,6 +97,11 @@ class AuthenticationController extends GetxController {
           backgroundColor: yellow1,
         );
         await auth.signInWithCredential(credential);
+        if((auth.currentUser!.metadata.creationTime!.millisecondsSinceEpoch - DateTime.now().millisecondsSinceEpoch).abs() < 300000){
+          FirebaseFirestore.instance.collection("app").doc("statistics").update({"totalUsers": FieldValue.increment(1)});
+        }
+        Get.offAllNamed('/frame');
+
       },
       verificationFailed: (FirebaseAuthException e) {
         Get.back();
@@ -116,7 +122,7 @@ class AuthenticationController extends GetxController {
             context: Get.context!,
             builder: (builder) {
               return Container(
-                height: 350.0,
+                height: 450.0,
                 color: Colors.transparent, //could change this to Color(0xFF737373),
                 //so you don't have to change MaterialApp canvasColor
                 child: Container(
@@ -176,7 +182,8 @@ class AuthenticationController extends GetxController {
 
                             if (auth.currentUser != null) {
                               // signed in
-                              Get.offAllNamed("/frame");
+                              Get.offAllNamed('/frame');
+
 
                               print("Signed in");
                             } else {
