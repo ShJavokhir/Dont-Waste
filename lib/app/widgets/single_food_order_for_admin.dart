@@ -33,10 +33,17 @@ class SingleFoodOrderForAdmin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(5),
+      margin: EdgeInsets.all(10),
       width: double.infinity,
-      height: 400,
+      height: 350,
       decoration: BoxDecoration(
+          boxShadow: <BoxShadow>[
+            new BoxShadow(
+              color: Colors.black26,
+              blurRadius: 2.0,
+              offset: new Offset(0.0, 0.5),
+            ),
+          ],
           color: black4,
           borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0)),
       child: Column(
@@ -51,6 +58,7 @@ class SingleFoodOrderForAdmin extends StatelessWidget {
                   height: double.infinity,
                   margin: EdgeInsets.all(5),
                   decoration: BoxDecoration(
+
                     //border: Border.all(color: Colors.black12, width: 1),
                       borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0)),
                   child: Hero(
@@ -67,8 +75,16 @@ class SingleFoodOrderForAdmin extends StatelessWidget {
                 Positioned(child: Container(
                   padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                   decoration: BoxDecoration(
+                      boxShadow: <BoxShadow>[
+                        new BoxShadow(
+                          color: Colors.black54,
+                          blurRadius: 5.0,
+                          offset: new Offset(0.0, 2.0),
+                        ),
+                      ],
                     
-                    color: Colors.grey.withOpacity(0.8),
+                    //color: Colors.grey.withOpacity(0.8),
+                    color: yellow1,
 
 
                     borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0)
@@ -78,7 +94,7 @@ class SingleFoodOrderForAdmin extends StatelessWidget {
                     SizedBox(width: 5,),
                     Text("views".tr() + views.toString(), style: TextStyle(color: Colors.white, fontSize: 12.sp),),
                   ],),
-                ), right:  20, top: 20,)
+                ), right:  15, top: 15,)
               ],
             ),
           ),
@@ -165,10 +181,10 @@ class SingleFoodOrderForAdmin extends StatelessWidget {
                                 //padding: EdgeInsets.all(20),
                                 shape: RoundedRectangleBorder(
                                   borderRadius:
-                                  BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
+                                  BorderRadius.vertical(top: Radius.circular(BORDER_RADIUS_1 * 1.0 / 2)),
                                 ),
                                 //side: BorderSide(width: 1, color: Colors.green),
-                                primary: Colors.blue, // <-- Button color
+                                primary: Colors.blue[300], // <-- Button color
                                 onPrimary: Colors.white, // <-- Splash color
                               ),
                             ),
@@ -185,10 +201,10 @@ class SingleFoodOrderForAdmin extends StatelessWidget {
                                 //padding: EdgeInsets.all(20),
                                 shape: RoundedRectangleBorder(
                                   borderRadius:
-                                  BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
+                                  BorderRadius.vertical(top: Radius.circular(BORDER_RADIUS_1 * 1.0 / 2)),
                                 ),
                                 //side: BorderSide(width: 1, color: Colors.green),
-                                primary: Colors.deepPurple, // <-- Button color
+                                primary: Colors.purple[300], // <-- Button color
                                 onPrimary: Colors.white, // <-- Splash color
                               ),
                             ),
@@ -209,10 +225,10 @@ class SingleFoodOrderForAdmin extends StatelessWidget {
                                 //padding: EdgeInsets.all(20),
                                 shape: RoundedRectangleBorder(
                                   borderRadius:
-                                  BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
+                                  BorderRadius.vertical(bottom: Radius.circular(BORDER_RADIUS_1 * 1.0 / 2)),
                                 ),
                                 //side: BorderSide(width: 1, color: Colors.green),
-                                primary: Colors.green, // <-- Button color
+                                primary: Colors.green[300], // <-- Button color
                                 onPrimary: Colors.white, // <-- Splash color
                               ),
                             ),
@@ -229,10 +245,10 @@ class SingleFoodOrderForAdmin extends StatelessWidget {
                                 //padding: EdgeInsets.all(20),
                                 shape: RoundedRectangleBorder(
                                   borderRadius:
-                                  BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
+                                  BorderRadius.vertical(bottom: Radius.circular(BORDER_RADIUS_1 * 1.0 / 2)),
                                 ),
                                 //side: BorderSide(width: 1, color: Colors.green),
-                                primary: Colors.redAccent, // <-- Button color
+                                primary: Colors.redAccent[200], // <-- Button color
                                 onPrimary: Colors.white, // <-- Splash color
                               ),
                             ),

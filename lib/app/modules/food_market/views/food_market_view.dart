@@ -13,6 +13,7 @@ import 'package:dont_waste/app/modules/food_preview/controllers/food_preview_con
 import 'package:dont_waste/app/modules/food_preview/views/food_preview_view.dart';
 import 'package:dont_waste/app/widgets/single_food_order.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sizer/sizer.dart';
@@ -21,6 +22,11 @@ import 'package:get/get.dart' hide Trans;
 import '../controllers/food_market_controller.dart';
 
 class FoodMarketView extends GetView<FoodMarketController> {
+
+  final Map<int, Widget> myTabs = const <int, Widget>{
+    0: Padding(padding: EdgeInsets.all(10), child: Text("Yaroqli")),
+    1: Padding(padding: EdgeInsets.all(10), child: Text("Yaroqsiz"))
+  };
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -156,7 +162,7 @@ class FoodMarketView extends GetView<FoodMarketController> {
                           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                           // margin:
                           // EdgeInsets.symmetric(horizontal: DEFAULT_PADDING * 1.0),
-                          height: 60,
+                          height: 50,
                           width: double.infinity,
                           decoration: BoxDecoration(
                             color: green2,
@@ -202,8 +208,52 @@ class FoodMarketView extends GetView<FoodMarketController> {
                       ),
                     ),
                     SizedBox(
+                      height: 10,
+                    ),
+                    CupertinoSlidingSegmentedControl(
+                      backgroundColor: black4,
+                      padding: EdgeInsets.all(5),
+                      groupValue: controller.segmentedControlGroupValue.value,
+                      children: myTabs,
+                      onValueChanged: (i) {
+                        controller.segmentedControlGroupValue.value =  int.parse(i.toString()) ;
+                        controller.switchMarket();
+                        // setState(() {
+                        //   segmentedControlGroupValue = i;
+
+                      }),
+                    SizedBox(
                       height: 20,
                     ),
+                    Visibility(visible: controller.isLoading.value , child: Container(
+                      //padding: EdgeInsets.all(50),
+                      //width: 85.w,
+                      child: Container(
+                          padding: EdgeInsets.all(15),
+                          //width: double.infinity,
+                          height: 200,
+                          decoration: BoxDecoration(
+                            color: black4,
+                            borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
+                          ),
+                          child: Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                CircularProgressIndicator(
+                                  color: yellow1,
+                                ),
+                                SizedBox(
+                                  height: 25,
+                                ),
+                                Text(
+                                  'loading'.tr(),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ],
+                            ),
+                          )),
+                    )),
                     ...controller.foods.value.map((e) {
                       return Padding(
                         padding: EdgeInsets.only(bottom: 15),
@@ -215,6 +265,7 @@ class FoodMarketView extends GetView<FoodMarketController> {
                           price: e.price ?? 0,
                           location: e.city ?? "Uzbekistan",
                           photo_url: e.photo_url ?? "no",
+                          isEatable: e.isEatable ?? true,
                           onPressed: () {
                             FoodPreviewBinding().dependencies();
                             Get.find<FoodPreviewController>().foodModel = e;

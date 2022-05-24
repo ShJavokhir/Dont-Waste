@@ -90,9 +90,12 @@
   "language": "Language: ",
   "advertising_": "Advertising",
   "gps_error": "Please try to turn on GPS and allow location permission for this app from settings",
-  "advertise": "This feature is coming soon, be prepared :).\n With the help of this function, you can advertise your foods so many people can discover it"
-
-
-
-
+  "advertise": "This feature is coming soon, be prepared :).\n With the help of this function, you can advertise your foods so many people can discover it",
+  "payment_method": "Payment method",
+  "payment_info": "Please make a payment to the following card with your user id on comment: \"8600110077071202\"\n\nYou can take your user id from profile settings page.\n\nFor now all payments are verified manually, so it takes some time. We apologize for inconveniences",
+  "ad_fee": "Advertisement fee: 5000 uzs",
+  "is_eatable": "Is eatable ?",
+  "food_expiry_alert": "This food is expired and only for animals",
+  "expired": "Expired",
+  "top": "TOP"
 }

@@ -119,7 +119,8 @@ class UserProfileController extends GetxController {
       value.docs.forEach((element) {
 
         final food = Food.fromJson(element.data());
-        print("Fetching foods: ${food.isDonation}");
+        //print("Fetching foods: ${food.isDonation}");
+        print("Fetching foods: ${food.isEatable}");
          food.id = element.id;
         //print(food.id);
         foods.add(food);

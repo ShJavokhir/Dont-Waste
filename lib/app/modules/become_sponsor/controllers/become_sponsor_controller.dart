@@ -22,6 +22,7 @@ class BecomeSponsorController extends GetxController {
   XFile? image;
   final didImageSelected = false.obs;
   final isDonation = false.obs;
+  final isEatable = true.obs;
   final title = "".obs;
   final description = "".obs;
   final quantity = 0.0.obs;
@@ -150,6 +151,7 @@ class BecomeSponsorController extends GetxController {
     food.quantity = quantity.value;
     food.views = 0;
     food.isDonation = isDonation.value;
+    food.isEatable = isEatable.value;
     food.ownerName = FirebaseAuth.instance.currentUser?.displayName;
     food.photo_url = imageUrl==""?null: imageUrl;
     //final coordinates = Coordinates(latitude.value, longitude.value);

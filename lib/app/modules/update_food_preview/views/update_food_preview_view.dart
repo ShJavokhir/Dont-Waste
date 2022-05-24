@@ -20,6 +20,8 @@ import 'package:url_launcher/url_launcher.dart';
 class UpdateFoodPreviewView extends GetView<UpdateFoodPreviewController> {
   @override
   Widget build(BuildContext context) {
+
+    print("Here debug msg in build: "+ controller.isEatable.value.toString());
     //controller.increment();
     return SafeArea(
       child: Scaffold(
@@ -88,7 +90,7 @@ class UpdateFoodPreviewView extends GetView<UpdateFoodPreviewController> {
                   child: Row(
                     children: [
                       Text(
-                        "Donation",
+                        "is_donation".tr(),
                         style: TextStyle(fontSize: 12.sp),
                       ),
                       Spacer(),
@@ -104,6 +106,48 @@ class UpdateFoodPreviewView extends GetView<UpdateFoodPreviewController> {
                               },
                               value: controller.isDonation.value,
                                   
+                              activeColor: yellow1,
+                              //activeTrackColor: Colors.yellow,
+                              //inactiveThumbColor: Colors.redAccent,
+                              //inactiveTrackColor: Colors.orange,
+                            ),
+                          )
+                      )
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  // margin:
+                  // EdgeInsets.symmetric(horizontal: DEFAULT_PADDING * 1.0),
+                  height: 60,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: black4,
+                    borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
+                  ),
+                  child: Row(
+                    children: [
+                      Text(
+                        "is_eatable".tr(),
+                        style: TextStyle(fontSize: 12.sp),
+                      ),
+                      Spacer(),
+                      Container(
+                        //padding: EdgeInsets.symmetric(horizontal: 10),
+                          alignment: Alignment.center,
+                          height: double.infinity,
+                          //width: 150,
+                          child: Obx(
+                                ()=> CupertinoSwitch(
+                              onChanged: (value){
+                                controller.isEatable.value = value;
+                              },
+                              value: controller.isEatable.value,
+
                               activeColor: yellow1,
                               //activeTrackColor: Colors.yellow,
                               //inactiveThumbColor: Colors.redAccent,

@@ -13,6 +13,7 @@ class SingleFoodOrder extends StatelessWidget {
   final String photo_url;
   final int? postedTimestamp;
   final bool isDonation;
+  final bool isEatable;
 
   final void Function() onPressed;
   SingleFoodOrder(
@@ -23,7 +24,8 @@ class SingleFoodOrder extends StatelessWidget {
       required this.location,
         required this.isDonation,
         required this.photo_url,
-        required this.postedTimestamp
+        required this.postedTimestamp,
+        required this.isEatable
       });
 
   @override
@@ -41,26 +43,81 @@ class SingleFoodOrder extends StatelessWidget {
           children: [
             Expanded(
               flex: 1,
-              child: Container(
-                width: double.infinity,
-                height: double.infinity,
-                margin: EdgeInsets.all(5),
-                decoration: BoxDecoration(
-                    //border: Border.all(color: Colors.black12, width: 1),
-                    borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0)),
-                child: Hero(
-                  tag: id + 'foodImageTag',
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
-                    child: photo_url.contains("http")?Image.network(
-                      photo_url,
-                      fit: BoxFit.cover,
-                      isAntiAlias: false,
-                    ):Container(
-                      //margin: EdgeInsets.all(50),
-                        child: Image.asset('assets/images/default-photo.png', fit: BoxFit.cover)),
+              child: Stack(
+                children: [
+                  Container(
+                    width: double.infinity,
+                    height: double.infinity,
+                    margin: EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                        //border: Border.all(color: Colors.black12, width: 1),
+                        borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0)),
+                    child: Hero(
+                      tag: id + 'foodImageTag',
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
+                        child: photo_url.contains("http")?Image.network(
+                          photo_url,
+                          fit: BoxFit.cover,
+                          isAntiAlias: false,
+                        ):Container(
+                          //margin: EdgeInsets.all(50),
+                            child: Image.asset('assets/images/default-photo.png', fit: BoxFit.cover)),
+                      ),
+                    ),
                   ),
-                ),
+                  Visibility(
+                    visible: !isEatable,
+                    child: Positioned(
+                      bottom: 15,
+                      left: 15,
+                      child: Container(
+                        padding: EdgeInsets.all(5),
+                        //width: 50,
+                        //height: 20,
+                        decoration: BoxDecoration(
+                          color: Colors.red,
+                          borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(Icons.warning, color: Colors.white, size: 9.sp,),
+                            SizedBox(width: 5,),
+                            Text("expired".tr(), style: TextStyle(
+                              fontSize: 9.sp,
+                              color: Colors.white
+                            ),),
+                          ],
+                        ),
+                      ),
+                    ),
+
+                  ),
+                  Positioned(
+                    top: 0,
+                    left: 0,
+                    child: Container(
+                      margin: EdgeInsets.all(5),
+                      padding: EdgeInsets.all(8),
+                      //width: 50,
+                      //height: 20,
+                      decoration: BoxDecoration(
+                        color: Colors.blue,
+                        borderRadius: BorderRadius.only(topLeft: Radius.circular(BORDER_RADIUS_1 * 1.0), bottomRight: Radius.circular(BORDER_RADIUS_1 * 1.0)),
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(Icons.warning, color: Colors.white, size: 9.sp,),
+                          SizedBox(width: 5,),
+                          Text("top".tr(), style: TextStyle(
+                              fontSize: 9.sp,
+                              color: Colors.white
+                          ),),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
             Expanded(

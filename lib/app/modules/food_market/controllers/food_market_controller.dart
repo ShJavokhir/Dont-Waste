@@ -7,10 +7,11 @@ import 'package:get/get.dart';
 
 class FoodMarketController extends GetxController {
   //TODO: Implement FoodMarketController
-
+   final segmentedControlGroupValue = 0.obs;
   final count = 0.obs;
   late FirebaseFirestore firestore;
   final foods = <Food>[].obs;
+   final isLoading = false.obs;
 
   @override
   void onInit() async {
@@ -47,19 +48,46 @@ class FoodMarketController extends GetxController {
     Get.back();
 
   }
+  Future<void> switchMarket() async {
+    foods.clear();
+    isLoading.value = true;
+    if(segmentedControlGroupValue.value == 0){
+      foods.value = await fetchFoods();
+    }else if(segmentedControlGroupValue.value == 1){
+      foods.value = await fetchExpiredFoods();
+    }
+
+    isLoading.value = false;
+
+  }
 
   Future<List<Food>> fetchFoods() async {
 
-    final List<Food> foods = [];
-    await firestore.collection("posts").orderBy('postedTimestamp', descending: true).get().then((value) {
-      //print(value.size);
-      value.docs.forEach((element) {
-        final food = Food.fromJson(element.data());
-        food.id = element.id;
-        //print(food.id);
-        foods.add(food);
-      });
-    });
-    return foods;
-  }
+     final List<Food> foods = [];
+     await firestore.collection("posts").orderBy('postedTimestamp', descending: true).get().then((value) {
+       //print(value.size);
+       value.docs.forEach((element) {
+         final food = Food.fromJson(element.data());
+         food.id = element.id;
+         //print(food.id);
+         foods.add(food);
+       });
+     });
+     return foods;
+   }
+
+   Future<List<Food>> fetchExpiredFoods() async {
+
+     final List<Food> foods = [];
+     await firestore.collection("posts").where('isEatable', isEqualTo: false).orderBy('postedTimestamp', descending: true).get().then((value) {
+       //print(value.size);
+       value.docs.forEach((element) {
+         final food = Food.fromJson(element.data());
+         food.id = element.id;
+         //print(food.id);
+         foods.add(food);
+       });
+     });
+     return foods;
+   }
 }

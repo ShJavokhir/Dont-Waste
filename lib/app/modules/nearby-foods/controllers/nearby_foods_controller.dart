@@ -225,7 +225,7 @@ class NearbyFoodsController extends GetxController {
       FoodPreviewBinding().dependencies();
       Get.find<FoodPreviewController>().foodModel = food;
       Get.toNamed("/food-preview");
-    }, title: food.title!, price: food.price!, location: food.city!, isDonation: food.isDonation ?? false, photo_url: food.photo_url ?? "no", postedTimestamp: food.postedTimestamp);
+    }, title: food.title!, price: food.price!, location: food.city!, isDonation: food.isDonation ?? false, photo_url: food.photo_url ?? "no", postedTimestamp: food.postedTimestamp, isEatable: food.isEatable ?? true,);
   }
   Food getFoodById(String id){
 

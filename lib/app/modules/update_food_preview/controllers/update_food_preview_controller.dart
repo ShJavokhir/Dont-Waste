@@ -27,6 +27,7 @@ class UpdateFoodPreviewController extends GetxController {
   final phoneNumber = "".obs;
   //41.338622, 69.334240
   final isDonation = false.obs;
+  final isEatable = true.obs;
   final latitude = 41.338622.obs;
   final longitude = 69.334240.obs;
   final isLocationSelected = false.obs;
@@ -44,7 +45,9 @@ class UpdateFoodPreviewController extends GetxController {
   void onReady() {
     latitude.value = oldFood.location!.latitude;
     longitude.value = oldFood.location!.longitude;
-    print("Came to update food previw with ${oldFood.isDonation}");
+    // print("Came to update food previw with ${oldFood.isDonation}");
+    // print("Came to update food previw with isEatable ${oldFood.isEatable}");
+    print("Here debug msg in onready: "+ isEatable.value.toString());
     //isDonation.value = oldFood.isDonation ?? false;
     super.onReady();
   }
@@ -80,6 +83,7 @@ class UpdateFoodPreviewController extends GetxController {
     if(isLocationSelected.value) updatedElements['location'] = GeoPoint(latitude.value, longitude.value);
     if(phoneNumber.value != "") updatedElements['phoneNumber'] = phoneNumber.value;
     updatedElements["isDonation"] = isDonation.value;
+    updatedElements["isEatable"] = isEatable.value;
 
     print("updatedElements before send: " + updatedElements.entries.toList().toString());
     showDialog(
