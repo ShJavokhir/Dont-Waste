@@ -27,10 +27,18 @@ class FoodMarketView extends GetView<FoodMarketController> {
     0: Padding(padding: EdgeInsets.all(10), child: Text("Yaroqli")),
     1: Padding(padding: EdgeInsets.all(10), child: Text("Yaroqsiz"))
   };
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: (){
+            controller.scrollUp();
+          },
+          backgroundColor: yellow1,
+          child: Icon(Icons.arrow_upward_rounded),
+        ),
         // bottomNavigationBar: BottomNavigationBar(
         //   elevation: 20,
         //   currentIndex: 1,
@@ -143,6 +151,7 @@ class FoodMarketView extends GetView<FoodMarketController> {
               padding: EdgeInsets.fromLTRB(DEFAULT_PADDING * 1.0,DEFAULT_PADDING * 1.0,DEFAULT_PADDING * 1.0,0),
               child: Obx(
                 () => ListView(
+                  controller: controller.scrollController,
                   physics: BouncingScrollPhysics(
                       parent: AlwaysScrollableScrollPhysics()),
                   children: [
@@ -266,6 +275,7 @@ class FoodMarketView extends GetView<FoodMarketController> {
                           location: e.city ?? "Uzbekistan",
                           photo_url: e.photo_url ?? "no",
                           isEatable: e.isEatable ?? true,
+                          isTop: e.isTop ?? false,
                           onPressed: () {
                             FoodPreviewBinding().dependencies();
                             Get.find<FoodPreviewController>().foodModel = e;

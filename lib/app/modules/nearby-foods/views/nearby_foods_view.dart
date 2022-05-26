@@ -89,7 +89,7 @@ class NearbyFoodsView extends GetView<NearbyFoodsController> {
               Positioned(
 
                 child: (Container(
-                  height: 200,
+                  height: 250,
                   width: MediaQuery
                       .of(Get.context!)
                       .size
@@ -129,7 +129,10 @@ class NearbyFoodsView extends GetView<NearbyFoodsController> {
                               },
                               postedTimestamp: e.postedTimestamp,
                               price: e.price ?? 0.0,
-                              title: e.title ?? "null");
+                              title: e.title ?? "null",
+                            isTop: e.isTop ?? false,
+                            isEatable: e.isEatable ?? true,
+                          );
                         }),
 
                         SizedBox(width: 10,),

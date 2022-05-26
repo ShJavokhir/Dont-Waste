@@ -14,6 +14,7 @@ class SingleFoodOrder extends StatelessWidget {
   final int? postedTimestamp;
   final bool isDonation;
   final bool isEatable;
+  final bool isTop;
 
   final void Function() onPressed;
   SingleFoodOrder(
@@ -25,7 +26,8 @@ class SingleFoodOrder extends StatelessWidget {
         required this.isDonation,
         required this.photo_url,
         required this.postedTimestamp,
-        required this.isEatable
+        required this.isEatable,
+        required this.isTop
       });
 
   @override
@@ -81,7 +83,7 @@ class SingleFoodOrder extends StatelessWidget {
                         ),
                         child: Row(
                           children: [
-                            Icon(Icons.warning, color: Colors.white, size: 9.sp,),
+                            Icon(Icons.warning, color: Colors.white, size: 10.sp,),
                             SizedBox(width: 5,),
                             Text("expired".tr(), style: TextStyle(
                               fontSize: 9.sp,
@@ -93,27 +95,30 @@ class SingleFoodOrder extends StatelessWidget {
                     ),
 
                   ),
-                  Positioned(
-                    top: 0,
-                    left: 0,
-                    child: Container(
-                      margin: EdgeInsets.all(5),
-                      padding: EdgeInsets.all(8),
-                      //width: 50,
-                      //height: 20,
-                      decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.only(topLeft: Radius.circular(BORDER_RADIUS_1 * 1.0), bottomRight: Radius.circular(BORDER_RADIUS_1 * 1.0)),
-                      ),
-                      child: Row(
-                        children: [
-                          Icon(Icons.warning, color: Colors.white, size: 9.sp,),
-                          SizedBox(width: 5,),
-                          Text("top".tr(), style: TextStyle(
-                              fontSize: 9.sp,
-                              color: Colors.white
-                          ),),
-                        ],
+                  Visibility(
+                    visible: isTop,
+                    child: Positioned(
+                      top: 0,
+                      left: 0,
+                      child: Container(
+                        margin: EdgeInsets.all(5),
+                        padding: EdgeInsets.all(8),
+                        //width: 50,
+                        //height: 20,
+                        decoration: BoxDecoration(
+                          color: Colors.blue,
+                          borderRadius: BorderRadius.only(topLeft: Radius.circular(BORDER_RADIUS_1 * 1.0), bottomRight: Radius.circular(BORDER_RADIUS_1 * 1.0)),
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(Icons.flash_on_rounded, color: Colors.white, size: 10.sp),
+                            SizedBox(width: 5,),
+                            Text("top".tr(), style: TextStyle(
+                                fontSize: 9.sp,
+                                color: Colors.white
+                            ),),
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -160,7 +165,7 @@ class SingleFoodOrder extends StatelessWidget {
                             width: 5,
                           ),
                           Text(
-                            price.toString(),
+                            price.toString() + " uzs",
                             style: TextStyle(
                                 fontSize: 11.sp,
                                 color: Colors.black87,

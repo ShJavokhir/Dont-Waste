@@ -7,6 +7,8 @@ import 'package:get/get.dart';
 
 class FoodMarketController extends GetxController {
   //TODO: Implement FoodMarketController
+  ScrollController scrollController = ScrollController();
+
    final segmentedControlGroupValue = 0.obs;
   final count = 0.obs;
   late FirebaseFirestore firestore;
@@ -20,6 +22,14 @@ class FoodMarketController extends GetxController {
 
     //print("look " + foods.value[0].price.toString());
     super.onInit();
+  }
+
+  void scrollUp(){
+    scrollController.animateTo(
+      scrollController.position.minScrollExtent,
+      duration: Duration(seconds: 2),
+      curve: Curves.fastOutSlowIn,
+    );
   }
 
   @override

@@ -204,216 +204,221 @@ class FrameView extends GetView<FrameController> {
 }
 Drawer buildDrawer(BuildContext context) {
   return Drawer(
-    child: ListView(
-      physics: AlwaysScrollableScrollPhysics(
-          parent: BouncingScrollPhysics()),
-      padding: EdgeInsets.zero,
-      children: <Widget>[
-        DrawerHeader(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Image.asset(
-                'assets/images/icon.png',
-                width: 80,
-                height: 80,
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              Text(
-                "app_name".tr(),
-                style: TextStyle(color: Colors.grey),
-              )
-            ],
+    child: Container(
+      height: MediaQuery.of(context).size.height,
+      child: Column(
+        // physics: AlwaysScrollableScrollPhysics(
+        //     parent: BouncingScrollPhysics()),
+        // padding: EdgeInsets.zero,
+        children: <Widget>[
+          DrawerHeader(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Image.asset(
+                  'assets/images/icon.png',
+                  width: 80,
+                  height: 80,
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Text(
+                  "app_name".tr(),
+                  style: TextStyle(color: Colors.grey),
+                )
+              ],
+            ),
+            decoration: BoxDecoration(
+              color: Colors.white,
+            ),
           ),
-          decoration: BoxDecoration(
-            color: Colors.white,
+
+          ListTile(
+            leading: Icon(Icons.home),
+            title: Text('home_button'.tr(),
+                style: Theme.of(context).textTheme.titleMedium),
+            onTap: () {
+              Navigator.pop(context);
+              Get.find<FrameController>().changeTabIndex(0);
+
+            },
           ),
-        ),
+          ListTile(
+            leading: Icon(Icons.shopping_cart),
+            title: Text('foods_button'.tr(),
+                style: Theme.of(context).textTheme.titleMedium),
+            onTap: () {
+              Navigator.pop(context);
+              Get.find<FrameController>().changeTabIndex(1);
 
-        ListTile(
-          leading: Icon(Icons.home),
-          title: Text('home_button'.tr(),
-              style: Theme.of(context).textTheme.titleMedium),
-          onTap: () {
-            Navigator.pop(context);
-            Get.find<FrameController>().changeTabIndex(0);
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.add_a_photo),
+            title: Text('add_post_button'.tr(),
+                style: Theme.of(context).textTheme.titleMedium),
+            onTap: () {
+              Navigator.pop(context);
+              Get.find<FrameController>().changeTabIndex(2);
 
-          },
-        ),
-        ListTile(
-          leading: Icon(Icons.shopping_cart),
-          title: Text('foods_button'.tr(),
-              style: Theme.of(context).textTheme.titleMedium),
-          onTap: () {
-            Navigator.pop(context);
-            Get.find<FrameController>().changeTabIndex(1);
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.account_circle),
 
-          },
-        ),
-        ListTile(
-          leading: Icon(Icons.add_a_photo),
-          title: Text('add_post_button'.tr(),
-              style: Theme.of(context).textTheme.titleMedium),
-          onTap: () {
-            Navigator.pop(context);
-            Get.find<FrameController>().changeTabIndex(2);
+            title: Text('profile_button'.tr(),
+                style: Theme.of(context).textTheme.titleMedium),
+            onTap: () {
+              Navigator.pop(context);
+              Get.find<FrameController>().changeTabIndex(3);
 
-          },
-        ),
-        ListTile(
-          leading: Icon(Icons.account_circle),
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.question_mark_rounded),
+            title: Text('info'.tr(),
+                style: Theme.of(context).textTheme.titleMedium),
+            onTap: () {
+              Navigator.pop(context);
+              Get.find<FrameController>().changeTabIndex(4);
 
-          title: Text('profile_button'.tr(),
-              style: Theme.of(context).textTheme.titleMedium),
-          onTap: () {
-            Navigator.pop(context);
-            Get.find<FrameController>().changeTabIndex(3);
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.settings),
+            title: Text('settings'.tr(),
+                style: Theme.of(context).textTheme.titleMedium),
+            onTap: () {
+              Navigator.pop(context);
+              Get.find<FrameController>().changeTabIndex(3, initialIndex: 1);
+            },
+          ),
+          //Spacer(),
+          Divider(),
 
-          },
-        ),
-        ListTile(
-          leading: Icon(Icons.question_mark_rounded),
-          title: Text('info'.tr(),
-              style: Theme.of(context).textTheme.titleMedium),
-          onTap: () {
-            Navigator.pop(context);
-            Get.find<FrameController>().changeTabIndex(4);
+          Container(
 
-          },
-        ),
-        ListTile(
-          leading: Icon(Icons.settings),
-          title: Text('settings'.tr(),
-              style: Theme.of(context).textTheme.titleMedium),
-          onTap: () {
-            Navigator.pop(context);
-            Get.find<FrameController>().changeTabIndex(3, initialIndex: 1);
-          },
-        ),
-        //Spacer(),
-        Divider(),
-
-        Container(
-
-          width: double.infinity,
-          child: ListTile(
-            leading: Text("language".tr(),style: Theme.of(context).textTheme.titleMedium),
-            title: DropdownButton<String>(
-              underline: Container(),
-              value: context.locale.countryCode,
-              selectedItemBuilder: (_) {
-                return  <String>['EN', 'RU', 'UZ'].map((String choice) {
-                  return Center(
+            width: double.infinity,
+            child: ListTile(
+              leading: Text("language".tr(),style: Theme.of(context).textTheme.titleMedium),
+              title: DropdownButton<String>(
+                underline: Container(),
+                value: context.locale.countryCode,
+                selectedItemBuilder: (_) {
+                  return  <String>['EN', 'RU', 'UZ'].map((String choice) {
+                    return Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          //SizedBox(width: 20,),
+                          Image.asset('assets/images/$choice.png', height: 30, width: 30,),
+                          SizedBox(width: 15,),
+                          Text(choice),
+                          SizedBox(width: 15,),
+                        ],
+                      ),
+                    );
+                  }).toList();
+                },
+                items: <String>['EN', 'RU', 'UZ'].map((String choice) {
+                  return DropdownMenuItem<String>(
+                    value: choice,
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        //SizedBox(width: 20,),
                         Image.asset('assets/images/$choice.png', height: 30, width: 30,),
                         SizedBox(width: 15,),
-                        Text(choice),
-                        SizedBox(width: 15,),
+                        Text(choice)
                       ],
                     ),
                   );
-                }).toList();
-              },
-              items: <String>['EN', 'RU', 'UZ'].map((String choice) {
-                return DropdownMenuItem<String>(
-                  value: choice,
-                  child: Row(
-                    children: [
-                      Image.asset('assets/images/$choice.png', height: 30, width: 30,),
-                      SizedBox(width: 15,),
-                      Text(choice)
-                    ],
-                  ),
-                );
-              }).toList(),
-              onChanged: (opt) {
+                }).toList(),
+                onChanged: (opt) {
 
-                      if (opt == "UZ") {
-                        final locale = Locale("uz", "UZ");
-                        context.setLocale(locale);
-                        EasyLocalization.of(context)!.setLocale(locale);
-                        //EasyLocalization.of(context)!.currentLocale = locale;
-                        Get.updateLocale(locale);
-                      } else if (opt == "RU") {
-                        final locale =(Locale("ru", "RU"));
-                        context.setLocale(locale);
-                        Get.updateLocale(locale);
-                        EasyLocalization.of(context)!.setLocale(locale);
-                      } else if (opt == "EN") {
-                        final locale =(Locale("en", "EN"));
-                        context.setLocale(locale);
-                        Get.updateLocale(locale);
-                        EasyLocalization.of(context)!.setLocale(locale);
-                      }
+                        if (opt == "UZ") {
+                          final locale = Locale("uz", "UZ");
+                          context.setLocale(locale);
+                          EasyLocalization.of(context)!.setLocale(locale);
+                          //EasyLocalization.of(context)!.currentLocale = locale;
+                          Get.updateLocale(locale);
+                        } else if (opt == "RU") {
+                          final locale =(Locale("ru", "RU"));
+                          context.setLocale(locale);
+                          Get.updateLocale(locale);
+                          EasyLocalization.of(context)!.setLocale(locale);
+                        } else if (opt == "EN") {
+                          final locale =(Locale("en", "EN"));
+                          context.setLocale(locale);
+                          Get.updateLocale(locale);
+                          EasyLocalization.of(context)!.setLocale(locale);
+                        }
 
-                      //Get.offAndToNamed('/choice-view');
-                Get.forceAppUpdate();
-                Get.appUpdate();
-                      //FrameBinding().dependencies();
-                //       await Get.find<FoodMarketController>().setFoods();
+                        //Get.offAndToNamed('/choice-view');
+                  Get.forceAppUpdate();
+                  Get.appUpdate();
+                        //FrameBinding().dependencies();
+                  //       await Get.find<FoodMarketController>().setFoods();
 
-              },
+                },
+              ),
             ),
           ),
-        ),
-            // PopupMenuButton<String>(
-            //
-            //     icon: Icon(Icons.language_sharp),
-            //     onSelected: (String opt) {
-            //       if (opt == "UZ") {
-            //         final locale = Locale("uz", "UZ");
-            //         context.setLocale(locale);
-            //         EasyLocalization.of(context)!.setLocale(locale);
-            //         //EasyLocalization.of(context)!.currentLocale = locale;
-            //         Get.updateLocale(locale);
-            //       } else if (opt == "RU") {
-            //         final locale =(Locale("ru", "RU"));
-            //         context.setLocale(locale);
-            //         Get.updateLocale(locale);
-            //         EasyLocalization.of(context)!.setLocale(locale);
-            //       } else if (opt == "EN") {
-            //         final locale =(Locale("en", "EN"));
-            //         context.setLocale(locale);
-            //         Get.updateLocale(locale);
-            //         EasyLocalization.of(context)!.setLocale(locale);
-            //       }
-            //
-            //       //Get.offAndToNamed('/choice-view');
-            //
-            //     },
-            //     itemBuilder: (BuildContext context) {
-            //       return {'UZ', 'RU', 'EN'}.map((String choice) {
-            //         return PopupMenuItem<String>(
-            //           value: choice,
-            //           child: ListTile(
-            //             leading: Image.asset('assets/images/$choice.png', height: 30, width: 30,),
-            //             title: Text(choice),
-            //           ),
-            //         );
-            //       }).toList();
-            //     },
-            //   ),
-        Divider(),
-        ListTile(
-          leading: Icon(Icons.exit_to_app,
-              color: Colors.redAccent, size: 18.sp),
-          title: Text('sign_out'.tr(),
-              style: Theme.of(context)
-                  .textTheme
-                  .titleMedium!
-                  .copyWith(color: Colors.red)),
-          onTap: () {
-            //Navigator.pop(context);
-            Get.find<FrameController>().signOut();
-          },
-        ),
-      ],
+              // PopupMenuButton<String>(
+              //
+              //     icon: Icon(Icons.language_sharp),
+              //     onSelected: (String opt) {
+              //       if (opt == "UZ") {
+              //         final locale = Locale("uz", "UZ");
+              //         context.setLocale(locale);
+              //         EasyLocalization.of(context)!.setLocale(locale);
+              //         //EasyLocalization.of(context)!.currentLocale = locale;
+              //         Get.updateLocale(locale);
+              //       } else if (opt == "RU") {
+              //         final locale =(Locale("ru", "RU"));
+              //         context.setLocale(locale);
+              //         Get.updateLocale(locale);
+              //         EasyLocalization.of(context)!.setLocale(locale);
+              //       } else if (opt == "EN") {
+              //         final locale =(Locale("en", "EN"));
+              //         context.setLocale(locale);
+              //         Get.updateLocale(locale);
+              //         EasyLocalization.of(context)!.setLocale(locale);
+              //       }
+              //
+              //       //Get.offAndToNamed('/choice-view');
+              //
+              //     },
+              //     itemBuilder: (BuildContext context) {
+              //       return {'UZ', 'RU', 'EN'}.map((String choice) {
+              //         return PopupMenuItem<String>(
+              //           value: choice,
+              //           child: ListTile(
+              //             leading: Image.asset('assets/images/$choice.png', height: 30, width: 30,),
+              //             title: Text(choice),
+              //           ),
+              //         );
+              //       }).toList();
+              //     },
+              //   ),
+          Spacer(),
+          Divider(),
+
+          ListTile(
+            leading: Icon(Icons.exit_to_app,
+                color: Colors.redAccent, size: 18.sp),
+            title: Text('sign_out'.tr(),
+                style: Theme.of(context)
+                    .textTheme
+                    .titleMedium!
+                    .copyWith(color: Colors.red)),
+            onTap: () {
+              //Navigator.pop(context);
+              Get.find<FrameController>().signOut();
+            },
+          ),
+        ],
+      ),
     ),
   );
 }

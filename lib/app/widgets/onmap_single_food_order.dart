@@ -11,6 +11,8 @@ class OnMapSingleFoodOrder extends StatelessWidget {
   final String location;
   final int? postedTimestamp;
   final bool isDonation;
+  final bool isEatable;
+  final bool isTop;
   final void Function() onPressed;
 
   const OnMapSingleFoodOrder({
@@ -20,6 +22,9 @@ class OnMapSingleFoodOrder extends StatelessWidget {
     required this.price,
     required this.location,
     required this.isDonation,
+    required this.isEatable,
+    required this.isTop,
+
 
     required this.postedTimestamp
 }) : super();
@@ -28,7 +33,7 @@ class OnMapSingleFoodOrder extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 180,
-      height: 180,
+      height: 200,
       //width: double.infinity,
       padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
       margin: EdgeInsets.all(5),
@@ -58,8 +63,68 @@ class OnMapSingleFoodOrder extends StatelessWidget {
               maxLines: 2,
             ),
           ),
+
           Expanded(
             child: Container(),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Visibility(
+                visible: !isEatable,
+                child: Positioned(
+                  bottom: 15,
+                  left: 15,
+                  child: Container(
+                    padding: EdgeInsets.all(5),
+                    //width: 50,
+                    //height: 20,
+                    decoration: BoxDecoration(
+                      color: Colors.red,
+                      borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(Icons.warning, color: Colors.white, size: 10.sp,),
+                        SizedBox(width: 5,),
+                        Text("expired".tr(), style: TextStyle(
+                            fontSize: 9.sp,
+                            color: Colors.white
+                        ),),
+                      ],
+                    ),
+                  ),
+                ),
+
+              ),
+              Visibility(
+                visible: isTop,
+                child: Positioned(
+                  top: 0,
+                  left: 0,
+                  child: Container(
+                    margin: EdgeInsets.all(5),
+                    padding: EdgeInsets.all(8),
+                    //width: 50,
+                    //height: 20,
+                    decoration: BoxDecoration(
+                      color: Colors.blue,
+                      borderRadius: BorderRadius.only(topLeft: Radius.circular(BORDER_RADIUS_1 * 1.0), bottomRight: Radius.circular(BORDER_RADIUS_1 * 1.0)),
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(Icons.flash_on_rounded, color: Colors.white, size: 10.sp),
+                        SizedBox(width: 5,),
+                        Text("top".tr(), style: TextStyle(
+                            fontSize: 9.sp,
+                            color: Colors.white
+                        ),),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
           Visibility(
             visible: !isDonation,
@@ -82,7 +147,10 @@ class OnMapSingleFoodOrder extends StatelessWidget {
                 )
               ],
             ),
+
           ),
+          SizedBox(height: 10),
+
           Visibility(
             visible: isDonation,
             child: Row(
