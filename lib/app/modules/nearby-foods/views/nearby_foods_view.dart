@@ -14,7 +14,7 @@ import 'package:get/get.dart' hide Trans;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../controllers/nearby_foods_controller.dart';
-
+import 'package:sizer/sizer.dart';
 class NearbyFoodsView extends GetView<NearbyFoodsController> {
   @override
   Widget build(BuildContext context) {
@@ -119,19 +119,90 @@ class NearbyFoodsView extends GetView<NearbyFoodsController> {
 
                             )),
                         ...controller.foods.value.map((e) {
-                          return OnMapSingleFoodOrder(id: e.id,
-                              isDonation: e.isDonation ?? false,
-                              location: e.city ?? "Tashkent",
-                              onPressed: () {
-                                FoodPreviewBinding().dependencies();
-                                Get.find<FoodPreviewController>().foodModel = e;
-                                Get.toNamed("/food-preview");
-                              },
-                              postedTimestamp: e.postedTimestamp,
-                              price: e.price ?? 0.0,
-                              title: e.title ?? "null",
-                            isTop: e.isTop ?? false,
-                            isEatable: e.isEatable ?? true,
+                          return Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                padding: EdgeInsets.only(bottom: 5, left: 5, right: 5),
+                                width: 180,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+
+                                    Visibility(
+                                      visible: e.isTop ?? false,
+                                      child: Positioned(
+                                        top: 0,
+                                        left: 0,
+                                        child: Container(
+                                          //margin: EdgeInsets.all(5),
+                                          padding: EdgeInsets.all(8),
+                                          //width: 50,
+                                          //height: 20,
+                                          decoration: BoxDecoration(
+                                            color: Colors.blue,
+                                            borderRadius: BorderRadius.all(Radius.circular(BORDER_RADIUS_1 * 1.0)),
+                                          ),
+                                          child: Row(
+                                            children: [
+                                              Icon(Icons.flash_on_rounded, color: Colors.white, size: 10.sp),
+                                              SizedBox(width: 5,),
+                                              Text("top".tr(), style: TextStyle(
+                                                  fontSize: 9.sp,
+                                                  color: Colors.white
+                                              ),),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(width: 10,),
+                                    Visibility(
+                                      visible: !(e.isEatable ?? true),
+                                      child: Positioned(
+                                        bottom: 15,
+                                        left: 15,
+                                        child: Container(
+                                          padding: EdgeInsets.all(8),
+                                          //width: 50,
+                                          //height: 20,
+                                          decoration: BoxDecoration(
+                                            color: Colors.red,
+                                            borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
+                                          ),
+                                          child: Row(
+                                            children: [
+                                              Icon(Icons.warning, color: Colors.white, size: 10.sp,),
+                                              SizedBox(width: 5,),
+                                              Text("expired".tr(), style: TextStyle(
+                                                  fontSize: 9.sp,
+                                                  color: Colors.white
+                                              ),),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              OnMapSingleFoodOrder(id: e.id,
+                                  isDonation: e.isDonation ?? false,
+                                  location: e.city ?? "Tashkent",
+                                  onPressed: () {
+                                    FoodPreviewBinding().dependencies();
+                                    Get.find<FoodPreviewController>().foodModel = e;
+                                    Get.toNamed("/food-preview");
+                                  },
+                                  postedTimestamp: e.postedTimestamp,
+                                  price: e.price ?? 0.0,
+                                  title: e.title ?? "null",
+                                isTop: e.isTop ?? false,
+                                isEatable: e.isEatable ?? true,
+                              ),
+                            ],
                           );
                         }),
 

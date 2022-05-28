@@ -1,50 +1,36 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dont_waste/app/data/constants/colors.dart';
-import 'package:dont_waste/app/data/models/food_model.dart';
 import 'package:dont_waste/app/modules/frame/controllers/frame_controller.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:dont_waste/app/widgets/custom_comfirmation_dialog.dart';
 import 'package:dont_waste/app/widgets/custom_loader_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:get/get.dart' hide Trans;
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:get/get.dart' hide Trans;
+import 'package:sizer/sizer.dart';
+import 'package:easy_localization/easy_localization.dart';
 
-class UserProfileController extends GetxController {
-  int initialIndex = 0;
+class SettingsController extends GetxController {
+  //TODO: Implement SettingsController
+
   final fullName = "".obs;
   late FirebaseFirestore firestore;
-  final foods = <Food>[].obs;
-  final isLoading = true.obs;
-
-
 
   @override
-  void onInit()async {
-
-
-    //print(FirebaseAuth.instance.currentUser!.uid);
-    firestore = FirebaseFirestore.instance;
+  void onInit() {
     super.onInit();
   }
 
   @override
-  void onReady() async{
-    isLoading.value = true;
-    try{
-      await setFoodsWithoutLoader();
-    }catch(err){
-
-    }
-    isLoading.value = false;
+  void onReady() {
     super.onReady();
   }
 
   @override
   void onClose() {}
+  Future<void> saveFullName()async {
 
-  Future<void> setFoods()async{
-
+    //FirebaseAuth.instance.currentUser!.displayName = fullName.value;
     showDialog(
       barrierDismissible: false,
       context: Get.context!,
@@ -57,34 +43,52 @@ class UserProfileController extends GetxController {
         // );
       },
     );
-    foods.value = await fetchFoods();
-    Get.back();
-  }
-
-  Future<void> setFoodsWithoutLoader()async{
-
-    foods.value = await fetchFoods();
-
-  }
-
-  Future<List<Food>> fetchFoods() async {
-
-    final List<Food> foods = [];
-    await firestore.collection("posts").where("userId", isEqualTo: FirebaseAuth.instance.currentUser!.uid).get().then((value) {
-      //print(value.size);
-      value.docs.forEach((element) {
-
-        final food = Food.fromJson(element.data());
-        //print("Fetching foods: ${food.isDonation}");
-        print("Fetching foods: ${food.isEatable}");
-         food.id = element.id;
-        //print(food.id);
-        foods.add(food);
-      });
+    await FirebaseAuth.instance.currentUser!.updateDisplayName(fullName.value).then((value) {
+      Get.back();
+      Get.snackbar(
+        "info".tr(),
+        "succ_updated".tr(),
+        colorText: Colors.white,
+        margin: EdgeInsets.fromLTRB(10, 30, 10, 10),
+        progressIndicatorBackgroundColor: Colors.green,
+        barBlur: 0,
+        dismissDirection: DismissDirection.horizontal,
+        duration: Duration(milliseconds: 2500),
+        //instantInit: true,
+        //shouldIconPulse: true,
+        animationDuration: Duration(milliseconds: 300),
+        icon: Icon(
+          Icons.done,
+          color: Colors.green,
+          size: 35,
+        ),
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: yellow1,
+      );
+    }).catchError((onError){
+      Get.back();
+      Get.snackbar(
+        "error".tr(),
+        "err_while_posting".tr(),
+        colorText: Colors.white,
+        margin: EdgeInsets.fromLTRB(10, 30, 10, 10),
+        barBlur: 0,
+        dismissDirection: DismissDirection.horizontal,
+        duration: Duration(milliseconds: 200),
+        //instantInit: true,
+        //shouldIconPulse: true,
+        animationDuration: Duration(milliseconds: 300),
+        icon: Icon(
+          Icons.cancel,
+          color: red2,
+          size: 35,
+        ),
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: yellow1,
+      );
     });
-    return foods;
   }
-  Future<void> deletePost(String postId)async{
+  Future<void> signOut()async{
     showDialog(
       barrierDismissible: false,
       context: Get.context!,
@@ -95,12 +99,12 @@ class UserProfileController extends GetxController {
           },
           onConfirm: () async{
             Get.back();
-            FirebaseFirestore.instance.collection("posts").doc(postId).delete().then((value)async {
-
-              await setFoods();
+            FirebaseAuth.instance.signOut().then((value)async {
+              Get.appUpdate();
+              Get.find<FrameController>().changeTabIndex(0);
               Get.snackbar(
                 "info".tr(),
-                "post_deleted_successfully".tr(),
+                "succesfully_signed_out".tr(),
                 colorText: Colors.white,
                 margin: EdgeInsets.fromLTRB(10, 30, 10, 10),
                 progressIndicatorBackgroundColor: Colors.green,
@@ -123,7 +127,7 @@ class UserProfileController extends GetxController {
             }).catchError((onError){
               Get.snackbar(
                 "error".tr(),
-                "error_while_deleting_post".tr() + onError.toString(),
+                "unexpected_error_happened".tr() + onError.toString(),
                 colorText: Colors.white,
                 margin: EdgeInsets.fromLTRB(10, 30, 10, 10),
 
@@ -145,14 +149,9 @@ class UserProfileController extends GetxController {
             });
 
           },
-          text: "confirm_delete_post".tr(),
+          text: "are_u_sure_to_sign_out".tr(),
         );
       },
     );
   }
-  String? getUid(){
-    return FirebaseAuth.instance.currentUser?.uid;
-  }
-
-
 }

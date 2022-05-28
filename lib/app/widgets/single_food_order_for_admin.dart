@@ -12,6 +12,8 @@ class SingleFoodOrderForAdmin extends StatelessWidget {
   final int views;
   final String location;
   final String photoUrl;
+  final bool isTop;
+  final bool isEatable;
   final void Function() onView;
   final void Function() onEdit;
   final void Function() onDelete;
@@ -28,6 +30,8 @@ class SingleFoodOrderForAdmin extends StatelessWidget {
         required this.views,
         required this.photoUrl,
         required this.onTop,
+        required this.isTop,
+        required this.isEatable,
       });
 
   @override
@@ -84,7 +88,7 @@ class SingleFoodOrderForAdmin extends StatelessWidget {
                       ],
                     
                     //color: Colors.grey.withOpacity(0.8),
-                    color: yellow1,
+                    color: Colors.orange,
 
 
                     borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0)
@@ -94,7 +98,55 @@ class SingleFoodOrderForAdmin extends StatelessWidget {
                     SizedBox(width: 5,),
                     Text("views".tr() + views.toString(), style: TextStyle(color: Colors.white, fontSize: 12.sp),),
                   ],),
-                ), right:  15, top: 15,)
+                ), right:  15, top: 15,),
+                Positioned(child: Visibility(
+                  visible: isTop,
+                  child: Container(
+                    margin: EdgeInsets.all(5),
+                    padding: EdgeInsets.all(8),
+                    //width: 50,
+                    //height: 20,
+                    decoration: BoxDecoration(
+                      color: Colors.blue,
+                      borderRadius: BorderRadius.only(topLeft: Radius.circular(BORDER_RADIUS_1 * 1.0), bottomRight: Radius.circular(BORDER_RADIUS_1 * 1.0)),
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(Icons.flash_on_rounded, color: Colors.white, size: 10.sp),
+                        SizedBox(width: 5,),
+                        Text("top".tr(), style: TextStyle(
+                            fontSize: 9.sp,
+                            color: Colors.white
+                        ),),
+                      ],
+                    ),
+                  ),
+                ), left:  0, top: 0,),
+
+                Positioned(child:
+                Visibility(
+                  visible: !isEatable,
+                  child: Container(
+                    padding: EdgeInsets.all(5),
+                    //width: 50,
+                    //height: 20,
+                    decoration: BoxDecoration(
+                      color: Colors.red,
+                      borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(Icons.warning, color: Colors.white, size: 10.sp,),
+                        SizedBox(width: 5,),
+                        Text("expired".tr(), style: TextStyle(
+                            fontSize: 9.sp,
+                            color: Colors.white
+                        ),),
+                      ],
+                    ),
+                  ),
+
+                ), left: 15, bottom: 15,),
               ],
             ),
           ),
@@ -176,16 +228,24 @@ class SingleFoodOrderForAdmin extends StatelessWidget {
                               child: Container(
                                   width: double.infinity,
                                   alignment: Alignment.center,
-                                  child: Text("view".tr(), overflow: TextOverflow.ellipsis)),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(Icons.remove_red_eye, size: 12.sp, color: yellow1,),
+                                      SizedBox(width: 5,),
+                                      Text("view".tr(), overflow: TextOverflow.ellipsis,style: Theme.of(context).textTheme.titleSmall!.copyWith(color: yellow1, fontWeight: FontWeight.bold)),
+                                    ],
+                                  )),
                               style: ElevatedButton.styleFrom(
                                 //padding: EdgeInsets.all(20),
                                 shape: RoundedRectangleBorder(
                                   borderRadius:
                                   BorderRadius.vertical(top: Radius.circular(BORDER_RADIUS_1 * 1.0 / 2)),
                                 ),
+                                side: BorderSide(width: 2, color: yellow1),
                                 //side: BorderSide(width: 1, color: Colors.green),
-                                primary: Colors.blue[300], // <-- Button color
-                                onPrimary: Colors.white, // <-- Splash color
+                                primary: Colors.white, // <-- Button color
+                                onPrimary: yellow1, // <-- Splash color
                               ),
                             ),
                           ),
@@ -196,16 +256,27 @@ class SingleFoodOrderForAdmin extends StatelessWidget {
                               child: Container(
                                   width: double.infinity,
                                   alignment: Alignment.center,
-                                  child: Text("advertising_".tr(), overflow: TextOverflow.ellipsis)),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(Icons.star_rounded, size: 12.sp,),
+                                      SizedBox(width: 5,),
+                                      Text("advertising_".tr(), overflow: TextOverflow.ellipsis, style: Theme.of(context).textTheme.titleSmall!.copyWith(color: yellow1, fontWeight: FontWeight.bold),),
+                                    ],
+                                  )),
                               style: ElevatedButton.styleFrom(
+
                                 //padding: EdgeInsets.all(20),
                                 shape: RoundedRectangleBorder(
+                                  side: BorderSide(width: 2, color: yellow1),
                                   borderRadius:
                                   BorderRadius.vertical(top: Radius.circular(BORDER_RADIUS_1 * 1.0 / 2)),
+                                  //BorderRadius.vertical(top: Radius.circular(BORDER_RADIUS_1 * 1.0 / 2)),
                                 ),
-                                //side: BorderSide(width: 1, color: Colors.green),
-                                primary: Colors.purple[300], // <-- Button color
-                                onPrimary: Colors.white, // <-- Splash color
+
+                                primary: Colors.white, // <-- Button color
+
+                                onPrimary: yellow1, // <-- Splash color
                               ),
                             ),
                           ),
@@ -220,7 +291,7 @@ class SingleFoodOrderForAdmin extends StatelessWidget {
                               child: Container(
                                   width: double.infinity,
                                   alignment: Alignment.center,
-                                  child: Text("edit".tr(), overflow: TextOverflow.ellipsis, )),
+                                  child: Text("edit".tr(), overflow: TextOverflow.ellipsis,style: Theme.of(context).textTheme.titleSmall!.copyWith(color: yellow1, fontWeight: FontWeight.bold) )),
                               style: ElevatedButton.styleFrom(
                                 //padding: EdgeInsets.all(20),
                                 shape: RoundedRectangleBorder(
@@ -228,8 +299,9 @@ class SingleFoodOrderForAdmin extends StatelessWidget {
                                   BorderRadius.vertical(bottom: Radius.circular(BORDER_RADIUS_1 * 1.0 / 2)),
                                 ),
                                 //side: BorderSide(width: 1, color: Colors.green),
-                                primary: Colors.green[300], // <-- Button color
-                                onPrimary: Colors.white, // <-- Splash color
+                                primary: Colors.white, // <-- Button color
+                                side: BorderSide(width: 2, color: yellow1),
+                                onPrimary: yellow1, // <-- Splash color
                               ),
                             ),
                           ),
@@ -240,7 +312,7 @@ class SingleFoodOrderForAdmin extends StatelessWidget {
                               child: Container(
                                   width: double.infinity,
                                   alignment: Alignment.center,
-                                  child: Text("delete".tr(), overflow: TextOverflow.ellipsis,)),
+                                  child: Text("delete".tr(), overflow: TextOverflow.ellipsis,style: Theme.of(context).textTheme.titleSmall!.copyWith(color: yellow1, fontWeight: FontWeight.bold))),
                               style: ElevatedButton.styleFrom(
                                 //padding: EdgeInsets.all(20),
                                 shape: RoundedRectangleBorder(
@@ -248,8 +320,9 @@ class SingleFoodOrderForAdmin extends StatelessWidget {
                                   BorderRadius.vertical(bottom: Radius.circular(BORDER_RADIUS_1 * 1.0 / 2)),
                                 ),
                                 //side: BorderSide(width: 1, color: Colors.green),
-                                primary: Colors.redAccent[200], // <-- Button color
-                                onPrimary: Colors.white, // <-- Splash color
+                                side: BorderSide(width: 2, color: yellow1),
+                                primary: Colors.white, // <-- Button color
+                                onPrimary: yellow1, // <-- Splash color
                               ),
                             ),
                           ),

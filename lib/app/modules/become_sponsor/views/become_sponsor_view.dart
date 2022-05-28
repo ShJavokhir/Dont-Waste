@@ -220,6 +220,65 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                         ),
                       ],
                     ),
+                    SizedBox(height: 20,),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: Text(
+                        "category".tr(),
+                        //controller.longitude.value.toString(),
+                        style: TextStyle(
+                          color: Colors.black54,
+                          fontWeight: FontWeight.normal,
+                          fontSize: 14.sp,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      // margin:
+                      // EdgeInsets.symmetric(horizontal: DEFAULT_PADDING * 1.0),
+                      height: 60,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: black4,
+                        borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
+                      ),
+                      child: DropdownButton<String>(
+                        isExpanded: true,
+                        underline: Container(),
+                        value: controller.category.value.tr(),
+                        selectedItemBuilder: (_) {
+
+                          return  Constants().categories.map((String choice) {
+                            return Center(
+                              child: Container(
+                                width: double.infinity,
+
+                                child:  Text(choice.tr()),
+
+
+                              ),
+                            );
+                          }).toList();
+                        },
+                        items: Constants().categories.map((String choice) {
+                          return DropdownMenuItem<String>(
+                            value: choice.tr(),
+                            child: Row(
+                              children: [
+                                Text(choice.tr())
+                              ],
+                            ),
+                          );
+                        }).toList(),
+                        onChanged: (opt) {
+                          controller.category.value = opt ?? 'all';
+                        },
+                      ),
+                    ),
                     SizedBox(
                       height: 20,
                     ),

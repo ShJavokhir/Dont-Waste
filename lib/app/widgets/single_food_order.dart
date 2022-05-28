@@ -222,7 +222,7 @@ class SingleFoodOrder extends StatelessWidget {
                       children: [
                         Icon(
                           Icons.calendar_today_rounded,
-                          size: 9.sp,
+                          size: 10.sp,
                           color: Colors.black54,
                         ),
                         SizedBox(

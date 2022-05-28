@@ -18,6 +18,7 @@ class Food {
   bool? isDonation = false;
   bool? isEatable = true;
   bool? isTop = false;
+  String? category;
 
   Food(
       {this.title,
@@ -34,7 +35,8 @@ class Food {
         this.isDonation=false,
         this.isEatable=true,
         this.postedTimestamp,
-        this.isTop
+        this.isTop,
+        this.category
       });
 
   Food.fromJson(Map<String, dynamic> json) {
@@ -53,6 +55,7 @@ class Food {
     isDonation = json['isDonation'];
     isEatable = json['isEatable'];
     isTop = json['isTop'];
+    category = json['category'];
   }
 
   Map<String, dynamic> toJson() {
@@ -72,6 +75,7 @@ class Food {
     data['isDonation'] = isDonation;
     data['isEatable'] = isEatable;
     data['isTop'] = isTop;
+    data['category'] = category;
     return data;
   }
 }

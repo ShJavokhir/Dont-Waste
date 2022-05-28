@@ -42,11 +42,81 @@ void showSuccessSnackbar(String successMsg,{int timeout=2500}){
     //shouldIconPulse: true,
     animationDuration: Duration(milliseconds: 300),
     icon: Icon(
-      Icons.cancel,
-      color: red2,
+      Icons.done,
+      color: Colors.white,
       size: 35,
     ),
     snackPosition: SnackPosition.TOP,
     backgroundColor: yellow1,
+  );
+}
+
+void showInfoSnackbar(String successMsg,{int timeout=2500}){
+  Get.snackbar(
+    "info".tr(),
+    successMsg,
+    boxShadows: <BoxShadow>[
+
+      new BoxShadow(
+        color: Colors.black26,
+        blurRadius: 2.0,
+        offset: new Offset(0.0, 1),
+      ),
+    ],
+    colorText: Colors.black87,
+    margin: EdgeInsets.fromLTRB(10, 30, 10, 10),
+
+    barBlur: 0,
+    dismissDirection: DismissDirection.horizontal,
+    duration: Duration(milliseconds: timeout),
+
+    //instantInit: true,
+    //shouldIconPulse: true,
+    animationDuration: Duration(milliseconds: 300),
+    icon: Icon(
+      Icons.info_rounded,
+      color: Colors.black87,
+      size: 35,
+    ),
+    snackPosition: SnackPosition.TOP,
+    backgroundColor: Colors.white,
+  );
+}
+
+void showNotificationSnackbar(String title, String description,{int timeout=2500}) {
+  Get.snackbar(
+    title,
+    description,
+    onTap: (sn) {
+      Get.toNamed('/notifications');
+    },
+    isDismissible: true,
+
+
+    boxShadows: <BoxShadow>[
+
+      new BoxShadow(
+        color: Colors.black26,
+        blurRadius: 2.0,
+        offset: new Offset(0.0, 1),
+      ),
+    ],
+    colorText: Colors.black87,
+    margin: EdgeInsets.fromLTRB(10, 30, 10, 10),
+
+    barBlur: 0,
+    dismissDirection: DismissDirection.horizontal,
+    duration: Duration(milliseconds: timeout),
+
+    //instantInit: true,
+    //shouldIconPulse: true,
+    animationDuration: Duration(milliseconds: 300),
+    icon: Icon(
+      Icons.info_rounded,
+      color: Colors.black87,
+      size: 35,
+    ),
+    snackPosition: SnackPosition.TOP,
+    backgroundColor: Colors.white,
   );
 }

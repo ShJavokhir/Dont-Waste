@@ -15,7 +15,8 @@ class AuthenticationView extends GetView<AuthenticationController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset:false,
+      //resizeToAvoidBottomPadding: false
+      resizeToAvoidBottomInset:true,
         appBar: AppBar(
           elevation: 0.4,
           backgroundColor: Colors.white,

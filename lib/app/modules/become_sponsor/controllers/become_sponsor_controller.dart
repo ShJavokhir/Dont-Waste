@@ -32,6 +32,7 @@ class BecomeSponsorController extends GetxController {
   final latitude = 41.338622.obs;
   final longitude = 69.334240.obs;
   final isLocationSelected = false.obs;
+  final category = "all".obs;
   Completer<GoogleMapController> controller = Completer();
 
   @override
@@ -151,6 +152,7 @@ class BecomeSponsorController extends GetxController {
     food.quantity = quantity.value;
     food.views = 0;
     food.isDonation = isDonation.value;
+    food.category = category.value;
     food.isEatable = isEatable.value;
     food.ownerName = FirebaseAuth.instance.currentUser?.displayName;
     food.photo_url = imageUrl==""?null: imageUrl;
@@ -219,4 +221,5 @@ class BecomeSponsorController extends GetxController {
       );
     });
   }
+
 }

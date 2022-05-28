@@ -18,6 +18,10 @@ import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/nearby-foods/bindings/nearby_foods_binding.dart';
 import '../modules/nearby-foods/views/nearby_foods_view.dart';
+import '../modules/notifications/bindings/notifications_binding.dart';
+import '../modules/notifications/views/notifications_view.dart';
+import '../modules/settings/bindings/settings_binding.dart';
+import '../modules/settings/views/settings_view.dart';
 import '../modules/update_food_preview/bindings/update_food_preview_binding.dart';
 import '../modules/update_food_preview/views/update_food_preview_view.dart';
 import '../modules/user_profile/bindings/user_profile_binding.dart';
@@ -93,6 +97,16 @@ class AppPages {
       name: _Paths.ABOUT,
       page: () => AboutView(),
       binding: AboutBinding(),
+    ),
+    GetPage(
+      name: _Paths.SETTINGS,
+      page: () => SettingsView(),
+      binding: SettingsBinding(),
+    ),
+    GetPage(
+      name: _Paths.NOTIFICATIONS,
+      page: () => NotificationsView(),
+      binding: NotificationsBinding(),
     ),
   ];
 }

@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dont_waste/app/data/models/food_model.dart';
 import 'package:dont_waste/app/widgets/custom_loader_dialog.dart';
+import 'package:dont_waste/app/widgets/snackbar.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,11 +15,13 @@ class FoodMarketController extends GetxController {
   final count = 0.obs;
   late FirebaseFirestore firestore;
   final foods = <Food>[].obs;
-   final isLoading = false.obs;
+   final isLoading = true.obs;
 
   @override
   void onInit() async {
-    print("hello");
+
+
+
     firestore = FirebaseFirestore.instance;
 
     //print("look " + foods.value[0].price.toString());
@@ -32,8 +36,19 @@ class FoodMarketController extends GetxController {
     );
   }
 
+
+
   @override
-  void onReady() {
+  void onReady() async{
+    isLoading.value = true;
+    try{
+      await setFoodsWithoutLoader();
+    }catch(err){
+      showErrorSnackbar("Error while fetching foods from server");
+    }
+    isLoading.value = false;
+
+
     super.onReady();
   }
 
@@ -58,14 +73,24 @@ class FoodMarketController extends GetxController {
     Get.back();
 
   }
+  Future<void> setFoodsWithoutLoader() async{
+
+    foods.value = await fetchFoods();
+
+  }
   Future<void> switchMarket() async {
     foods.clear();
     isLoading.value = true;
-    if(segmentedControlGroupValue.value == 0){
-      foods.value = await fetchFoods();
-    }else if(segmentedControlGroupValue.value == 1){
-      foods.value = await fetchExpiredFoods();
+    try{
+      if(segmentedControlGroupValue.value == 0){
+        foods.value = await fetchFoods();
+      }else if(segmentedControlGroupValue.value == 1){
+        foods.value = await fetchExpiredFoods();
+      }
+    }catch(err){
+
     }
+
 
     isLoading.value = false;
 
@@ -100,4 +125,35 @@ class FoodMarketController extends GetxController {
      });
      return foods;
    }
+
+   Future<void> fetchByCategory(String catName) async {
+     foods.clear();
+      isLoading.value = true;
+      try{
+        foods.value = await fetchCategory(catName);
+      }catch(err){
+
+      }
+      isLoading.value = false;
+   }
+
+  Future<List<Food>> fetchCategory(String catName) async {
+    if(catName == 'all') {
+      return await fetchFoods();
+    }else{
+      final List<Food> foods = [];
+      await firestore.collection("posts").where('category', isEqualTo: catName).orderBy('postedTimestamp', descending: true).get().then((value) {
+        //print(value.size);
+        value.docs.forEach((element) {
+          final food = Food.fromJson(element.data());
+          food.id = element.id;
+          //print(food.id);
+          foods.add(food);
+        });
+      });
+
+      return foods;
+    }
+
+  }
 }

@@ -1,8 +1,10 @@
 import 'dart:ui';
+import 'package:dont_waste/app/core/utils/category_utility.dart';
 import 'package:dont_waste/app/data/constants/colors.dart';
 import 'package:dont_waste/app/modules/food_market/bindings/food_market_binding.dart';
 import 'package:dont_waste/app/modules/user_profile/bindings/user_profile_binding.dart';
 import 'package:dont_waste/app/modules/user_profile/controllers/user_profile_controller.dart';
+import 'package:dont_waste/app/widgets/categories.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -18,15 +20,13 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sizer/sizer.dart';
 import 'package:get/get.dart' hide Trans;
+import 'package:easy_localization/easy_localization.dart';
 
 import '../controllers/food_market_controller.dart';
 
 class FoodMarketView extends GetView<FoodMarketController> {
 
-  final Map<int, Widget> myTabs = const <int, Widget>{
-    0: Padding(padding: EdgeInsets.all(10), child: Text("Yaroqli")),
-    1: Padding(padding: EdgeInsets.all(10), child: Text("Yaroqsiz"))
-  };
+  // final Map<int, Widget> myTabs =  ;
 
   @override
   Widget build(BuildContext context) {
@@ -148,7 +148,6 @@ class FoodMarketView extends GetView<FoodMarketController> {
           Expanded(
             child: Container(
               width: double.infinity,
-              padding: EdgeInsets.fromLTRB(DEFAULT_PADDING * 1.0,DEFAULT_PADDING * 1.0,DEFAULT_PADDING * 1.0,0),
               child: Obx(
                 () => ListView(
                   controller: controller.scrollController,
@@ -158,60 +157,63 @@ class FoodMarketView extends GetView<FoodMarketController> {
                     // SizedBox(
                     //   height: 20,
                     // ),
-                    Material(
-                      color: Colors.transparent,
-                      child: InkWell(
-                        onTap: (){
-                          //open nearby foods page
-                          Get.toNamed("/nearby-foods");
-                        },
-                        splashColor: Colors.yellow,
-                        highlightColor: Colors.transparent,
-                        child: Container(
-                          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                          // margin:
-                          // EdgeInsets.symmetric(horizontal: DEFAULT_PADDING * 1.0),
-                          height: 50,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: green2,
-                            borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 0.4),
-                          ),
-                          child: Row(
-                            //mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Icon(Icons.image_search_rounded),
-                              SizedBox(width: 10,),
-                              FittedBox(
-                                child: Text(
-                                  "see_nearby_foods".tr(),
-                                  style: TextStyle(fontSize: 12.sp),
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(DEFAULT_PADDING * 1.0,DEFAULT_PADDING * 1.0,DEFAULT_PADDING * 1.0,0),
+                      child: Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                          onTap: (){
+                            //open nearby foods page
+                            Get.toNamed("/nearby-foods");
+                          },
+                          splashColor: Colors.yellow,
+                          highlightColor: Colors.transparent,
+                          child: Container(
+                            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                            // margin:
+                            // EdgeInsets.symmetric(horizontal: DEFAULT_PADDING * 1.0),
+                            height: 50,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: green2,
+                              borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 0.4),
+                            ),
+                            child: Row(
+                              //mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Icon(Icons.image_search_rounded),
+                                SizedBox(width: 10,),
+                                FittedBox(
+                                  child: Text(
+                                    "see_nearby_foods".tr(),
+                                    style: TextStyle(fontSize: 12.sp),
+                                  ),
                                 ),
-                              ),
-                              Spacer(),
-                              Icon(Icons.keyboard_arrow_right_rounded)
-                              // Expanded(
-                              //   flex: 5,
-                              //   child: Container(
-                              //     padding: EdgeInsets.symmetric(horizontal: 10),
-                              //     alignment: Alignment.center,
-                              //     height: double.infinity,
-                              //     width: 150,
-                              //     decoration: BoxDecoration(
-                              //       color: Colors.white70,
-                              //       borderRadius:
-                              //       BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
-                              //     ),
-                              //     child: FittedBox(
-                              //       child: Text(
-                              //         "Test",
-                              //         textAlign: TextAlign.center,
-                              //
-                              //       ),
-                              //     ),
-                              //   ),
-                              // )
-                            ],
+                                Spacer(),
+                                Icon(Icons.keyboard_arrow_right_rounded)
+                                // Expanded(
+                                //   flex: 5,
+                                //   child: Container(
+                                //     padding: EdgeInsets.symmetric(horizontal: 10),
+                                //     alignment: Alignment.center,
+                                //     height: double.infinity,
+                                //     width: 150,
+                                //     decoration: BoxDecoration(
+                                //       color: Colors.white70,
+                                //       borderRadius:
+                                //       BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
+                                //     ),
+                                //     child: FittedBox(
+                                //       child: Text(
+                                //         "Test",
+                                //         textAlign: TextAlign.center,
+                                //
+                                //       ),
+                                //     ),
+                                //   ),
+                                // )
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -219,53 +221,99 @@ class FoodMarketView extends GetView<FoodMarketController> {
                     SizedBox(
                       height: 10,
                     ),
-                    CupertinoSlidingSegmentedControl(
-                      backgroundColor: black4,
-                      padding: EdgeInsets.all(5),
-                      groupValue: controller.segmentedControlGroupValue.value,
-                      children: myTabs,
-                      onValueChanged: (i) {
-                        controller.segmentedControlGroupValue.value =  int.parse(i.toString()) ;
-                        controller.switchMarket();
-                        // setState(() {
-                        //   segmentedControlGroupValue = i;
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: DEFAULT_PADDING * 1.0),
+                      child: CupertinoSlidingSegmentedControl(
+                          backgroundColor: black4,
+                          padding: EdgeInsets.all(5),
+                          thumbColor: Colors.orangeAccent,
+                          groupValue: controller.segmentedControlGroupValue.value,
+                          children: <int, Widget>{
+                            0: Padding(padding: EdgeInsets.all(10), child: Text("eatable".tr(), style: TextStyle(
+                              color: controller.segmentedControlGroupValue.value == 0?Colors.white:Colors.black87
+                            ),)),
+                            1: Padding(padding: EdgeInsets.all(10), child: Text("expired".tr(), style: TextStyle(
+                      color: controller.segmentedControlGroupValue.value == 1?Colors.white:Colors.black87
+                      ),))
+                          },
+                          onValueChanged: (i) {
+                            controller.segmentedControlGroupValue.value =  int.parse(i.toString()) ;
+                            controller.switchMarket();
+                            // setState(() {
+                            //   segmentedControlGroupValue = i;
 
-                      }),
+                          }),
+                    ),
+                    Visibility(
+                      visible: controller.segmentedControlGroupValue.value == 0,
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Container(
+                            //height: 50,
+                              child: CustomCategories(onCategorySelected: (categoryId){
+                                controller.fetchByCategory(CategoryUtility.getCategoryNameById(categoryId));
+                              },)
+                          ),
+                        ],
+                      ),
+                    ),
+
+
                     SizedBox(
                       height: 20,
                     ),
-                    Visibility(visible: controller.isLoading.value , child: Container(
-                      //padding: EdgeInsets.all(50),
-                      //width: 85.w,
-                      child: Container(
-                          padding: EdgeInsets.all(15),
-                          //width: double.infinity,
-                          height: 200,
-                          decoration: BoxDecoration(
-                            color: black4,
-                            borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
-                          ),
-                          child: Center(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                CircularProgressIndicator(
-                                  color: yellow1,
-                                ),
-                                SizedBox(
-                                  height: 25,
-                                ),
-                                Text(
-                                  'loading'.tr(),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ],
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: DEFAULT_PADDING * 1.0),
+                      child: Visibility(visible: controller.isLoading.value , child: Container(
+                        //padding: EdgeInsets.all(50),
+                        //width: 85.w,
+                        child: Container(
+                            padding: EdgeInsets.all(15),
+                            //width: double.infinity,
+                            height: 200,
+                            decoration: BoxDecoration(
+                              color: black4,
+                              borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
                             ),
-                          )),
-                    )),
+                            child: Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  CircularProgressIndicator(
+                                    color: yellow1,
+                                  ),
+                                  SizedBox(
+                                    height: 25,
+                                  ),
+                                  Text(
+                                    'loading'.tr(),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ],
+                              ),
+                            )),
+                      )),
+                    ),
+                    Visibility(visible: !controller.isLoading.value && controller.foods.value.length == 0,
+                    child: Container(
+                      alignment: Alignment.center,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          SizedBox(height: 80,),
+                          Image.asset('assets/images/sad.gif', height: 150, width: 150,),
+                          SizedBox(height: 30,),
+                          Text("no_foods_found".tr(), textAlign: TextAlign.center,)
+                        ],
+                      ),
+                    )
+                      ),
                     ...controller.foods.value.map((e) {
                       return Padding(
-                        padding: EdgeInsets.only(bottom: 15),
+                        padding: EdgeInsets.only(bottom: 15, right: DEFAULT_PADDING * 1.0, left: DEFAULT_PADDING * 1.0),
                         child: SingleFoodOrder(
                           id: e.id,
                           isDonation: e.isDonation ?? false,

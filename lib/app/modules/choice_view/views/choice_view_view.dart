@@ -1,15 +1,6 @@
-import 'package:dont_waste/app/modules/become_sponsor/bindings/become_sponsor_binding.dart';
-import 'package:dont_waste/app/modules/become_sponsor/views/become_sponsor_view.dart';
-import 'package:dont_waste/app/modules/food_market/bindings/food_market_binding.dart';
-import 'package:dont_waste/app/modules/food_market/controllers/food_market_controller.dart';
-import 'package:dont_waste/app/modules/food_market/views/food_market_view.dart';
 import 'package:dont_waste/app/modules/frame/controllers/frame_controller.dart';
-import 'package:dont_waste/app/modules/user_profile/bindings/user_profile_binding.dart';
-import 'package:dont_waste/app/modules/user_profile/controllers/user_profile_controller.dart';
 import 'package:dont_waste/app/widgets/choice_card.dart';
-import 'package:dont_waste/app/widgets/custom_loader_dialog.dart';
 import 'package:dont_waste/app/widgets/divider.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:get/get.dart' hide Trans;

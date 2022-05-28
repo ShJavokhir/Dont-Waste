@@ -14,6 +14,8 @@ abstract class Routes {
   static const NEARBY_FOODS = _Paths.NEARBY_FOODS;
   static const FRAME = _Paths.FRAME;
   static const ABOUT = _Paths.ABOUT;
+  static const SETTINGS = _Paths.SETTINGS;
+  static const NOTIFICATIONS = _Paths.NOTIFICATIONS;
 }
 
 abstract class _Paths {
@@ -29,4 +31,6 @@ abstract class _Paths {
   static const NEARBY_FOODS = '/nearby-foods';
   static const FRAME = '/frame';
   static const ABOUT = '/about';
+  static const SETTINGS = '/settings';
+  static const NOTIFICATIONS = '/notifications';
 }

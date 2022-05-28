@@ -26,6 +26,7 @@ dependencies:
   geoflutterfire: ^3.0.3
   geolocator: ^8.2.0
   shared_preferences: ^2.0.13
+  firebase_messaging: ^11.4.1
 
 dev_dependencies: 
   flutter_lints: ^1.0.0
@@ -54,6 +55,9 @@ flutter:
       - assets/images/icon.png
       - assets/images/payme.png
       - assets/images/click.png
+      - assets/images/sad.gif
+      - assets/images/avatar.png
+      - assets/images/bell.gif
   uses-material-design: true
 flutter_icons:
   android: "launcher_icon"

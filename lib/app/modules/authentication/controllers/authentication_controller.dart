@@ -1,11 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dont_waste/app/data/constants/colors.dart';
 import 'package:dont_waste/app/data/constants/constants.dart';
+import 'package:dont_waste/app/data/models/user_model.dart';
 import 'package:dont_waste/app/modules/frame/bindings/frame_binding.dart';
 import 'package:dont_waste/app/modules/frame/controllers/frame_controller.dart';
 import 'package:dont_waste/app/widgets/custom_loader_dialog.dart';
 import 'package:dont_waste/app/widgets/snackbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide Trans;
 import 'package:easy_localization/easy_localization.dart';
@@ -100,7 +102,10 @@ class AuthenticationController extends GetxController {
         if((auth.currentUser!.metadata.creationTime!.millisecondsSinceEpoch - DateTime.now().millisecondsSinceEpoch).abs() < 300000){
           FirebaseFirestore.instance.collection("app").doc("statistics").update({"totalUsers": FieldValue.increment(1)});
         }
-        Get.offAllNamed('/frame');
+        if(await createUserDocument()){
+          Get.offAllNamed('/frame');
+        };
+
 
       },
       verificationFailed: (FirebaseAuthException e) {
@@ -182,7 +187,10 @@ class AuthenticationController extends GetxController {
 
                             if (auth.currentUser != null) {
                               // signed in
-                              Get.offAllNamed('/frame');
+                              if(await createUserDocument()){
+                                Get.offAllNamed('/frame');
+                              }
+
 
 
                               print("Signed in");
@@ -242,5 +250,48 @@ class AuthenticationController extends GetxController {
         //Get.snackbar("info".tr(), "otp_timed_out".tr());
       },
     );
+  }
+
+  Future<bool> createUserDocument()async{
+    final authUser = FirebaseAuth.instance.currentUser;
+    final firestore = FirebaseFirestore.instance;
+
+    if(authUser == null){
+      showErrorSnackbar("User is not available");
+      return false;
+    }
+
+    if(await firestore.collection("users").doc(authUser.uid).get().then((value) {
+     if(value.data() != null) return true;
+     return false;
+    }).catchError((onError){
+      showErrorSnackbar("Could not fetch data from database, please try again later on");
+      return true;
+    })){
+      //showErrorSnackbar("User is not available");
+      return true;
+    };
+
+    final user = UserModel();
+    user.phoneNumber = authUser.phoneNumber;
+    user.createdTimestamp = DateTime.now().millisecondsSinceEpoch;
+    user.rating = 5.0;
+    user.bonusCoins = 0;
+    user.balance = 0;
+    user.photoUrl = "";
+    user.fullName = "User";
+    user.fcmToken = await FirebaseMessaging.instance.getToken();
+
+    if(user.fcmToken == null){
+      showErrorSnackbar("Could not get FCM token, please try again later");
+      return false;
+    }
+
+    return await firestore.collection("users").doc(authUser.uid).set(user.toJson()).then((value) {
+      return true;
+    }).catchError((onError) {
+      showErrorSnackbar(onError.toString());
+      return false;
+    });
   }
 }
