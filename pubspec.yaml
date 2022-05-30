@@ -58,6 +58,8 @@ flutter:
       - assets/images/sad.gif
       - assets/images/avatar.png
       - assets/images/bell.gif
+      - assets/images/discount.png
+      - assets/images/coins.png
   uses-material-design: true
 flutter_icons:
   android: "launcher_icon"

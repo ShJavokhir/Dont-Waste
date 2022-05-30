@@ -221,14 +221,19 @@ class SettingsView extends GetView<SettingsController> {
                             Get.toNamed('/edit-profile');
                           }),
                           Divider(height: 0,),
-                          SettingsOptionTile(context,"application".tr(), Icons.info_rounded, (){
-                            Get.toNamed('/about');
+                          SettingsOptionTile(context,"exchange_coins".tr(), Icons.currency_exchange_rounded,(){
+                            Get.toNamed('/bonus-coins');
                           }),
-
                           Divider(height: 0,),
                           SettingsOptionTile(context,"statistics".tr(), Icons.bar_chart_rounded, (){
                             Get.toNamed('/statistics');
                           }),
+                          Divider(height: 0,),
+                          SettingsOptionTile(context,"application".tr(), Icons.info_rounded, (){
+                            Get.toNamed('/about');
+                          }),
+
+
                           Divider(height: 0,),
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: DEFAULT_PADDING * 1.0, vertical: DEFAULT_PADDING * 1.0 * 1.3),
@@ -236,7 +241,7 @@ class SettingsView extends GetView<SettingsController> {
                               children: [
                                 Row(
                                   children: [
-                                    Icon(Icons.notifications_rounded, size: 15.sp ),
+                                    Icon(Icons.notifications_rounded, size: 15.sp, color: Colors.black87 ),
                                     SizedBox(width: 10,),
                                     Text("notifications".tr(), style: Theme.of(context).textTheme.subtitle1,),
                                   ],
@@ -257,17 +262,17 @@ class SettingsView extends GetView<SettingsController> {
                           Divider(height: 0,),
                           Visibility(
                             visible: FirebaseAuth.instance.currentUser != null,
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(horizontal: DEFAULT_PADDING * 1.0, vertical: DEFAULT_PADDING * 1.0 * 1.3),
-                              child: Container(
-                                width: double.infinity,
-                                child: GestureDetector(
-                                  onTap: (){
-                                    Clipboard.setData(ClipboardData(text: FirebaseAuth.instance.currentUser != null
-                                        ? FirebaseAuth.instance.currentUser!.uid
-                                        : "null"));
-                                    showInfoSnackbar("user_id_copied".tr());
-                                  },
+                            child: GestureDetector(
+                              onTap: (){
+                                Clipboard.setData(ClipboardData(text: FirebaseAuth.instance.currentUser != null
+                                    ? FirebaseAuth.instance.currentUser!.uid
+                                    : "null"));
+                                showInfoSnackbar("user_id_copied".tr());
+                              },
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(horizontal: DEFAULT_PADDING * 1.0, vertical: DEFAULT_PADDING * 1.0 * 1.3),
+                                child: Container(
+                                  width: double.infinity,
                                   child: Row(
                                     children: [
                                       Text(
@@ -340,7 +345,16 @@ class SettingsView extends GetView<SettingsController> {
                           }),
                           Divider(height: 0,),
                           SettingsOptionTile(context, "our_contacts".tr(), Icons.quick_contacts_dialer_rounded, (){
-                            Get.toNamed('contacts');
+                            Get.toNamed('/contacts');
+                          }),
+                          Divider(height: 0,),
+                          SettingsOptionTile(context, "api_documentation".tr(), Icons.code_rounded, ()async{
+                            if (await canLaunch("https://documenter.getpostman.com/view/14751979/Uz5CNe8p")) {
+                            launch("https://documenter.getpostman.com/view/14751979/Uz5CNe8p");
+
+                            } else {
+                            showErrorSnackbar("Could not open website");
+                            }
                           }),
                           Divider(height: 0,),
                           SettingsOptionTile(context, "terms_of_use".tr(), Icons.warning_rounded ,()async{
@@ -446,13 +460,13 @@ class SettingsView extends GetView<SettingsController> {
                                 children: [
                                   Row(
                                     children: [
-                                      Icon(titleIcon, size: 15.sp ),
+                                      Icon(titleIcon, size: 15.sp, color: Colors.black54),
                                       SizedBox(width: 10,),
                                       Text(title, style: Theme.of(context).textTheme.subtitle1,),
                                     ],
                                   ),
                                   Spacer(),
-                                  Icon(Icons.arrow_forward_ios_rounded, size: 15.sp)
+                                  Icon(Icons.arrow_forward_ios_rounded, size: 15.sp, color: Colors.black87,)
                                 ],
 
                               ),

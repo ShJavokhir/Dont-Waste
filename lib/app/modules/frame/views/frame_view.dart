@@ -90,7 +90,7 @@ class FrameView extends GetView<FrameController> {
                             Get.toNamed("/notifications");
                           },
                           icon: Icon(Icons.notifications_rounded),
-                          iconSize: 30,
+                          iconSize: 20.sp,
                         ))
               ],
             ),
@@ -190,10 +190,10 @@ Drawer buildDrawer(BuildContext context) {
     backgroundColor: Colors.white,
     child: Container(
       height: MediaQuery.of(context).size.height,
-      child: Column(
-        // physics: AlwaysScrollableScrollPhysics(
-        //     parent: BouncingScrollPhysics()),
-        // padding: EdgeInsets.zero,
+      child: ListView(
+        physics: AlwaysScrollableScrollPhysics(
+            parent: BouncingScrollPhysics()),
+        padding: EdgeInsets.zero,
         children: <Widget>[
           DrawerHeader(
             child: Column(
@@ -202,8 +202,8 @@ Drawer buildDrawer(BuildContext context) {
               children: <Widget>[
                 Image.asset(
                   'assets/images/icon.png',
-                  width: 80,
-                  height: 80,
+                  width: 50,
+                  height: 50,
                 ),
                 SizedBox(
                   height: 15,
@@ -256,15 +256,7 @@ Drawer buildDrawer(BuildContext context) {
               Get.find<FrameController>().changeTabIndex(2);
             },
           ),
-          ListTile(
-            leading: Icon(Icons.question_mark_rounded),
-            title: Text('info'.tr(),
-                style: Theme.of(context).textTheme.titleMedium),
-            onTap: () {
-              Navigator.pop(context);
-              Get.find<FrameController>().changeTabIndex(3);
-            },
-          ),
+
           ListTile(
             leading: Icon(Icons.settings),
             title: Text('settings'.tr(),
@@ -272,12 +264,155 @@ Drawer buildDrawer(BuildContext context) {
             onTap: () {
               Navigator.pop(context);
               // Get.toNamed("/settings");
-              Get.find<FrameController>().changeTabIndex(4);
+              Get.find<FrameController>().changeTabIndex(3);
               // Get.find<FrameController>().changeTabIndex(3, initialIndex: 1);
             },
           ),
           //Spacer(),
           Divider(),
+
+          ListTile(
+            leading: Icon(Icons.language_rounded),
+            title: Text('change_language'.tr(),
+                style: Theme.of(context).textTheme.titleMedium),
+            onTap: () {
+              Navigator.pop(context);
+              showDialog(
+                barrierDismissible: true,
+                context: Get.context!,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    alignment: Alignment.center,
+                    content: ListTile(
+                      leading: Text("language".tr(),
+                          style: Theme.of(context).textTheme.titleMedium),
+                      title: DropdownButton<String>(
+                        underline: Container(),
+                        value: context.locale.countryCode,
+                        selectedItemBuilder: (_) {
+                          return <String>['EN', 'RU', 'UZ']
+                              .map((String choice) {
+                            return Center(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Image.asset(
+                                    'assets/images/$choice.png',
+                                    height: 30,
+                                    width: 30,
+                                  ),
+                                  SizedBox(
+                                    width: 15,
+                                  ),
+                                  Text(choice),
+                                  SizedBox(
+                                    width: 15,
+                                  ),
+                                ],
+                              ),
+                            );
+                          }).toList();
+                        },
+                        items:
+                        <String>['EN', 'RU', 'UZ'].map((String choice) {
+                          return DropdownMenuItem<String>(
+                            value: choice,
+                            child: Row(
+                              children: [
+                                Image.asset(
+                                  'assets/images/$choice.png',
+                                  height: 30,
+                                  width: 30,
+                                ),
+                                SizedBox(
+                                  width: 15,
+                                ),
+                                Text(choice)
+                              ],
+                            ),
+                          );
+                        }).toList(),
+                        onChanged: (opt) {
+                          Get.back();
+                          if (opt == "UZ") {
+                            final locale = Locale("uz", "UZ");
+                            context.setLocale(locale);
+                            EasyLocalization.of(context)!.setLocale(locale);
+                            //EasyLocalization.of(context)!.currentLocale = locale;
+                            Get.updateLocale(locale);
+                          } else if (opt == "RU") {
+                            final locale = (Locale("ru", "RU"));
+                            context.setLocale(locale);
+                            Get.updateLocale(locale);
+                            EasyLocalization.of(context)!.setLocale(locale);
+                          } else if (opt == "EN") {
+                            final locale = (Locale("en", "EN"));
+                            context.setLocale(locale);
+                            Get.updateLocale(locale);
+                            EasyLocalization.of(context)!.setLocale(locale);
+                          }
+
+                          //Get.offAndToNamed('/choice-view');
+                          Get.forceAppUpdate();
+                          Get.appUpdate();
+                        },
+                      ),
+                    ),
+                  );
+
+                },
+              );
+
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.currency_exchange_rounded),
+            title: Text('exchange_coins'.tr(),
+                style: Theme.of(context).textTheme.titleMedium),
+            onTap: () {
+              Navigator.pop(context);
+              Get.toNamed('/bonus-coins');
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.bar_chart_rounded),
+            title: Text('statistics'.tr(),
+                style: Theme.of(context).textTheme.titleMedium),
+            onTap: () {
+              Navigator.pop(context);
+              Get.toNamed('/statistics');
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.info_rounded),
+            title: Text('application'.tr(),
+                style: Theme.of(context).textTheme.titleMedium),
+            onTap: () {
+              Navigator.pop(context);
+
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.question_mark_rounded),
+            title: Text('faq'.tr(),
+                style: Theme.of(context).textTheme.titleMedium),
+            onTap: () {
+              Navigator.pop(context);
+              Get.toNamed('/faq');
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.quick_contacts_dialer_rounded),
+            title: Text('our_contacts'.tr(),
+                style: Theme.of(context).textTheme.titleMedium),
+            onTap: () {
+              Navigator.pop(context);
+              Get.toNamed('/contacts');
+            },
+          ),
 
 
           // PopupMenuButton<String>(
@@ -317,7 +452,7 @@ Drawer buildDrawer(BuildContext context) {
           //       }).toList();
           //     },
           //   ),
-          Spacer(),
+          // Spacer(),
           Divider(),
 
           Visibility(

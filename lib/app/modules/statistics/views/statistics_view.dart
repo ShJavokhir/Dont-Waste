@@ -102,7 +102,98 @@ class StatisticsView extends GetView<StatisticsController> {
                     ),
                   ),
                   SizedBox(height: 30,),
-
+                  Align(
+                    //alignment: Alignment.center,
+                    child: Stack(
+                      overflow: Overflow.visible,
+                      children: [
+                        Container(
+                            padding: EdgeInsets.only(right: 20),
+                            height: 100,
+                            width: 300,
+                            decoration: BoxDecoration(
+                              color: black4,
+                              borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text("total_saved_foods".tr(), style: TextStyle(
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.normal
+                                ),),
+                                SizedBox(height: 10,),
+                                Text(controller.savedFoods.value.toString(), style: TextStyle(
+                                    fontSize: 20.sp,
+                                    fontWeight: FontWeight.bold
+                                ),)
+                              ],
+                            )
+                        ),
+                        Positioned(child: Image.asset('assets/images/operator.png', width: 200), top: -5, bottom: -5, left: -60,),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 30,),
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Container(
+                            padding: EdgeInsets.all(20),
+                            height: 130,
+                            decoration: BoxDecoration(
+                              color: black4,
+                              borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text("total_donations".tr(), maxLines: 2, style: TextStyle(
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.normal
+                                ),),
+                                SizedBox(height: 10,),
+                                Text(controller.totalDonations.value.toString(), style: TextStyle(
+                                    fontSize: 20.sp,
+                                    fontWeight: FontWeight.bold
+                                ),)
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 10,),
+                        Expanded(
+                          child: Container(
+                            padding: EdgeInsets.all(20),
+                            height: 130,
+                            decoration: BoxDecoration(
+                              color: black4,
+                              borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text("total_countries".tr(), maxLines: 2, style: TextStyle(
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.normal
+                                ),),
+                                SizedBox(height: 10,),
+                                Text(controller.totalCountries.value.toString(), style: TextStyle(
+                                    fontSize: 20.sp,
+                                    fontWeight: FontWeight.bold
+                                ),)
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
 
 
 

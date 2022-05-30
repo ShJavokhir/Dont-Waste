@@ -11,40 +11,40 @@ import '../controllers/faq_controller.dart';
 class FaqView extends GetView<FaqController> {
   var faqs = [
     {
-      "title": "What kind of app is this?",
-      "description": "This application helps you to not waste your additional foods. Instead you can sell them for money or just donate to hungry people"
+      "title": "faqt1",
+      "description": "faqd1"
     },
     {
-      "title": "Is this app free?",
-      "description": "Yes this app free to sell/donate your foods. You can post your foods without any fees. In case you want to sell/donate your foods faster, you can check out our paid plans"
+      "title": "faqt2",
+      "description": "faqd2"
     },
     {
-      "title": "How can I see foods near to me?",
-      "description": "On the home page you can see 'See nearby foods' button. Just click it and app shows you all foods near you on the map interactively"
+      "title": "faqt3",
+      "description": "faqd3"
     },
     {
-      "title": "How to post food",
-      "description": "Simply click 'Post food' icon on the bottom, fill required fields and you are ready to go"
+      "title": "faqt4",
+      "description": "faqd4"
     },
     {
-      "title": "Can I sell/donate my foods faster?",
-      "description": "We recommend you our paid plans, by using our paid plans, more users would reach your foods and it helps to sell/donate them faster"
+      "title": "faqt5",
+      "description": "faqd5"
     },
     {
-      "title": "Can I edit/delete my post?",
-      "description": "Yes of course, there is profile tab on the bottom bar, just click it and you can see your foods list with the management features"
+      "title": "faqt6",
+      "description": "faqd6"
     },
     {
-      "title": "How to deposit money to my account?",
-      "description": "Just go on profile page and click deposit or plus icon. Currently there is uzcard option. By the way current payments are being verified manually, in future it can be managed automatically"
+      "title": "faqt7",
+      "description": "faqd7"
     },
     {
-      "title": "Can I sell/donate expired foods?",
-      "description": "Yes of course, expired foods can be useful for animals and even for gardening. Just switch off 'Is eatable?' option when you are posting"
+      "title": "faqt8",
+      "description": "faqd8"
     },
     {
-      "title": "What are benefits of paid plans?",
-      "description": "With the help of paid plans, more viewers can reach your foods, so it may help you to sell/donate your foods faster"
+      "title": "faqt9",
+      "description": "faqd9"
     },
   ];
 
@@ -69,7 +69,7 @@ class FaqView extends GetView<FaqController> {
                       padding: EdgeInsets.only(bottom: 20, right: DEFAULT_PADDING * 1.0, left: DEFAULT_PADDING * 1.0),
                       child: Card(
                         child: ExpansionTile(
-                          title: Text(e["title"]!,
+                          title: Text(e["title"]!.tr(),
                             textAlign: TextAlign.left,
                             overflow: TextOverflow.ellipsis,
                             style: Theme.of(context).textTheme.titleMedium,
@@ -82,7 +82,7 @@ class FaqView extends GetView<FaqController> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Divider(),
-                                    Text(e["description"]!,
+                                    Text(e["description"]!.tr(),
                                       textAlign: TextAlign.left,
                                       overflow: TextOverflow.ellipsis,
                                       style: Theme.of(context).textTheme.titleSmall,

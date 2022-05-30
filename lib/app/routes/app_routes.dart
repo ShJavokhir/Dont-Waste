@@ -20,6 +20,7 @@ abstract class Routes {
   static const EDIT_PROFILE = _Paths.EDIT_PROFILE;
   static const STATISTICS = _Paths.STATISTICS;
   static const CONTACTS = _Paths.CONTACTS;
+  static const BONUS_COINS = _Paths.BONUS_COINS;
 }
 
 abstract class _Paths {
@@ -41,4 +42,5 @@ abstract class _Paths {
   static const EDIT_PROFILE = '/edit-profile';
   static const STATISTICS = '/statistics';
   static const CONTACTS = '/contacts';
+  static const BONUS_COINS = '/bonus-coins';
 }

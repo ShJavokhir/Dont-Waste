@@ -6,6 +6,8 @@ import '../modules/authentication/bindings/authentication_binding.dart';
 import '../modules/authentication/views/authentication_view.dart';
 import '../modules/become_sponsor/bindings/become_sponsor_binding.dart';
 import '../modules/become_sponsor/views/become_sponsor_view.dart';
+import '../modules/bonus_coins/bindings/bonus_coins_binding.dart';
+import '../modules/bonus_coins/views/bonus_coins_view.dart';
 import '../modules/choice_view/bindings/choice_view_binding.dart';
 import '../modules/choice_view/views/choice_view_view.dart';
 import '../modules/contacts/bindings/contacts_binding.dart';
@@ -135,6 +137,11 @@ class AppPages {
       name: _Paths.CONTACTS,
       page: () => ContactsView(),
       binding: ContactsBinding(),
+    ),
+    GetPage(
+      name: _Paths.BONUS_COINS,
+      page: () => BonusCoinsView(),
+      binding: BonusCoinsBinding(),
     ),
   ];
 }

@@ -91,9 +91,7 @@
   "advertising_": "Реклама",
   "gps_error": "Попробуйте включить GPS и разрешить определение местоположения для этого приложения в настройках.",
   "advertise": "Эта функция появится в ближайшее время, будьте готовы :).\\n С помощью этой функции вы можете рекламировать свои продукты, чтобы многие люди могли их узнать.",
-
   "payment_method": "Метод оплаты",
-  //"payment_info": "Please make a payment to the following card with your user id on comment: \"8600110077071202\"\n\nYou can take your user id from profile settings page.\n\nFor now all payments are verified manually, so it takes some time. We apologize for inconveniences",
   "ad_fee": "Плата за рекламу: 5000 сум.",
   "is_eatable": "Mожно есть ?",
   "no_foods_found": "Продукты не найдены",
@@ -121,11 +119,13 @@
   "features": "Функции",
   "read_more": "Читать далее",
   "notifications": "Уведомления",
-  //"add_suggestion": "Your food with the title of \"{}\" is going to be expired in {} days. In order to not waste it, you can sell it in discount faster with our paid plans",
   "suggestion": "Предложение",
   "no_enough_money_in_balance": "Недостаточно средств на балансе",
   "select_post_to_advertise": "Пожалуйста, выберите сообщение, которое вы хотите рекламировать",
-  //"advertise_info": "More viewers would reach your post and your post will be shown users more than one time if you advertise your post.\\n\\nAre you sure to advertise your post ?\\n\\nService fee: 5000 uzs",
   "no_foods_near_you": "Рядом с тобой нет еды",
-  "food": "Еда"
+  "food": "Еда",
+  //"payment_info": "Please make a payment to the following card with your user id on comment: \"8600110077071202\"\n\nYou can take your user id from profile settings page.\n\nFor now all payments are verified manually, so it takes some time. We apologize for inconveniences",
+  //"add_suggestion": "Your food with the title of \"{}\" is going to be expired in {} days. In order to not waste it, you can sell it in discount faster with our paid plans",
+  //"advertise_info": "More viewers would reach your post and your post will be shown users more than one time if you advertise your post.\\n\\nAre you sure to advertise your post ?\\n\\nService fee: 5000 uzs",
+
 }
