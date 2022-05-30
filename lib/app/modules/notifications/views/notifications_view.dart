@@ -73,9 +73,9 @@ class NotificationsView extends GetView<NotificationsController> {
                     ),
                   )
               ),
-              Padding(
-                  padding: EdgeInsets.only(bottom: 20),
-                  child: AdSuggestionOnNotifications()),
+              // Padding(
+              //     padding: EdgeInsets.only(bottom: 20),
+              //     child: AdSuggestionOnNotifications()),
               ...controller.notifications.value.map((e) {
                 return Padding(
                   padding: EdgeInsets.only(bottom: 20),

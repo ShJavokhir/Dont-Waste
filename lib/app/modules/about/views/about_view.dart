@@ -12,6 +12,13 @@ class AboutView extends GetView<AboutController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          elevation: 0.4,
+          title: Text('about_page_title'.tr(), style: Theme.of(Get.context!).textTheme.bodyText1),
+          centerTitle: true,
+
+        ),
         backgroundColor: Colors.white,
         // appBar: AppBar(
         //   backgroundColor: Colors.white,
@@ -26,148 +33,134 @@ class AboutView extends GetView<AboutController> {
                   parent: AlwaysScrollableScrollPhysics()),
               children: [
                 SizedBox(height: 30,),
-                Align(
-                  //alignment: Alignment.center,
-                  child: Stack(
-                    overflow: Overflow.visible,
-                    children: [
-                      Container(
-                        padding: EdgeInsets.only(right: 20),
-                        height: 100,
-                        width: 300,
-                        decoration: BoxDecoration(
-                          color: black4,
-                          borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
+                Image.asset('assets/images/icon.png', height: 150, width: 150,),
+                // SizedBox(height: 30,),
+                // Align(
+                //   //alignment: Alignment.center,
+                //   child: Stack(
+                //     overflow: Overflow.visible,
+                //     children: [
+                //       Container(
+                //         padding: EdgeInsets.only(right: 20),
+                //         height: 100,
+                //         width: 300,
+                //         decoration: BoxDecoration(
+                //           color: black4,
+                //           borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
+                //         ),
+                //         child: Column(
+                //           crossAxisAlignment: CrossAxisAlignment.end,
+                //           mainAxisAlignment: MainAxisAlignment.center,
+                //           children: [
+                //             Text("total_users".tr(), style: TextStyle(
+                //               fontSize: 12.sp,
+                //               fontWeight: FontWeight.normal
+                //             ),),
+                //             SizedBox(height: 10,),
+                //             Text(controller.totalUsers.value.toString(), style: TextStyle(
+                //                 fontSize: 20.sp,
+                //               fontWeight: FontWeight.bold
+                //             ),)
+                //           ],
+                //         )
+                //       ),
+                //       Positioned(child: Image.asset('assets/images/customer-review.png', width: 200), top: -5, bottom: -5, left: -60,),
+                //     ],
+                //   ),
+                // ),
+                // SizedBox(height: 30,),
+                // Align(
+                //   //alignment: Alignment.center,
+                //   child: Stack(
+                //     overflow: Overflow.visible,
+                //     children: [
+                //       Container(
+                //           padding: EdgeInsets.only(left: 20),
+                //           height: 100,
+                //           width: 300,
+                //           decoration: BoxDecoration(
+                //             color: black4,
+                //             borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
+                //           ),
+                //           child: Column(
+                //             crossAxisAlignment: CrossAxisAlignment.start,
+                //             mainAxisAlignment: MainAxisAlignment.center,
+                //             children: [
+                //               Text("total_foods".tr(), style: TextStyle(
+                //                   fontSize: 12.sp,
+                //                   fontWeight: FontWeight.normal
+                //               ),),
+                //               SizedBox(height: 10,),
+                //               Text(controller.totalFoods.value.toString(), style: TextStyle(
+                //                   fontSize: 20.sp,
+                //                   fontWeight: FontWeight.bold
+                //               ),)
+                //             ],
+                //           )
+                //       ),
+                //       Positioned(child: Image.asset('assets/images/chat.png', width: 200), top: -5, bottom: -5, right: -60,),
+                //     ],
+                //   ),
+                // ),
+                SizedBox(height: 30,),
+
+                Container(
+                    padding: EdgeInsets.all(DEFAULT_PADDING * 1.0),
+                    //height: 300,
+                    //width: 300,
+                    decoration: BoxDecoration(
+                      color: black4,
+                      borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+
+                        Text("about_team".tr(), style: TextStyle(
+                            fontSize: 15.sp,
+                            fontWeight: FontWeight.bold
+                        ),),
+                        SizedBox(height: 10,),
+                        Text("about_team2".tr(), style: TextStyle(
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.normal
                         ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text("total_users".tr(), style: TextStyle(
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.normal
-                            ),),
-                            SizedBox(height: 10,),
-                            Text(controller.totalUsers.value.toString(), style: TextStyle(
-                                fontSize: 20.sp,
-                              fontWeight: FontWeight.bold
-                            ),)
-                          ],
-                        )
-                      ),
-                      Positioned(child: Image.asset('assets/images/customer-review.png', width: 200), top: -5, bottom: -5, left: -60,),
-                    ],
-                  ),
+                          textAlign: TextAlign.left,
+                        ),
+
+
+                      ],
+                    )
                 ),
-                SizedBox(height: 30,),
-                Align(
-                  //alignment: Alignment.center,
-                  child: Stack(
-                    overflow: Overflow.visible,
-                    children: [
-                      Container(
-                          padding: EdgeInsets.only(left: 20),
-                          height: 100,
-                          width: 300,
-                          decoration: BoxDecoration(
-                            color: black4,
-                            borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text("total_foods".tr(), style: TextStyle(
-                                  fontSize: 12.sp,
-                                  fontWeight: FontWeight.normal
-                              ),),
-                              SizedBox(height: 10,),
-                              Text(controller.totalFoods.value.toString(), style: TextStyle(
-                                  fontSize: 20.sp,
-                                  fontWeight: FontWeight.bold
-                              ),)
-                            ],
-                          )
-                      ),
-                      Positioned(child: Image.asset('assets/images/chat.png', width: 200), top: -5, bottom: -5, right: -60,),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 30,),
-                Align(
-                  //alignment: Alignment.center,
-                  child: Stack(
-                    overflow: Overflow.visible,
-                    children: [
-                      Container(
-                          padding: EdgeInsets.all(DEFAULT_PADDING * 1.0),
-                          //height: 300,
-                          width: 300,
-                          decoration: BoxDecoration(
-                            color: black4,
-                            borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-
-                              Text("about_team".tr(), style: TextStyle(
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.bold
-                              ),),
-                              SizedBox(height: 10,),
-                              Text("about_team2".tr(), style: TextStyle(
-                                  fontSize: 12.sp,
-                                  fontWeight: FontWeight.normal
-                              ),
-                                textAlign: TextAlign.left,
-                              ),
+                SizedBox(height: 20,),
+                Container(
+                    padding: EdgeInsets.all(DEFAULT_PADDING * 1.0),
+                    //height: 300,
+                    //width: 300,
+                    decoration: BoxDecoration(
+                      color: black4,
+                      borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("app_version".tr(args: ["1.1.0"]), style: TextStyle(
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.normal
+                        ),
+                          textAlign: TextAlign.left,
+                        ),
 
 
-                            ],
-                          )
-                      ),
-                      //Positioned(child: Image.asset('assets/images/operator.png'), top: -50, left: 100, right: 100,),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 30,),
-                Align(
-                  //alignment: Alignment.center,
-                  child: Stack(
-                    overflow: Overflow.visible,
-                    children: [
-                      Container(
-                          padding: EdgeInsets.all(DEFAULT_PADDING * 1.0),
-                          //height: 300,
-                          width: 300,
-                          decoration: BoxDecoration(
-                            color: black4,
-                            borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text("app_version".tr(args: ["1.0.2"]), style: TextStyle(
-                                  fontSize: 12.sp,
-                                  fontWeight: FontWeight.normal
-                              ),
-                                textAlign: TextAlign.left,
-                              ),
-
-
-                            ],
-                          )
-                      ),
-                      //Positioned(child: Image.asset('assets/images/operator.png'), top: -50, left: 100, right: 100,),
-                    ],
-                  ),
+                      ],
+                    )
                 ),
 
 
               ]),
-        ));
+        )
+    );
   }
 }

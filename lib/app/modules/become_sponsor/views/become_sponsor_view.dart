@@ -249,7 +249,7 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                       child: DropdownButton<String>(
                         isExpanded: true,
                         underline: Container(),
-                        value: controller.category.value.tr(),
+                        value: controller.category.value,
                         selectedItemBuilder: (_) {
 
                           return  Constants().categories.map((String choice) {
@@ -266,7 +266,7 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                         },
                         items: Constants().categories.map((String choice) {
                           return DropdownMenuItem<String>(
-                            value: choice.tr(),
+                            value: choice,
                             child: Row(
                               children: [
                                 Text(choice.tr())
@@ -275,6 +275,7 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                           );
                         }).toList(),
                         onChanged: (opt) {
+                          print("changed " + opt.toString());
                           controller.category.value = opt ?? 'all';
                         },
                       ),

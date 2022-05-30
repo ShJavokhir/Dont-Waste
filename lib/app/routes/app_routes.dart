@@ -16,6 +16,10 @@ abstract class Routes {
   static const ABOUT = _Paths.ABOUT;
   static const SETTINGS = _Paths.SETTINGS;
   static const NOTIFICATIONS = _Paths.NOTIFICATIONS;
+  static const FAQ = _Paths.FAQ;
+  static const EDIT_PROFILE = _Paths.EDIT_PROFILE;
+  static const STATISTICS = _Paths.STATISTICS;
+  static const CONTACTS = _Paths.CONTACTS;
 }
 
 abstract class _Paths {
@@ -33,4 +37,8 @@ abstract class _Paths {
   static const ABOUT = '/about';
   static const SETTINGS = '/settings';
   static const NOTIFICATIONS = '/notifications';
+  static const FAQ = '/faq';
+  static const EDIT_PROFILE = '/edit-profile';
+  static const STATISTICS = '/statistics';
+  static const CONTACTS = '/contacts';
 }

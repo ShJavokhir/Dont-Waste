@@ -17,13 +17,18 @@ class ProfileMenuButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      alignment: Alignment.center,
+
       width: 100,
-      // height: 100,
       decoration: BoxDecoration(
-          color: Colors.orange
-          ,
-          borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0 / 2)
+          boxShadow: <BoxShadow>[
+            new BoxShadow(
+              color: Colors. black26,
+              blurRadius: 3.0,
+              offset: new Offset(0.5, 0.5),
+            ),
+          ],
+          color: Colors.orange,
+          borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0)
       ),
       child: Material(
 

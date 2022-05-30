@@ -7,6 +7,7 @@ import 'package:dont_waste/app/modules/food_market/views/food_market_view.dart';
 import 'package:dont_waste/app/modules/frame/bindings/frame_binding.dart';
 import 'package:dont_waste/app/modules/settings/views/settings_view.dart';
 import 'package:dont_waste/app/modules/user_profile/views/user_profile_view.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:get/get.dart' hide Trans;
@@ -20,7 +21,6 @@ class FrameView extends GetView<FrameController> {
     FoodMarketView(),
     BecomeSponsorView(),
     UserProfileView(),
-    AboutView(),
     SettingsView()
   ];
   List<Widget> _getAppBars = [
@@ -30,8 +30,6 @@ class FrameView extends GetView<FrameController> {
     Text("become_sponsor".tr(),
         style: Theme.of(Get.context!).textTheme.bodyText1),
     Text("account".tr(), style: Theme.of(Get.context!).textTheme.bodyText1),
-    Text('about_page_title'.tr(),
-        style: Theme.of(Get.context!).textTheme.bodyText1),
     Text('settings'.tr(), style: Theme.of(Get.context!).textTheme.bodyText1)
   ];
 
@@ -54,8 +52,6 @@ class FrameView extends GetView<FrameController> {
                 Text("become_sponsor".tr(),
                     style: Theme.of(Get.context!).textTheme.bodyText1),
                 Text("account".tr(), style: Theme.of(Get.context!).textTheme.bodyText1),
-                Text('about_page_title'.tr(),
-                    style: Theme.of(Get.context!).textTheme.bodyText1),
                 Text('settings'.tr(), style: Theme.of(Get.context!).textTheme.bodyText1)
               ][controller.tabIndex],
               centerTitle: true,
@@ -175,10 +171,6 @@ class FrameView extends GetView<FrameController> {
                       label: 'profile_button'.tr(),
                     ),
                     BottomNavigationBarItem(
-                      icon: Icon(Icons.question_mark_rounded),
-                      label: 'about_button'.tr(),
-                    ),
-                    BottomNavigationBarItem(
                       icon: Icon(Icons.settings),
                       label: 'settings'.tr(),
                     ),
@@ -287,84 +279,7 @@ Drawer buildDrawer(BuildContext context) {
           //Spacer(),
           Divider(),
 
-          Container(
-            width: double.infinity,
-            child: ListTile(
-              leading: Text("language".tr(),
-                  style: Theme.of(context).textTheme.titleMedium),
-              title: DropdownButton<String>(
-                underline: Container(),
-                value: context.locale.countryCode,
-                selectedItemBuilder: (_) {
-                  return <String>['EN', 'RU', 'UZ'].map((String choice) {
-                    return Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          //SizedBox(width: 20,),
-                          Image.asset(
-                            'assets/images/$choice.png',
-                            height: 30,
-                            width: 30,
-                          ),
-                          SizedBox(
-                            width: 15,
-                          ),
-                          Text(choice),
-                          SizedBox(
-                            width: 15,
-                          ),
-                        ],
-                      ),
-                    );
-                  }).toList();
-                },
-                items: <String>['EN', 'RU', 'UZ'].map((String choice) {
-                  return DropdownMenuItem<String>(
-                    value: choice,
-                    child: Row(
-                      children: [
-                        Image.asset(
-                          'assets/images/$choice.png',
-                          height: 30,
-                          width: 30,
-                        ),
-                        SizedBox(
-                          width: 15,
-                        ),
-                        Text(choice)
-                      ],
-                    ),
-                  );
-                }).toList(),
-                onChanged: (opt) {
-                  if (opt == "UZ") {
-                    final locale = Locale("uz", "UZ");
-                    context.setLocale(locale);
-                    EasyLocalization.of(context)!.setLocale(locale);
-                    //EasyLocalization.of(context)!.currentLocale = locale;
-                    Get.updateLocale(locale);
-                  } else if (opt == "RU") {
-                    final locale = (Locale("ru", "RU"));
-                    context.setLocale(locale);
-                    Get.updateLocale(locale);
-                    EasyLocalization.of(context)!.setLocale(locale);
-                  } else if (opt == "EN") {
-                    final locale = (Locale("en", "EN"));
-                    context.setLocale(locale);
-                    Get.updateLocale(locale);
-                    EasyLocalization.of(context)!.setLocale(locale);
-                  }
 
-                  //Get.offAndToNamed('/choice-view');
-                  Get.forceAppUpdate();
-                  Get.appUpdate();
-                  //FrameBinding().dependencies();
-                  //       await Get.find<FoodMarketController>().setFoods();
-                },
-              ),
-            ),
-          ),
           // PopupMenuButton<String>(
           //
           //     icon: Icon(Icons.language_sharp),
@@ -405,18 +320,21 @@ Drawer buildDrawer(BuildContext context) {
           Spacer(),
           Divider(),
 
-          ListTile(
-            leading:
-                Icon(Icons.exit_to_app, color: Colors.redAccent, size: 18.sp),
-            title: Text('sign_out'.tr(),
-                style: Theme.of(context)
-                    .textTheme
-                    .titleMedium!
-                    .copyWith(color: Colors.red)),
-            onTap: () {
-              //Navigator.pop(context);
-              Get.find<FrameController>().signOut();
-            },
+          Visibility(
+            visible: FirebaseAuth.instance.currentUser != null,
+            child: ListTile(
+              leading:
+                  Icon(Icons.exit_to_app, color: Colors.redAccent, size: 18.sp),
+              title: Text('sign_out'.tr(),
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleMedium!
+                      .copyWith(color: Colors.red)),
+              onTap: () {
+                //Navigator.pop(context);
+                Get.find<FrameController>().signOut();
+              },
+            ),
           ),
         ],
       ),

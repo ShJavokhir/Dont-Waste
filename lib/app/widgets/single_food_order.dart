@@ -145,7 +145,7 @@ class SingleFoodOrder extends StatelessWidget {
 
                         textAlign: TextAlign.left,
                         overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context).textTheme.bodyText2,
+                        style: Theme.of(context).textTheme.bodyText2!.copyWith(fontSize: 12.sp),
                         maxLines: 2,
                       ),
                     ),

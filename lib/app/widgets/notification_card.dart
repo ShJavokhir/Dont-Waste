@@ -39,28 +39,32 @@ class NotificationCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            width: double.infinity,
-            height: 100,
-            decoration: BoxDecoration(
-                boxShadow: <BoxShadow>[
-                  new BoxShadow(
-                    color: Colors.black12,
-                    blurRadius: 3.0,
-                    offset: new Offset(0.0, 3.0),
-                  ),
-                ],
-              //border: Border.all(color: Colors.black12, width: 1),
-                borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0 /2 )),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0 /2 ),
-              child: photo_url.contains("http")?Image.network(
-                photo_url,
-                fit: BoxFit.cover,
-                isAntiAlias: false,
-              ):Container(
-                //margin: EdgeInsets.all(50),
-                  child: Image.asset('assets/images/default-photo.png', fit: BoxFit.cover)),
+          Visibility(
+            visible: photo_url.contains("http"),
+            child: Container(
+              width: double.infinity,
+              height: 100,
+              decoration: BoxDecoration(
+                  boxShadow: <BoxShadow>[
+                    new BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 3.0,
+                      offset: new Offset(0.0, 3.0),
+                    ),
+                  ],
+                //border: Border.all(color: Colors.black12, width: 1),
+                  borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0 /2 )),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0 /2 ),
+                child: photo_url.contains("http")?Image.network(
+                  photo_url,
+                  fit: BoxFit.cover,
+                  isAntiAlias: false,
+                ):Container(
+                  //margin: EdgeInsets.all(50),
+
+                ),
+              ),
             ),
           ),
           SizedBox(height: 20,),

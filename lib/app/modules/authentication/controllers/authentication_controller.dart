@@ -286,7 +286,7 @@ class AuthenticationController extends GetxController {
       showErrorSnackbar("Could not get FCM token, please try again later");
       return false;
     }
-
+    await FirebaseAuth.instance.currentUser!.updateDisplayName("User");
     return await firestore.collection("users").doc(authUser.uid).set(user.toJson()).then((value) {
       return true;
     }).catchError((onError) {

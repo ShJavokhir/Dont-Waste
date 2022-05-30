@@ -7,6 +7,7 @@ import 'package:dont_waste/app/modules/food_market/bindings/food_market_binding.
 import 'package:dont_waste/app/modules/food_market/controllers/food_market_controller.dart';
 import 'package:dont_waste/app/modules/settings/bindings/settings_binding.dart';
 import 'package:dont_waste/app/modules/user_profile/bindings/user_profile_binding.dart';
+import 'package:dont_waste/app/modules/user_profile/controllers/user_data_controller.dart';
 import 'package:dont_waste/app/modules/user_profile/controllers/user_profile_controller.dart';
 import 'package:dont_waste/app/widgets/custom_comfirmation_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -24,6 +25,7 @@ class FrameController extends GetxController {
 
   @override
   void onReady() {
+    // Get.find<UserDataController>()
     super.onReady();
   }
 
@@ -71,7 +73,7 @@ class FrameController extends GetxController {
         UserProfileBinding().dependencies();
         // await Get.find<UserProfileController>().setFoods();
         if(initialIndex != null){
-          Get.find<UserProfileController>().initialIndex  = initialIndex;
+          //Get.find<UserProfileController>().initialIndex  = initialIndex;
         }
         // Get.toNamed("/food-preview");
         tabIndex = index;
@@ -82,19 +84,16 @@ class FrameController extends GetxController {
       }
     }
     if(index == 3){
-      AboutBinding().dependencies();
-      await Get.find<AboutController>().getStats();
-      // Get.toNamed("/food-preview");
-      tabIndex = index;
-    }
-
-    if(index == 4){
       SettingsBinding().dependencies();
       //await Get.find<AboutController>().getStats();
       // Get.toNamed("/food-preview");
       tabIndex = index;
-    }
 
+      // AboutBinding().dependencies();
+      // await Get.find<AboutController>().getStats();
+      // // Get.toNamed("/food-preview");
+      // tabIndex = index;
+    }
 
     update();
   }

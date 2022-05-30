@@ -129,7 +129,7 @@ class FoodPreviewView extends GetView<FoodPreviewController> {
                                         ),
                                         Expanded(
                                           child: Text(
-                                            controller.foodModel.price
+                                             controller.foodModel.isDonation!?"0.0 UZS":controller.foodModel.price
                                                     .toString() +
                                                 ' UZS',
                                             textAlign: TextAlign.center,
@@ -364,7 +364,7 @@ class FoodPreviewView extends GetView<FoodPreviewController> {
                               padding: EdgeInsets.all(15),
                               //alignment: Alignment.center,
                               height: double.infinity,
-                              width: 150,
+                              //width: 150,
                               decoration: BoxDecoration(
                                 color: Colors.red[100],
                                 borderRadius:
@@ -373,6 +373,7 @@ class FoodPreviewView extends GetView<FoodPreviewController> {
                               child: Text(
                                 "food_expiry_alert".tr(),
                                 textAlign: TextAlign.left,
+
                                 style: TextStyle(fontSize: 12.sp),
                               ),
                             ),

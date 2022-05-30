@@ -1,7 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dont_waste/app/data/constants/colors.dart';
 import 'package:dont_waste/app/data/models/food_model.dart';
+import 'package:dont_waste/app/data/models/user_model.dart';
 import 'package:dont_waste/app/modules/frame/controllers/frame_controller.dart';
+import 'package:dont_waste/app/modules/user_profile/controllers/user_data_controller.dart';
+import 'package:dont_waste/app/widgets/snackbar.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:dont_waste/app/widgets/custom_comfirmation_dialog.dart';
 import 'package:dont_waste/app/widgets/custom_loader_dialog.dart';
@@ -11,31 +14,31 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserProfileController extends GetxController {
-  int initialIndex = 0;
-  final fullName = "".obs;
   late FirebaseFirestore firestore;
   final foods = <Food>[].obs;
   final isLoading = true.obs;
 
+  //final userData = <UserModel>.obs;
+  final Rx<UserModel> userData = Rx<UserModel>(UserModel());
 
+  // final balance = 0.obs;
+  // final bonusCoins = 0.obs;
+  // final rating = 0.0.obs;
 
   @override
-  void onInit()async {
-
-
+  void onInit() async {
+    userData.value = Get.find<UserDataController>().userModel;
     //print(FirebaseAuth.instance.currentUser!.uid);
     firestore = FirebaseFirestore.instance;
     super.onInit();
   }
 
   @override
-  void onReady() async{
+  void onReady() async {
     isLoading.value = true;
-    try{
+    try {
       await setFoodsWithoutLoader();
-    }catch(err){
-
-    }
+    } catch (err) {}
     isLoading.value = false;
     super.onReady();
   }
@@ -43,8 +46,7 @@ class UserProfileController extends GetxController {
   @override
   void onClose() {}
 
-  Future<void> setFoods()async{
-
+  Future<void> setFoods() async {
     showDialog(
       barrierDismissible: false,
       context: Get.context!,
@@ -61,30 +63,31 @@ class UserProfileController extends GetxController {
     Get.back();
   }
 
-  Future<void> setFoodsWithoutLoader()async{
-
+  Future<void> setFoodsWithoutLoader() async {
     foods.value = await fetchFoods();
-
   }
 
   Future<List<Food>> fetchFoods() async {
-
     final List<Food> foods = [];
-    await firestore.collection("posts").where("userId", isEqualTo: FirebaseAuth.instance.currentUser!.uid).get().then((value) {
+    await firestore
+        .collection("posts")
+        .where("userId", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .get()
+        .then((value) {
       //print(value.size);
       value.docs.forEach((element) {
-
         final food = Food.fromJson(element.data());
         //print("Fetching foods: ${food.isDonation}");
         print("Fetching foods: ${food.isEatable}");
-         food.id = element.id;
+        food.id = element.id;
         //print(food.id);
         foods.add(food);
       });
     });
     return foods;
   }
-  Future<void> deletePost(String postId)async{
+
+  Future<void> deletePost(String postId) async {
     showDialog(
       barrierDismissible: false,
       context: Get.context!,
@@ -93,10 +96,13 @@ class UserProfileController extends GetxController {
           onCancel: () {
             Get.back();
           },
-          onConfirm: () async{
+          onConfirm: () async {
             Get.back();
-            FirebaseFirestore.instance.collection("posts").doc(postId).delete().then((value)async {
-
+            FirebaseFirestore.instance
+                .collection("posts")
+                .doc(postId)
+                .delete()
+                .then((value) async {
               await setFoods();
               Get.snackbar(
                 "info".tr(),
@@ -120,7 +126,7 @@ class UserProfileController extends GetxController {
                 backgroundColor: yellow1,
               );
               //setState();
-            }).catchError((onError){
+            }).catchError((onError) {
               Get.snackbar(
                 "error".tr(),
                 "error_while_deleting_post".tr() + onError.toString(),
@@ -143,16 +149,44 @@ class UserProfileController extends GetxController {
                 backgroundColor: yellow1,
               );
             });
-
           },
           text: "confirm_delete_post".tr(),
         );
       },
     );
   }
-  String? getUid(){
+
+  String? getUid() {
     return FirebaseAuth.instance.currentUser?.uid;
   }
 
+  Future<void> advertiseAd(String postId) async {
+    Get.back();
+    if (userData.value.balance! < 5000) {
+      await Get.find<UserDataController>().fetchUserData();
+      fetchUserDataAgain();
 
+      showErrorSnackbar("no_enough_money_in_balance".tr());
+      return;
+    }
+    await firestore.collection("posts").doc(postId).update({
+      "isTop": true,
+    }).then((value) async {
+      userData.value.balance = userData.value.balance! - 5000;
+      await firestore
+          .collection("users")
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .update({"balance": userData.value.balance}).then((value) {
+        showSuccessSnackbar("succ_updated".tr());
+        fetchFoods();
+      });
+    });
+
+    await Get.find<UserDataController>().fetchUserData();
+    fetchUserDataAgain();
+  }
+
+  Future<void> fetchUserDataAgain() async {
+    userData.value = Get.find<UserDataController>().userModel;
+  }
 }

@@ -80,7 +80,8 @@ class CustomComfirmationDialog extends StatelessWidget {
                     ),
                     shadowColor: Colors.transparent,
                     //side: BorderSide(width: 1, color: Colors.green),
-                    primary: green2, // <-- Button color
+                    primary: green2,
+                    // <-- Button color
                     onPrimary: Colors.white, // <-- Splash color
                   ),
                 ),
@@ -110,7 +111,8 @@ class CustomComfirmationDialog extends StatelessWidget {
                     ),
                     shadowColor: Colors.transparent,
                     //side: BorderSide(width: 1, color: Colors.green),
-                    primary: red2, // <-- Button color
+                    primary: red2,
+                    // <-- Button color
                     onPrimary: Colors.white, // <-- Splash color
                   ),
                 ),

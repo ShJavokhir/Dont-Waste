@@ -149,7 +149,7 @@ class NearbyFoodsController extends GetxController {
                                 topRight: const Radius.circular(40.0))),
                         child: Column(
                           children: [
-                            Text("Food"),
+                            Text("food".tr()),
                             SizedBox(height: 20,),
                             getSingleFoodOrderForId(element.id)
 

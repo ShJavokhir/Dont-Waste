@@ -5,6 +5,7 @@ import 'package:dont_waste/app/modules/food_preview/controllers/food_preview_con
 import 'package:dont_waste/app/modules/frame/controllers/frame_controller.dart';
 import 'package:dont_waste/app/modules/update_food_preview/bindings/update_food_preview_binding.dart';
 import 'package:dont_waste/app/modules/update_food_preview/controllers/update_food_preview_controller.dart';
+import 'package:dont_waste/app/widgets/custom_comfirmation_dialog.dart';
 import 'package:dont_waste/app/widgets/custom_info_dialog.dart';
 import 'package:dont_waste/app/widgets/divider.dart';
 import 'package:dont_waste/app/widgets/profile_menu_button.dart';
@@ -67,10 +68,32 @@ class UserProfileView extends GetView<UserProfileController> {
                   radius: 50,
                 ),
                 SizedBox(height: 15,),
-                Text('welcome'.tr() + " " + (FirebaseAuth.instance.currentUser!.displayName ?? ""), textAlign: TextAlign.center, style: TextStyle(
-                    fontSize: 12.sp,
-                    color: Colors.black87
-                ),),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('welcome'.tr() + " " + (FirebaseAuth.instance.currentUser!.displayName ?? ""), textAlign: TextAlign.center, style: TextStyle(
+                        fontSize: 12.sp,
+                        color: Colors.black87
+                    ),),
+                    SizedBox(width: 5,),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
+                        color: Colors.lightGreen[100]
+                      ),
+                      padding: EdgeInsets.symmetric(vertical: 3, horizontal: 5),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.star_rounded, size: 10.sp, color: Colors.green,),
+                          SizedBox(width: 2,),
+                          Text(controller.userData.value.rating.toString(),textAlign: TextAlign.center, style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Colors.green, fontSize: 10.sp),)
+                        ],
+                      ),
+                    )
+                  ],
+                ),
                 SizedBox(height: 20),
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: 20),
@@ -93,7 +116,7 @@ class UserProfileView extends GetView<UserProfileController> {
                               color: Colors.black54
                           ),),
                           SizedBox(height: 10,),
-                          Text("125000 uzs", style: TextStyle(
+                          Text(controller.userData.value.balance.toString() + " uzs", style: TextStyle(
                             fontSize: 20.sp,
                             fontWeight: FontWeight.bold,
                             color: Colors.black87,
@@ -104,12 +127,98 @@ class UserProfileView extends GetView<UserProfileController> {
                         color: Colors.transparent,
                         child: InkWell(
                           //customBorder: new CircleBorder(),
-                          onTap: () {},
+                          onTap: () {
+                             showDialog(
+                                context: context,
+                                builder: (context) =>
+                                //CustomInfoDialog(text: "This feature is cooming soon, be prepared :).\n With the help of this function, you can advertise your foods so many people can discover it")
+                                AlertDialog(
+                                  title: Text(
+                                    "payment_method".tr(),
+                                    style: TextStyle(fontSize: 18.sp),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  insetPadding: EdgeInsets.zero,
+                                  contentPadding: EdgeInsets.all(15),
+                                  actionsPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 5),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                      BorderRadius.all(Radius.circular(BORDER_RADIUS_1 * 1.0))),
+                                  content: Builder(
+                                    builder: (context) {
+                                      // Get available height and width of the build area of this widget. Make a choice depending on the size.
+                                      var height = MediaQuery.of(context).size.height;
+                                      var width = MediaQuery.of(context).size.width;
+
+                                      return GestureDetector(
+                                        onTap: (){
+                                          Get.back();
+                                          showDialog(context: context,
+                                              builder: (ctx) =>
+                                                  CustomInfoDialog(text: "payment_info".tr())
+                                          );
+                                        },
+                                        child: Container(
+                                          //padding: EdgeInsets.all(50),
+                                          //height: 50.h,
+                                          width: 85.w,
+                                          height: 300,
+                                          child: Column(
+                                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              // Text("ad_fee".tr(), textAlign: TextAlign.center, style: TextStyle(
+                                              //     fontWeight: FontWeight.bold
+                                              // ),),
+                                              Container(
+                                                // margin: EdgeInsets.all(15),
+                                                width: double.infinity,
+                                                //height: 100,
+                                                decoration: BoxDecoration(
+                                                  color: black4,
+                                                  borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
+                                                ),
+                                                child: Row(
+                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  children: [
+                                                    SizedBox(width: 15,),
+                                                    Image.asset('assets/images/payme.png', height: 100, width: 100),
+                                                    Text("pay_using_payme".tr()),
+                                                    SizedBox(width: 15,),
+                                                  ],
+                                                ),
+                                              ),
+                                              Container(
+                                                // margin: EdgeInsets.all(15),
+                                                width: double.infinity,
+                                                //height: 100,
+                                                decoration: BoxDecoration(
+                                                  color: black4,
+                                                  borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
+                                                ),
+                                                child: Row(
+                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  children: [
+                                                    SizedBox(width: 15,),
+                                                    Image.asset('assets/images/click.png', height: 100, width: 100),
+                                                    Text("pay_using_apelsin".tr()),
+                                                    SizedBox(width: 15,),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                )
+                            );
+                          },
                           splashColor: Colors.white,
                           child: new Icon(
                             Icons.add_box_rounded,
                             size: 35.sp,
-                            color: Colors.black87,
+                            color: Colors.black54,
                           ),
                         ),
                       )
@@ -133,8 +242,10 @@ class UserProfileView extends GetView<UserProfileController> {
                 ),
                 SizedBox(height: 10,),
                 Container(
-                  height: 100,
+                  //padding: EdgeInsets.symmetric(vertical: 5),
+                  height: 110,
                   child: ListView(
+                    padding: EdgeInsets.symmetric(vertical: 5),
                     scrollDirection: Axis.horizontal,
                     physics: AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
                     children: [
@@ -232,18 +343,19 @@ class UserProfileView extends GetView<UserProfileController> {
                       }, iconData: Icons.monetization_on_rounded),
                       SizedBox(width: 10,),
                       ProfileMenuButton(title: "advertise".tr(), onTap: (){
-                        showInfoSnackbar("Please select post you want to advertise");
+                        showInfoSnackbar("select_post_to_advertise".tr());
                         scrollController.animateTo(
-                          400,
+                          420,
                           duration: Duration(seconds: 2),
                           curve: Curves.fastOutSlowIn,
                         );
 
                       }, iconData: Icons.star_rate_rounded ),
                       SizedBox(width: 10,),
-                      ProfileMenuButton(title: "settings".tr(), onTap: (){
-                        Get.find<FrameController>().changeTabIndex(4);
-                      }, iconData: Icons.settings),
+                      ProfileMenuButton(title: "faq".tr(), onTap: (){
+                        Get.toNamed('/faq');
+
+                      }, iconData: Icons.star_rate_rounded ),
                     ],
                   ),
                 ),
@@ -298,6 +410,25 @@ class UserProfileView extends GetView<UserProfileController> {
                       isEatable: e.isEatable ?? true,
                       isTop: e.isTop ?? false,
                       onTop: (){
+                        showDialog(
+                          barrierDismissible: true,
+                          context: Get.context!,
+                          builder: (BuildContext context) {
+                            return CustomComfirmationDialog(text: "advertise_info".tr(),
+                              onCancel: (){
+                                Get.back();
+                              },
+                              onConfirm: (){
+                                controller.advertiseAd(e.id);
+                              },
+                            );
+                            // return CustomComfirmationDialog(
+                            //   onCancel: () {},
+                            //   onConfirm: () {},
+                            //   text: "test",
+                            // );
+                          },
+                        );
 
                       },
                       onView: (){

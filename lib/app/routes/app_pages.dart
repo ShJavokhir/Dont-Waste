@@ -8,6 +8,12 @@ import '../modules/become_sponsor/bindings/become_sponsor_binding.dart';
 import '../modules/become_sponsor/views/become_sponsor_view.dart';
 import '../modules/choice_view/bindings/choice_view_binding.dart';
 import '../modules/choice_view/views/choice_view_view.dart';
+import '../modules/contacts/bindings/contacts_binding.dart';
+import '../modules/contacts/views/contacts_view.dart';
+import '../modules/edit_profile/bindings/edit_profile_binding.dart';
+import '../modules/edit_profile/views/edit_profile_view.dart';
+import '../modules/faq/bindings/faq_binding.dart';
+import '../modules/faq/views/faq_view.dart';
 import '../modules/food_market/bindings/food_market_binding.dart';
 import '../modules/food_market/views/food_market_view.dart';
 import '../modules/food_preview/bindings/food_preview_binding.dart';
@@ -22,6 +28,8 @@ import '../modules/notifications/bindings/notifications_binding.dart';
 import '../modules/notifications/views/notifications_view.dart';
 import '../modules/settings/bindings/settings_binding.dart';
 import '../modules/settings/views/settings_view.dart';
+import '../modules/statistics/bindings/statistics_binding.dart';
+import '../modules/statistics/views/statistics_view.dart';
 import '../modules/update_food_preview/bindings/update_food_preview_binding.dart';
 import '../modules/update_food_preview/views/update_food_preview_view.dart';
 import '../modules/user_profile/bindings/user_profile_binding.dart';
@@ -107,6 +115,26 @@ class AppPages {
       name: _Paths.NOTIFICATIONS,
       page: () => NotificationsView(),
       binding: NotificationsBinding(),
+    ),
+    GetPage(
+      name: _Paths.FAQ,
+      page: () => FaqView(),
+      binding: FaqBinding(),
+    ),
+    GetPage(
+      name: _Paths.EDIT_PROFILE,
+      page: () => EditProfileView(),
+      binding: EditProfileBinding(),
+    ),
+    GetPage(
+      name: _Paths.STATISTICS,
+      page: () => StatisticsView(),
+      binding: StatisticsBinding(),
+    ),
+    GetPage(
+      name: _Paths.CONTACTS,
+      page: () => ContactsView(),
+      binding: ContactsBinding(),
     ),
   ];
 }

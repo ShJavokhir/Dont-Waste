@@ -37,15 +37,16 @@ class SingleFoodOrderForAdmin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.all(3),
       margin: EdgeInsets.all(10),
       width: double.infinity,
       height: 350,
       decoration: BoxDecoration(
           boxShadow: <BoxShadow>[
             new BoxShadow(
-              color: Colors.black26,
-              blurRadius: 2.0,
-              offset: new Offset(0.0, 0.5),
+              color: Colors.black12,
+              blurRadius: 5.0,
+              offset: new Offset(0.0, 0.1),
             ),
           ],
           color: black4,
@@ -242,7 +243,7 @@ class SingleFoodOrderForAdmin extends StatelessWidget {
                                   borderRadius:
                                   BorderRadius.vertical(top: Radius.circular(BORDER_RADIUS_1 * 1.0 / 2)),
                                 ),
-                                side: BorderSide(width: 2, color: yellow1),
+                                side: BorderSide(width: 1, color: yellow1),
                                 //side: BorderSide(width: 1, color: Colors.green),
                                 primary: Colors.white, // <-- Button color
                                 onPrimary: yellow1, // <-- Splash color
@@ -268,7 +269,7 @@ class SingleFoodOrderForAdmin extends StatelessWidget {
 
                                 //padding: EdgeInsets.all(20),
                                 shape: RoundedRectangleBorder(
-                                  side: BorderSide(width: 2, color: yellow1),
+                                  side: BorderSide(width: 1, color: yellow1),
                                   borderRadius:
                                   BorderRadius.vertical(top: Radius.circular(BORDER_RADIUS_1 * 1.0 / 2)),
                                   //BorderRadius.vertical(top: Radius.circular(BORDER_RADIUS_1 * 1.0 / 2)),
@@ -291,7 +292,14 @@ class SingleFoodOrderForAdmin extends StatelessWidget {
                               child: Container(
                                   width: double.infinity,
                                   alignment: Alignment.center,
-                                  child: Text("edit".tr(), overflow: TextOverflow.ellipsis,style: Theme.of(context).textTheme.titleSmall!.copyWith(color: yellow1, fontWeight: FontWeight.bold) )),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(Icons.edit_rounded, size: 12.sp, color: yellow1,),
+                                      SizedBox(width: 5,),
+                                      Text("edit".tr(), overflow: TextOverflow.ellipsis,style: Theme.of(context).textTheme.titleSmall!.copyWith(color: yellow1, fontWeight: FontWeight.bold) ),
+                                    ],
+                                  )),
                               style: ElevatedButton.styleFrom(
                                 //padding: EdgeInsets.all(20),
                                 shape: RoundedRectangleBorder(
@@ -300,7 +308,7 @@ class SingleFoodOrderForAdmin extends StatelessWidget {
                                 ),
                                 //side: BorderSide(width: 1, color: Colors.green),
                                 primary: Colors.white, // <-- Button color
-                                side: BorderSide(width: 2, color: yellow1),
+                                side: BorderSide(width: 1, color: yellow1),
                                 onPrimary: yellow1, // <-- Splash color
                               ),
                             ),
@@ -312,7 +320,14 @@ class SingleFoodOrderForAdmin extends StatelessWidget {
                               child: Container(
                                   width: double.infinity,
                                   alignment: Alignment.center,
-                                  child: Text("delete".tr(), overflow: TextOverflow.ellipsis,style: Theme.of(context).textTheme.titleSmall!.copyWith(color: yellow1, fontWeight: FontWeight.bold))),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(Icons.delete_rounded, size: 12.sp, color: yellow1,),
+                                      SizedBox(width: 5,),
+                                      Text("delete".tr(), overflow: TextOverflow.ellipsis,style: Theme.of(context).textTheme.titleSmall!.copyWith(color: yellow1, fontWeight: FontWeight.bold)),
+                                    ],
+                                  )),
                               style: ElevatedButton.styleFrom(
                                 //padding: EdgeInsets.all(20),
                                 shape: RoundedRectangleBorder(
@@ -320,7 +335,7 @@ class SingleFoodOrderForAdmin extends StatelessWidget {
                                   BorderRadius.vertical(bottom: Radius.circular(BORDER_RADIUS_1 * 1.0 / 2)),
                                 ),
                                 //side: BorderSide(width: 1, color: Colors.green),
-                                side: BorderSide(width: 2, color: yellow1),
+                                side: BorderSide(width: 1, color: yellow1),
                                 primary: Colors.white, // <-- Button color
                                 onPrimary: yellow1, // <-- Splash color
                               ),

@@ -115,7 +115,7 @@ class NearbyFoodsView extends GetView<NearbyFoodsController> {
                               padding: EdgeInsets.symmetric(vertical: 50, horizontal: 20),
                               width: MediaQuery.of(context).size.width - 20,
                               alignment: Alignment.center,
-                              child: Text("There is no any foods near you", textAlign: TextAlign.center,),
+                              child: Text("no_foods_near_you".tr(), textAlign: TextAlign.center,),
 
                             )),
                         ...controller.foods.value.map((e) {
@@ -132,55 +132,47 @@ class NearbyFoodsView extends GetView<NearbyFoodsController> {
 
                                     Visibility(
                                       visible: e.isTop ?? false,
-                                      child: Positioned(
-                                        top: 0,
-                                        left: 0,
-                                        child: Container(
-                                          //margin: EdgeInsets.all(5),
-                                          padding: EdgeInsets.all(8),
-                                          //width: 50,
-                                          //height: 20,
-                                          decoration: BoxDecoration(
-                                            color: Colors.blue,
-                                            borderRadius: BorderRadius.all(Radius.circular(BORDER_RADIUS_1 * 1.0)),
-                                          ),
-                                          child: Row(
-                                            children: [
-                                              Icon(Icons.flash_on_rounded, color: Colors.white, size: 10.sp),
-                                              SizedBox(width: 5,),
-                                              Text("top".tr(), style: TextStyle(
-                                                  fontSize: 9.sp,
-                                                  color: Colors.white
-                                              ),),
-                                            ],
-                                          ),
+                                      child: Container(
+                                        //margin: EdgeInsets.all(5),
+                                        padding: EdgeInsets.all(8),
+                                        //width: 50,
+                                        //height: 20,
+                                        decoration: BoxDecoration(
+                                          color: Colors.blue,
+                                          borderRadius: BorderRadius.all(Radius.circular(BORDER_RADIUS_1 * 1.0)),
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            Icon(Icons.flash_on_rounded, color: Colors.white, size: 10.sp),
+                                            SizedBox(width: 5,),
+                                            Text("top".tr(), style: TextStyle(
+                                                fontSize: 9.sp,
+                                                color: Colors.white
+                                            ),),
+                                          ],
                                         ),
                                       ),
                                     ),
                                     SizedBox(width: 10,),
                                     Visibility(
                                       visible: !(e.isEatable ?? true),
-                                      child: Positioned(
-                                        bottom: 15,
-                                        left: 15,
-                                        child: Container(
-                                          padding: EdgeInsets.all(8),
-                                          //width: 50,
-                                          //height: 20,
-                                          decoration: BoxDecoration(
-                                            color: Colors.red,
-                                            borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
-                                          ),
-                                          child: Row(
-                                            children: [
-                                              Icon(Icons.warning, color: Colors.white, size: 10.sp,),
-                                              SizedBox(width: 5,),
-                                              Text("expired".tr(), style: TextStyle(
-                                                  fontSize: 9.sp,
-                                                  color: Colors.white
-                                              ),),
-                                            ],
-                                          ),
+                                      child: Container(
+                                        padding: EdgeInsets.all(8),
+                                        //width: 50,
+                                        //height: 20,
+                                        decoration: BoxDecoration(
+                                          color: Colors.red,
+                                          borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            Icon(Icons.warning, color: Colors.white, size: 10.sp,),
+                                            SizedBox(width: 5,),
+                                            Text("expired".tr(), style: TextStyle(
+                                                fontSize: 9.sp,
+                                                color: Colors.white
+                                            ),),
+                                          ],
                                         ),
                                       ),
 

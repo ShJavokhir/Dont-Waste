@@ -2,6 +2,7 @@ import 'package:dont_waste/app/modules/become_sponsor/controllers/become_sponsor
 import 'package:dont_waste/app/modules/choice_view/controllers/choice_view_controller.dart';
 import 'package:dont_waste/app/modules/choice_view/views/choice_view_view.dart';
 import 'package:dont_waste/app/modules/food_market/controllers/food_market_controller.dart';
+import 'package:dont_waste/app/modules/user_profile/controllers/user_data_controller.dart';
 import 'package:dont_waste/app/modules/user_profile/controllers/user_profile_controller.dart';
 import 'package:get/get.dart';
 
@@ -23,6 +24,7 @@ class FrameBinding extends Bindings {
     Get.lazyPut<BecomeSponsorController>(
           () => BecomeSponsorController(),
     );
+    Get.put(UserDataController());
 
   }
 }

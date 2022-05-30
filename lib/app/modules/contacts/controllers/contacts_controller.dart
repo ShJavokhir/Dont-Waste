@@ -1,9 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
-class AboutController extends GetxController {
+class ContactsController extends GetxController {
+  //TODO: Implement ContactsController
 
-
+  final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
@@ -16,7 +16,5 @@ class AboutController extends GetxController {
 
   @override
   void onClose() {}
-
-
-
+  void increment() => count.value++;
 }
