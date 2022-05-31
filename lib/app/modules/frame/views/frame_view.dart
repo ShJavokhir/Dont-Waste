@@ -89,7 +89,7 @@ class FrameView extends GetView<FrameController> {
                           onPressed: () {
                             Get.toNamed("/notifications");
                           },
-                          icon: Icon(Icons.notifications_rounded),
+                          icon: Icon(Icons.notifications_rounded, color: Colors.black87,),
                           iconSize: 20.sp,
                         ))
               ],
@@ -392,8 +392,8 @@ Drawer buildDrawer(BuildContext context) {
                 style: Theme.of(context).textTheme.titleMedium),
             onTap: () {
               Navigator.pop(context);
-
-            },
+              Get.toNamed('/about');
+              },
           ),
           ListTile(
             leading: Icon(Icons.question_mark_rounded),

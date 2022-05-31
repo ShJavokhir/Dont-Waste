@@ -8,6 +8,7 @@ class CustomTextField extends StatelessWidget {
   final bool isMultipleLine;
   final String defaultText;
   void Function(String) onChanged;
+  final bool? isEnabled;
   TextInputType? textInputType;
 
   CustomTextField(
@@ -15,7 +16,8 @@ class CustomTextField extends StatelessWidget {
       required this.onChanged,
       this.isMultipleLine = false,
       this.defaultText = "",
-      this.textInputType=TextInputType.text
+      this.textInputType=TextInputType.text,
+        this.isEnabled
       });
 
   @override
@@ -48,6 +50,7 @@ class CustomTextField extends StatelessWidget {
             borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
           ),
           child: TextField(
+            enabled: isEnabled ?? true,
             keyboardType: textInputType,
             maxLines: isMultipleLine ? 6 : 1,
             onChanged: onChanged,

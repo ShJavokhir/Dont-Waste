@@ -1,5 +1,6 @@
 import 'package:dont_waste/app/data/constants/colors.dart';
 import 'package:dont_waste/app/data/constants/constants.dart';
+import 'package:dont_waste/app/modules/user_profile/controllers/user_data_controller.dart';
 import 'package:dont_waste/app/widgets/snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -55,7 +56,7 @@ class BonusCoinsView extends GetView<BonusCoinsController> {
             Column(
 
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [Text("1200", style: Theme
+              children: [Text((Get.find<UserDataController>().userModel.bonusCoins ?? 0).toString(), style: Theme
                   .of(context)
                   .textTheme
                   .bodyLarge,),

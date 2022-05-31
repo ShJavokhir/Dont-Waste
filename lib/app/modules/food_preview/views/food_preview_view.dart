@@ -1,3 +1,4 @@
+import 'package:dont_waste/app/core/utils/datetime_utility.dart';
 import 'package:dont_waste/app/core/utils/map_utility.dart';
 import 'package:dont_waste/app/data/constants/colors.dart';
 import 'package:dont_waste/app/data/constants/constants.dart';
@@ -13,6 +14,7 @@ import 'package:url_launcher/url_launcher.dart';
 class FoodPreviewView extends GetView<FoodPreviewController> {
   @override
   Widget build(BuildContext context) {
+
     //print("debug" + controller.foodModel.photo_url);
     return Scaffold(
         backgroundColor: Colors.white,
@@ -20,12 +22,31 @@ class FoodPreviewView extends GetView<FoodPreviewController> {
           //automaticallyImplyLeading: false,
           title: Container(
             width: double.infinity,
-            child: Hero(
-              tag: controller.foodModel.id + '_foodTitleTag',
-              child: Text(
-                controller.foodModel.title ?? "null",
-                style: Theme.of(context).textTheme.bodyText2,
-              ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Hero(
+                  tag: controller.foodModel.id + '_foodTitleTag',
+                  child: Text(
+                    controller.foodModel.title ?? "null",
+                    style: Theme.of(context).textTheme.bodyText2,
+                  ),
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    color: black4,
+                    borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0)
+                  ),
+                  padding: EdgeInsets.all(5),
+                  child: Row(
+                    children: [
+                      Icon(Icons.calendar_month_rounded),
+                      SizedBox(width: 5,),
+                      Text(DateTimeUtility.getReadableTime(controller.foodModel.postedTimestamp), style: Theme.of(context).textTheme.bodyText2,),
+                    ],
+                  ),
+                )
+              ],
             ),
           ),
           centerTitle: true,
@@ -47,16 +68,48 @@ class FoodPreviewView extends GetView<FoodPreviewController> {
               Column(
                 children: [
                   Container(
+                    decoration: BoxDecoration(
+
+                    ),
                     padding: EdgeInsets.all(18),
                     child: Hero(
                       tag: controller.foodModel.id + 'foodImageTag',
-                      child: ClipRRect(
-                        borderRadius:
-                            BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
-                        child: controller.foodModel.photo_url!.contains("http")?Image.network(
-                          controller.foodModel.photo_url!,
-                          fit: BoxFit.cover,
-                        ):Image.asset('assets/images/default-photo.png',),
+                      child: Stack(
+                        children: [
+                          ClipRRect(
+                            borderRadius:
+                                BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
+                            child: controller.foodModel.photo_url!.contains("http")?Image.network(
+                              controller.foodModel.photo_url!,
+
+                              fit: BoxFit.cover,
+                            ):Container(
+                                child: Image.asset('assets/images/default-photo.png')),
+                          ),
+      Positioned(child: Container(
+        padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+        decoration: BoxDecoration(
+            boxShadow: <BoxShadow>[
+              new BoxShadow(
+                color: Colors.black54,
+                blurRadius: 5.0,
+                offset: new Offset(0.0, 2.0),
+              ),
+            ],
+
+            //color: Colors.grey.withOpacity(0.8),
+            color: Colors.orange,
+
+
+            borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0)
+        ),
+        child: Row(children: [
+          Icon(Icons.remove_red_eye, color: Colors.white, size: 12.sp,),
+          SizedBox(width: 5,),
+          Text("views".tr() + controller.foodModel.views.toString(), style: TextStyle(color: Colors.white, fontSize: 12.sp),),
+        ],),
+      ), right:  15, top: 15,)
+                        ],
                       ),
                     ),
                   ),
@@ -75,6 +128,13 @@ class FoodPreviewView extends GetView<FoodPreviewController> {
                                   child: Container(
                                     alignment: Alignment.center,
                                     decoration: BoxDecoration(
+                                        boxShadow: <BoxShadow>[
+                                          new BoxShadow(
+                                            color: Colors.black12,
+                                            blurRadius: 3.0,
+                                            offset: new Offset(1, 1),
+                                          ),
+                                        ],
                                         color: yellow1,
                                         borderRadius: BorderRadius.circular(24)),
                                     child: Row(
@@ -113,6 +173,13 @@ class FoodPreviewView extends GetView<FoodPreviewController> {
                                     alignment: Alignment.center,
                                     decoration: BoxDecoration(
                                         color: yellow1,
+                                        boxShadow: <BoxShadow>[
+                                          new BoxShadow(
+                                            color: Colors.black12,
+                                            blurRadius: 3.0,
+                                            offset: new Offset(1, 1),
+                                          ),
+                                        ],
                                         borderRadius: BorderRadius.circular(24)),
                                     child: Row(
                                       children: [
@@ -128,14 +195,19 @@ class FoodPreviewView extends GetView<FoodPreviewController> {
                                           width: 5,
                                         ),
                                         Expanded(
-                                          child: Text(
-                                             controller.foodModel.isDonation!?"0.0 UZS":controller.foodModel.price
-                                                    .toString() +
-                                                ' UZS',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                              fontSize: 12.sp,
-                                              color: Colors.white,
+                                          child: Container(
+                                            decoration: BoxDecoration(
+
+                                            ),
+                                            child: Text(
+                                               controller.foodModel.isDonation!?"0.0 UZS":controller.foodModel.price
+                                                      .toString() +
+                                                  ' UZS',
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                fontSize: 12.sp,
+                                                color: Colors.white,
+                                              ),
                                             ),
                                           ),
                                         )
@@ -158,6 +230,13 @@ class FoodPreviewView extends GetView<FoodPreviewController> {
                             // },
                             child: Container(
                               decoration: BoxDecoration(
+                                  boxShadow: <BoxShadow>[
+                                    new BoxShadow(
+                                      color: Colors.black12,
+                                      blurRadius: 3.0,
+                                      offset: new Offset(1, 1),
+                                    ),
+                                  ],
                                   //color: yellow1,
                                   borderRadius: BorderRadius.circular(24)),
                               child: ClipRRect(

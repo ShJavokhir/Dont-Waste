@@ -92,7 +92,15 @@ class UserProfileView extends GetView<UserProfileController> {
                           Text(controller.userData.value.rating.toString(),textAlign: TextAlign.center, style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Colors.green, fontSize: 10.sp),)
                         ],
                       ),
+                    ),
+                    SizedBox(width: 5,),
+                    GestureDetector(
+                      onTap: (){
+                        Get.toNamed('/edit-profile');
+                      },
+                      child: Icon(Icons.mode_edit_rounded, size: 12.sp),
                     )
+
                   ],
                 ),
                 SizedBox(height: 20),
@@ -345,6 +353,10 @@ class UserProfileView extends GetView<UserProfileController> {
                       isEatable: e.isEatable ?? true,
                       isTop: e.isTop ?? false,
                       onTop: (){
+                        if((e.isTop ?? false)){
+                          showInfoSnackbar("ad_is_already_on_top".tr());
+                          return;
+                        }
                         showDialog(
                           barrierDismissible: true,
                           context: Get.context!,

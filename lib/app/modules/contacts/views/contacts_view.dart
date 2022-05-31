@@ -66,6 +66,17 @@ class ContactsView extends GetView<ContactsController> {
                   height: 0,
                 ),
                 getContactTile(
+                    context, "Telegram news", "@DontWasteNews", () async{
+                  if (await canLaunch("https://t.me/DontWasteNews")) {
+                    launch("https://t.me/DontWasteNews");
+                  } else {
+                    showErrorSnackbar("unexpected_error".tr());
+                  }
+                }),
+                Divider(
+                  height: 0,
+                ),
+                getContactTile(
                     context, "TG help group", "@DontWasteGroup", () async{
                   if (await canLaunch("https://t.me/DontWasteGroup")) {
                   launch("https://t.me/DontWasteGroup");

@@ -26,8 +26,8 @@ class UserModel {
     fullName = json['fullName'];
     phoneNumber = json['phoneNumber'];
     photoUrl = json['photoUrl'];
-    balance = json['balance'];
-    bonusCoins = json['bonusCoins'];
+    balance = json['balance'] ?? 0;
+    bonusCoins = json['bonusCoins'] ?? 0;
     fcmToken = json['fcmToken'];
     rating = json['rating'];
     createdTimestamp = json['createdTimestamp'];
