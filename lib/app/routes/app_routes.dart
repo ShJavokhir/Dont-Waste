@@ -21,6 +21,7 @@ abstract class Routes {
   static const STATISTICS = _Paths.STATISTICS;
   static const CONTACTS = _Paths.CONTACTS;
   static const BONUS_COINS = _Paths.BONUS_COINS;
+  static const DONATION_LOCATIONS = _Paths.DONATION_LOCATIONS;
 }
 
 abstract class _Paths {
@@ -43,4 +44,5 @@ abstract class _Paths {
   static const STATISTICS = '/statistics';
   static const CONTACTS = '/contacts';
   static const BONUS_COINS = '/bonus-coins';
+  static const DONATION_LOCATIONS = '/donation-locations';
 }

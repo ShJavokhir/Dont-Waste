@@ -12,6 +12,8 @@ import '../modules/choice_view/bindings/choice_view_binding.dart';
 import '../modules/choice_view/views/choice_view_view.dart';
 import '../modules/contacts/bindings/contacts_binding.dart';
 import '../modules/contacts/views/contacts_view.dart';
+import '../modules/donation-locations/bindings/donation_locations_binding.dart';
+import '../modules/donation-locations/views/donation_locations_view.dart';
 import '../modules/edit_profile/bindings/edit_profile_binding.dart';
 import '../modules/edit_profile/views/edit_profile_view.dart';
 import '../modules/faq/bindings/faq_binding.dart';
@@ -142,6 +144,11 @@ class AppPages {
       name: _Paths.BONUS_COINS,
       page: () => BonusCoinsView(),
       binding: BonusCoinsBinding(),
+    ),
+    GetPage(
+      name: _Paths.DONATION_LOCATIONS,
+      page: () => DonationLocationsView(),
+      binding: DonationLocationsBinding(),
     ),
   ];
 }

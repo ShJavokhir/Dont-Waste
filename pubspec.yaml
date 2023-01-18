@@ -60,6 +60,7 @@ flutter:
       - assets/images/bell.gif
       - assets/images/discount.png
       - assets/images/coins.png
+      - assets/images/placeholder.png
   uses-material-design: true
 flutter_icons:
   android: "launcher_icon"

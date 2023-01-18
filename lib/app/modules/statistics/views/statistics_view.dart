@@ -37,8 +37,7 @@ class StatisticsView extends GetView<StatisticsController> {
                   Align(
                     //alignment: Alignment.center,
                     child: Stack(
-                      overflow: Overflow.visible,
-                      children: [
+                      clipBehavior: Clip.none, children: [
                         Container(
                           padding: EdgeInsets.only(right: 20),
                           height: 100,
@@ -71,8 +70,7 @@ class StatisticsView extends GetView<StatisticsController> {
                   Align(
                     //alignment: Alignment.center,
                     child: Stack(
-                      overflow: Overflow.visible,
-                      children: [
+                      clipBehavior: Clip.none, children: [
                         Container(
                             padding: EdgeInsets.only(left: 20),
                             height: 100,
@@ -105,8 +103,7 @@ class StatisticsView extends GetView<StatisticsController> {
                   Align(
                     //alignment: Alignment.center,
                     child: Stack(
-                      overflow: Overflow.visible,
-                      children: [
+                      clipBehavior: Clip.none, children: [
                         Container(
                             padding: EdgeInsets.only(right: 20),
                             height: 100,

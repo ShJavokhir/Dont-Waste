@@ -21,7 +21,6 @@ import 'package:easy_localization/easy_localization.dart';
 class BecomeSponsorView extends GetView<BecomeSponsorController> {
   @override
   Widget build(BuildContext context) {
-
     //controller.increment();
     return SafeArea(
       child: Scaffold(
@@ -72,12 +71,10 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
         body: Container(
           padding: EdgeInsets.symmetric(horizontal: 18),
           child: SingleChildScrollView(
-            physics: BouncingScrollPhysics(
-                parent: AlwaysScrollableScrollPhysics()),
-
+            physics:
+                BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
             child: Obx(
-                () => Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              () => Column(crossAxisAlignment: CrossAxisAlignment.start,
                   // addRepaintBoundaries: false,
 
                   children: [
@@ -103,14 +100,16 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                       height: 20,
                     ),
                     Container(
-                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                       // margin:
                       // EdgeInsets.symmetric(horizontal: DEFAULT_PADDING * 1.0),
                       height: 60,
                       width: double.infinity,
                       decoration: BoxDecoration(
                         color: black4,
-                        borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
+                        borderRadius:
+                            BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
                       ),
                       child: Row(
                         children: [
@@ -125,16 +124,15 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                             height: double.infinity,
                             //width: 150,
                             child: CupertinoSwitch(
-                                onChanged: (value){
-                                  controller.isDonation.value = value;
-                                },
-                                value: controller.isDonation.value,
-                                activeColor: yellow1,
-                                //activeTrackColor: Colors.yellow,
-                                //inactiveThumbColor: Colors.redAccent,
-                                //inactiveTrackColor: Colors.orange,
-                              ),
-
+                              onChanged: (value) {
+                                controller.isDonation.value = value;
+                              },
+                              value: controller.isDonation.value,
+                              activeColor: yellow1,
+                              //activeTrackColor: Colors.yellow,
+                              //inactiveThumbColor: Colors.redAccent,
+                              //inactiveTrackColor: Colors.orange,
+                            ),
                           )
                         ],
                       ),
@@ -143,14 +141,16 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                       height: 20,
                     ),
                     Container(
-                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                       // margin:
                       // EdgeInsets.symmetric(horizontal: DEFAULT_PADDING * 1.0),
                       height: 60,
                       width: double.infinity,
                       decoration: BoxDecoration(
                         color: black4,
-                        borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
+                        borderRadius:
+                            BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
                       ),
                       child: Row(
                         children: [
@@ -160,13 +160,13 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                           ),
                           Spacer(),
                           Container(
-                            //padding: EdgeInsets.symmetric(horizontal: 10),
+                              //padding: EdgeInsets.symmetric(horizontal: 10),
                               alignment: Alignment.center,
                               height: double.infinity,
                               //width: 150,
                               child: Obx(
-                                    ()=> CupertinoSwitch(
-                                  onChanged: (value){
+                                () => CupertinoSwitch(
+                                  onChanged: (value) {
                                     controller.isEatable.value = value;
                                   },
                                   value: controller.isEatable.value,
@@ -175,22 +175,89 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                                   //inactiveThumbColor: Colors.redAccent,
                                   //inactiveTrackColor: Colors.orange,
                                 ),
-                              )
-                          )
+                              ))
                         ],
                       ),
                     ),
-                    SizedBox(height: 20,),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    controller.isDonation.value && controller.isEatable.value?
+                    GestureDetector(
+                      onTap: (){
+                        Get.toNamed("/donation-locations");
+                      },
+                      child: Container(
+                        padding:
+                        EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                        // margin:
+                        // EdgeInsets.symmetric(horizontal: DEFAULT_PADDING * 1.0),
+                        height: 60,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: black4,
+                          borderRadius:
+                          BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
+                        ),
+                        child: Row(children: [
+                          Icon(Icons.location_on_rounded),
+                          SizedBox(width: 12,),
+                          FittedBox(
+                            fit: BoxFit.fitWidth,
+
+                            child: Text(
+                              "show_orphans".tr(),
+                              style: TextStyle(fontSize: 9.sp),
+                            ),
+                          ),
+
+                          Spacer(),
+                          Icon(Icons.keyboard_arrow_right_rounded)
+                        ]),
+
+                      ),
+                    ) :controller.isDonation.value && !controller.isEatable.value?
+                    GestureDetector(
+                      onTap: (){
+                        Get.toNamed("/donation-locations");
+                      },
+                      child: Container(
+                        padding:
+                        EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                        // margin:
+                        // EdgeInsets.symmetric(horizontal: DEFAULT_PADDING * 1.0),
+                        height: 60,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: black4,
+                          borderRadius:
+                          BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
+                        ),
+                        child: Row(children: [
+                          Icon(Icons.location_on_rounded),
+                          SizedBox(width: 12,),
+                          Text(
+                            "show_farms".tr(),
+                            style: TextStyle(fontSize: 12.sp),
+                          ),
+                          Spacer(),
+                          Icon(Icons.keyboard_arrow_right_rounded)
+                        ]),
+
+                      ),
+                    ):Container(),
+                    SizedBox(height: 20),
                     Row(
                       children: [
                         Flexible(
                           child: CustomTextField(
-                            textInputType: TextInputType.number,
+                              textInputType: TextInputType.number,
                               hint: "quantity".tr(),
                               isMultipleLine: false,
                               onChanged: (text) {
                                 if (text.isNumericOnly) {
-                                  controller.quantity.value = double.parse(text);
+                                  controller.quantity.value =
+                                      double.parse(text);
                                 } else {
                                   // Get.snackbar(
                                   //     "error".tr(), "qnt_shoud_be_number".tr());
@@ -201,7 +268,7 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                           width: 10,
                         ),
                         Obx(
-                          ()=> Visibility(
+                          () => Visibility(
                             visible: !controller.isDonation.value,
                             child: Flexible(
                               child: CustomTextField(
@@ -210,7 +277,8 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                                   isMultipleLine: false,
                                   onChanged: (text) {
                                     if (text.isNumericOnly) {
-                                      controller.price.value = double.parse(text);
+                                      controller.price.value =
+                                          double.parse(text);
                                     } else {
                                       //Get.snackbar("error".tr(), "prc_should_be_number".tr());
                                     }
@@ -220,7 +288,9 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 20,),
+                    SizedBox(
+                      height: 20,
+                    ),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 20),
                       child: Text(
@@ -237,29 +307,27 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                       height: 8,
                     ),
                     Container(
-                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                       // margin:
                       // EdgeInsets.symmetric(horizontal: DEFAULT_PADDING * 1.0),
                       height: 60,
                       width: double.infinity,
                       decoration: BoxDecoration(
                         color: black4,
-                        borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
+                        borderRadius:
+                            BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
                       ),
                       child: DropdownButton<String>(
                         isExpanded: true,
                         underline: Container(),
                         value: controller.category.value,
                         selectedItemBuilder: (_) {
-
-                          return  Constants().categories.map((String choice) {
+                          return Constants().categories.map((String choice) {
                             return Center(
                               child: Container(
                                 width: double.infinity,
-
-                                child:  Text(choice.tr()),
-
-
+                                child: Text(choice.tr()),
                               ),
                             );
                           }).toList();
@@ -268,9 +336,7 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                           return DropdownMenuItem<String>(
                             value: choice,
                             child: Row(
-                              children: [
-                                Text(choice.tr())
-                              ],
+                              children: [Text(choice.tr())],
                             ),
                           );
                         }).toList(),
@@ -299,34 +365,47 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                       height: 8,
                     ),
                     GestureDetector(
-                      onTap: (){
+                      onTap: () {
                         controller.pickImage();
                       },
                       child: Container(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        //Type TextField
-                        width: double.infinity,
-                        height: 60,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          color: black4,
-                          borderRadius: BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Obx(() => Icon(!controller.didImageSelected.value?Icons.image:Icons.done, color: !controller.didImageSelected.value?yellow1:Colors.green,)),
-                            SizedBox(width: 8,),
-                            Obx( () =>
-                               Text(!controller.didImageSelected.value?"select_image".tr():"image_selected".tr(), style: TextStyle(
-                                color: !controller.didImageSelected.value?yellow1:Colors.green,
-                                fontSize: 14.sp,
-                              ),)
-
-                            )
-                          ],
-                        )
-                      ),
+                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          //Type TextField
+                          width: double.infinity,
+                          height: 60,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: black4,
+                            borderRadius:
+                                BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Obx(() => Icon(
+                                    !controller.didImageSelected.value
+                                        ? Icons.image
+                                        : Icons.done,
+                                    color: !controller.didImageSelected.value
+                                        ? yellow1
+                                        : Colors.green,
+                                  )),
+                              SizedBox(
+                                width: 8,
+                              ),
+                              Obx(() => Text(
+                                    !controller.didImageSelected.value
+                                        ? "select_image".tr()
+                                        : "image_selected".tr(),
+                                    style: TextStyle(
+                                      color: !controller.didImageSelected.value
+                                          ? yellow1
+                                          : Colors.green,
+                                      fontSize: 14.sp,
+                                    ),
+                                  ))
+                            ],
+                          )),
                     ),
                     //image here
                     SizedBox(
@@ -354,15 +433,15 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                         await Permission.locationWhenInUse.request();
                         await Permission.location.request();
                         if (status.isDenied) {
-                          Get.snackbar("error".tr(),
-                              "location_perm_denied".tr());
+                          Get.snackbar(
+                              "error".tr(), "location_perm_denied".tr());
                           // We didn't ask for permission yet or the permission has been denied before but not permanently.
                         }
 
 // You can can also directly ask the permission about its status.
                         if (await Permission.location.isRestricted) {
-                          Get.snackbar("error".tr(),
-                              "location_perm_denied".tr());
+                          Get.snackbar(
+                              "error".tr(), "location_perm_denied".tr());
                           // The OS restricts access, for example because of parental controls.
                         }
                         //should show on map
@@ -381,21 +460,23 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                                       vertical: 0, horizontal: 5),
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.all(
-                                          Radius.circular(BORDER_RADIUS_1 * 1.0))),
+                                          Radius.circular(
+                                              BORDER_RADIUS_1 * 1.0))),
                                   content: Builder(
                                     builder: (context) {
                                       // Get available height and width of the build area of this widget. Make a choice depending on the size.
                                       var height =
                                           MediaQuery.of(context).size.height;
-                                      var width = MediaQuery.of(context).size.width;
+                                      var width =
+                                          MediaQuery.of(context).size.width;
 
                                       return Container(
                                         //padding: EdgeInsets.all(50),
                                         //height: 50.h,
                                         width: 85.w,
                                         height: 40.h,
-                                        child: LayoutBuilder(
-                                            builder: (BuildContext context,
+                                        child: LayoutBuilder(builder:
+                                            (BuildContext context,
                                                 BoxConstraints constraints) {
                                           return Stack(
                                               alignment: Alignment(0.0, 0.0),
@@ -424,14 +505,16 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                                                             (onCameraMove) {
                                                           print("hello 1");
                                                           //print("moved 22");
-                                                          controller
-                                                                  .longitude.value =
+                                                          controller.longitude
+                                                                  .value =
                                                               onCameraMove
-                                                                  .target.longitude;
-                                                          controller
-                                                                  .latitude.value =
+                                                                  .target
+                                                                  .longitude;
+                                                          controller.latitude
+                                                                  .value =
                                                               onCameraMove
-                                                                  .target.latitude;
+                                                                  .target
+                                                                  .latitude;
                                                           // print(onCameraMove.target.latitude.toString());
                                                           // print(onCameraMove.target.longitude.toString());
                                                         },
@@ -439,9 +522,11 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                                                             CameraPosition(
                                                           target: LatLng(
                                                               controller
-                                                                  .latitude.value,
+                                                                  .latitude
+                                                                  .value,
                                                               controller
-                                                                  .longitude.value),
+                                                                  .longitude
+                                                                  .value),
                                                           zoom: 13.0,
                                                         ),
                                                       ),
@@ -471,8 +556,8 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                                           flex: 1,
                                           child: ElevatedButton(
                                             onPressed: () {
-                                              controller.isLocationSelected.value =
-                                                  true;
+                                              controller.isLocationSelected
+                                                  .value = true;
                                               controller.moveCamera();
                                               //print(controller.longitude.value.toString());
                                               Navigator.of(context).pop();
@@ -492,15 +577,16 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
 
                                               elevation: 0,
                                               shape: RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.circular(
-                                                    BORDER_RADIUS_1 * 1.0),
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        BORDER_RADIUS_1 * 1.0),
                                               ),
                                               shadowColor: Colors.transparent,
                                               //side: BorderSide(width: 1, color: Colors.green),
                                               primary: green2,
                                               // <-- Button color
-                                              onPrimary:
-                                                  Colors.white, // <-- Splash color
+                                              onPrimary: Colors
+                                                  .white, // <-- Splash color
                                             ),
                                           ),
                                         ),
@@ -539,7 +625,8 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                                         mapType: MapType.normal,
 
                                         initialCameraPosition: CameraPosition(
-                                          target: LatLng(controller.latitude.value,
+                                          target: LatLng(
+                                              controller.latitude.value,
                                               controller.longitude.value),
                                           zoom: 13.0,
                                         ),
@@ -574,9 +661,11 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                                                       "location",
                                                       style: TextStyle(
                                                           fontSize: 18.sp),
-                                                      textAlign: TextAlign.center,
+                                                      textAlign:
+                                                          TextAlign.center,
                                                     ),
-                                                    insetPadding: EdgeInsets.zero,
+                                                    insetPadding:
+                                                        EdgeInsets.zero,
                                                     contentPadding:
                                                         EdgeInsets.all(15),
                                                     actionsPadding:
@@ -592,11 +681,13 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                                                       builder: (context) {
                                                         // Get available height and width of the build area of this widget. Make a choice depending on the size.
                                                         var height =
-                                                            MediaQuery.of(context)
+                                                            MediaQuery.of(
+                                                                    context)
                                                                 .size
                                                                 .height;
                                                         var width =
-                                                            MediaQuery.of(context)
+                                                            MediaQuery.of(
+                                                                    context)
                                                                 .size
                                                                 .width;
 
@@ -605,88 +696,81 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                                                           //height: 50.h,
                                                           width: 85.w,
                                                           height: 40.h,
-                                                          child: LayoutBuilder(builder:
-                                                              (BuildContext
+                                                          child: LayoutBuilder(
+                                                              builder: (BuildContext
                                                                       context,
                                                                   BoxConstraints
                                                                       constraints) {
                                                             return Stack(
-                                                            alignment:
-                                                                Alignment(
-                                                                    0.0, 0.0),
-                                                            children: <Widget>[
-                                                              Container(
-                                                                  padding:
-                                                                      EdgeInsets
-                                                                          .all(
+                                                                alignment:
+                                                                    Alignment(
+                                                                        0.0,
+                                                                        0.0),
+                                                                children: <
+                                                                    Widget>[
+                                                                  Container(
+                                                                      padding:
+                                                                          EdgeInsets.all(
                                                                               15),
-                                                                  width: double
-                                                                      .infinity,
-                                                                  //height: 100,
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    color:
-                                                                        black4,
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(BORDER_RADIUS_1 *
-                                                                            1.0),
-                                                                  ),
-                                                                  child:
-                                                                      ClipRRect(
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(BORDER_RADIUS_1 *
-                                                                            1.0),
-                                                                    child:
-                                                                        GoogleMap(
-                                                                      myLocationButtonEnabled:
-                                                                          true,
-                                                                      myLocationEnabled:
-                                                                          true,
-                                                                      onCameraMove:
-                                                                          (onCameraMove) {
-                                                                        print(
-                                                                            "hello 2");
-                                                                        controller
-                                                                            .longitude
-                                                                            .value = onCameraMove.target.longitude;
-                                                                        controller
-                                                                            .latitude
-                                                                            .value = onCameraMove.target.latitude;
-
-                                                                        print(onCameraMove
-                                                                            .target
-                                                                            .latitude
-                                                                            .toString());
-                                                                        // print(onCameraMove.target.longitude.toString());
-                                                                      },
-                                                                      initialCameraPosition:
-                                                                          CameraPosition(
-                                                                        target: LatLng(
-                                                                            controller.latitude.value,
-                                                                            controller.longitude.value),
-                                                                        zoom:
-                                                                            13.0,
+                                                                      width: double
+                                                                          .infinity,
+                                                                      //height: 100,
+                                                                      decoration:
+                                                                          BoxDecoration(
+                                                                        color:
+                                                                            black4,
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(BORDER_RADIUS_1 *
+                                                                                1.0),
                                                                       ),
+                                                                      child:
+                                                                          ClipRRect(
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(BORDER_RADIUS_1 *
+                                                                                1.0),
+                                                                        child:
+                                                                            GoogleMap(
+                                                                          myLocationButtonEnabled:
+                                                                              true,
+                                                                          myLocationEnabled:
+                                                                              true,
+                                                                          onCameraMove:
+                                                                              (onCameraMove) {
+                                                                            print("hello 2");
+                                                                            controller.longitude.value =
+                                                                                onCameraMove.target.longitude;
+                                                                            controller.latitude.value =
+                                                                                onCameraMove.target.latitude;
+
+                                                                            print(onCameraMove.target.latitude.toString());
+                                                                            // print(onCameraMove.target.longitude.toString());
+                                                                          },
+                                                                          initialCameraPosition:
+                                                                              CameraPosition(
+                                                                            target:
+                                                                                LatLng(controller.latitude.value, controller.longitude.value),
+                                                                            zoom:
+                                                                                13.0,
+                                                                          ),
+                                                                        ),
+                                                                      )),
+                                                                  Positioned(
+                                                                    top: (constraints.maxHeight -
+                                                                            25.sp) /
+                                                                        2,
+                                                                    right: (constraints.maxWidth -
+                                                                            25.sp) /
+                                                                        2,
+                                                                    child: Icon(
+                                                                      Icons
+                                                                          .person_pin_circle,
+                                                                      size:
+                                                                          25.sp,
+                                                                      color:
+                                                                          yellow1,
                                                                     ),
-                                                                  )),
-                                                              Positioned(
-                                                                top: (constraints
-                                                                            .maxHeight -
-                                                                        25.sp) /
-                                                                    2,
-                                                                right: (constraints
-                                                                            .maxWidth -
-                                                                        25.sp) /
-                                                                    2,
-                                                                child: Icon(
-                                                                  Icons
-                                                                      .person_pin_circle,
-                                                                  size: 25.sp,
-                                                                  color:
-                                                                      yellow1,
-                                                                ),
-                                                              )
-                                                            ]);
+                                                                  )
+                                                                ]);
                                                           }),
                                                         );
                                                       },
@@ -696,7 +780,8 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                                                         children: [
                                                           Expanded(
                                                             flex: 1,
-                                                            child: ElevatedButton(
+                                                            child:
+                                                                ElevatedButton(
                                                               onPressed: () {
                                                                 controller
                                                                     .moveCamera();
@@ -712,31 +797,33 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                                                               child: Container(
                                                                   padding:
                                                                       EdgeInsets
-                                                                          .all(15),
+                                                                          .all(
+                                                                              15),
                                                                   //width: double.infinity,
                                                                   alignment:
                                                                       Alignment
                                                                           .center,
                                                                   child: Text(
-                                                                    "select".tr(),
+                                                                    "select"
+                                                                        .tr(),
                                                                     style: TextStyle(
                                                                         color: Colors
                                                                             .black87,
                                                                         fontSize:
                                                                             15.sp),
                                                                   )),
-                                                              style: ElevatedButton
-                                                                  .styleFrom(
+                                                              style:
+                                                                  ElevatedButton
+                                                                      .styleFrom(
                                                                 //padding: EdgeInsets.all(20),
 
                                                                 elevation: 0,
                                                                 shape:
                                                                     RoundedRectangleBorder(
                                                                   borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              BORDER_RADIUS_1 *
-                                                                                  1.0),
+                                                                      BorderRadius.circular(
+                                                                          BORDER_RADIUS_1 *
+                                                                              1.0),
                                                                 ),
                                                                 shadowColor: Colors
                                                                     .transparent,
@@ -758,15 +845,19 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                                         //liteModeEnabled: true,
                                       ),
                                       Positioned(
-                                          top: (constraints.maxHeight - 25.sp) / 2,
-                                          right: (constraints.maxWidth - 25.sp) / 2,
+                                          top: (constraints.maxHeight - 25.sp) /
+                                              2,
+                                          right:
+                                              (constraints.maxWidth - 25.sp) /
+                                                  2,
                                           child: Container(
                                             width: 25.sp,
                                             height: 25.sp,
                                             decoration: BoxDecoration(
                                                 shape: BoxShape.circle,
                                                 border: Border.all(
-                                                    color: Colors.red, width: 3)),
+                                                    color: Colors.red,
+                                                    width: 3)),
                                           ))
                                     ],
                                   );
@@ -794,7 +885,8 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                                         width: 5,
                                       ),
                                       Text("select_location".tr(),
-                                          style: TextStyle(color: Colors.black87)),
+                                          style:
+                                              TextStyle(color: Colors.black87)),
                                     ],
                                   )),
                                 ),
@@ -808,7 +900,9 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                       height: 20,
                     ),
                     CustomTextField(
-                      defaultText: FirebaseAuth.instance.currentUser!.phoneNumber.toString(),
+                        defaultText: FirebaseAuth
+                            .instance.currentUser!.phoneNumber
+                            .toString(),
                         hint: "phone_number".tr(),
                         textInputType: TextInputType.phone,
                         isMultipleLine: false,
@@ -848,8 +942,8 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                             style: ElevatedButton.styleFrom(
                               //padding: EdgeInsets.all(20),
                               shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
+                                borderRadius: BorderRadius.circular(
+                                    BORDER_RADIUS_1 * 1.0),
                               ),
                               //side: BorderSide(width: 1, color: Colors.green),
                               primary: blue1, // <-- Button color
@@ -880,8 +974,8 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                             style: ElevatedButton.styleFrom(
                               //padding: EdgeInsets.all(20),
                               shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.circular(BORDER_RADIUS_1 * 1.0),
+                                borderRadius: BorderRadius.circular(
+                                    BORDER_RADIUS_1 * 1.0),
                               ),
                               //side: BorderSide(width: 1, color: Colors.green),
                               primary: red1, // <-- Button color
@@ -891,7 +985,9 @@ class BecomeSponsorView extends GetView<BecomeSponsorController> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 10,),
+                    SizedBox(
+                      height: 10,
+                    ),
                   ]),
             ),
           ),
