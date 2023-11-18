@@ -11,7 +11,8 @@ import 'package:dont_waste/app/widgets/custom_loader_dialog.dart';
 import 'package:dont_waste/app/widgets/single_food_order.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:geoflutterfire/geoflutterfire.dart';
+// import 'package:geoflutterfire/geoflutterfire.dart';
+import 'package:geoflutterfire2/geoflutterfire2.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart' hide Trans;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -20,16 +21,19 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class NearbyFoodsController extends GetxController {
-
   Future<Uint8List> getBytesFromAsset(String path, int width) async {
     ByteData data = await rootBundle.load(path);
-    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(), targetWidth: width);
+    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(),
+        targetWidth: width);
     ui.FrameInfo fi = await codec.getNextFrame();
-    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!.buffer.asUint8List();
+    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!
+        .buffer
+        .asUint8List();
   }
+
   //TODO: Implement NearbyFoodsController
   GoogleMapController? controller;
-  final geo = Geoflutterfire();
+  final geo = GeoFlutterFire();
 
   Map<MarkerId, Marker> markers = <MarkerId, Marker>{}.obs;
   final foods = <Food>[].obs;
@@ -38,8 +42,7 @@ class NearbyFoodsController extends GetxController {
   Position? usersLocation;
   late FirebaseFirestore firestore;
   @override
-  void onInit()async {
-
+  void onInit() async {
     firestore = FirebaseFirestore.instance;
     // showDialog(
     //   barrierDismissible: false,
@@ -61,20 +64,24 @@ class NearbyFoodsController extends GetxController {
     //       "location_perm_denied".tr());
     //   // We didn't ask for permission yet or the permission has been denied before but not permanently.
     // }
-    await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high).then((value) => {
-      print("device location found" + '${value.latitude},${value.longitude}'),
-      usersLocation = value,
-
-
-    }).catchError((error, stackTrace)  {
-      print("device location error: " + error.toString() + " | " + stackTrace.toString());
+    await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high)
+        .then((value) => {
+              print("device location found" +
+                  '${value.latitude},${value.longitude}'),
+              usersLocation = value,
+            })
+        .catchError((error, stackTrace) {
+      print("device location error: " +
+          error.toString() +
+          " | " +
+          stackTrace.toString());
       showDialog(
         barrierDismissible: false,
         context: Get.context!,
         builder: (BuildContext context) {
           return CustomErrorDialog(
-          text: error.toString() + "gps_error".tr(),
-    );
+            text: error.toString() + "gps_error".tr(),
+          );
           // return CustomComfirmationDialog(
           //   onCancel: () {},
           //   onConfirm: () {},
@@ -82,8 +89,8 @@ class NearbyFoodsController extends GetxController {
           // );
         },
       ).then((value) => {
-        Get.back(),
-      });
+            Get.back(),
+          });
     });
 
     showDialog(
@@ -101,7 +108,7 @@ class NearbyFoodsController extends GetxController {
     // Get.back();
     // Create a geoFirePoint
     // final center = GeoFirePoint(48.85806075757082,2.294355558423788);
-     // CLASS MEMBER, MAP OF MARKS
+    // CLASS MEMBER, MAP OF MARKS
 
 // get the collection reference or query
     foods.value = await fetchFoods();
@@ -111,21 +118,23 @@ class NearbyFoodsController extends GetxController {
 
 // make sure to initialize before map loading
     await BitmapDescriptor.fromAssetImage(
-        ImageConfiguration(size: Size(0.1, 0.1)), 'assets/images/food-delivery.png', )
-
-        .then((onValue) {
+      ImageConfiguration(size: Size(0.1, 0.1)),
+      'assets/images/food-delivery.png',
+    ).then((onValue) {
       customIcon = onValue;
     });
-    final Uint8List markerIcon = await getBytesFromAsset('assets/images/food-delivery.png', 100);
+    final Uint8List markerIcon =
+        await getBytesFromAsset('assets/images/food-delivery.png', 100);
 
     //if(customIcon == null) return;
     foods.value.forEach((element) {
       //markers.addAll(other)
       Marker marker = Marker(
-        markerId: MarkerId(element.id),
-        position:LatLng(element.location!.latitude, element.location!.longitude),
-        icon: BitmapDescriptor.fromBytes(markerIcon),
-          onTap: (){
+          markerId: MarkerId(element.id),
+          position:
+              LatLng(element.location!.latitude, element.location!.longitude),
+          icon: BitmapDescriptor.fromBytes(markerIcon),
+          onTap: () {
             showModalBottomSheet(
                 isDismissible: true,
                 shape: RoundedRectangleBorder(
@@ -138,29 +147,28 @@ class NearbyFoodsController extends GetxController {
                 builder: (builder) {
                   return Container(
                     height: 350.0,
-                    color: Colors.transparent, //could change this to Color(0xFF737373),
+                    color: Colors
+                        .transparent, //could change this to Color(0xFF737373),
                     //so you don't have to change MaterialApp canvasColor
                     child: Container(
                         padding: EdgeInsets.all(DEFAULT_PADDING * 1.0),
-                        decoration:  BoxDecoration(
+                        decoration: BoxDecoration(
                             color: Colors.white,
-                            borderRadius:  BorderRadius.only(
+                            borderRadius: BorderRadius.only(
                                 topLeft: const Radius.circular(40.0),
                                 topRight: const Radius.circular(40.0))),
                         child: Column(
                           children: [
                             Text("food".tr()),
-                            SizedBox(height: 20,),
+                            SizedBox(
+                              height: 20,
+                            ),
                             getSingleFoodOrderForId(element.id)
-
                           ],
-                        )
-                    ),
+                        )),
                   );
                 });
-
-        }
-      );
+          });
       print("here is it");
       markers[MarkerId(element.id)] = marker;
     });
@@ -176,11 +184,12 @@ class NearbyFoodsController extends GetxController {
 
   @override
   void onReady() {
-    controller!.moveCamera(CameraUpdate.newLatLng(LatLng(usersLocation!.latitude, usersLocation!.longitude)));
+    controller!.moveCamera(CameraUpdate.newLatLng(
+        LatLng(usersLocation!.latitude, usersLocation!.longitude)));
     super.onReady();
   }
-  Future<List<Food>> fetchFoods() async {
 
+  Future<List<Food>> fetchFoods() async {
     final List<Food> foods = [];
 
     //GeoFirePoint position = geo.point(latitude: usersLocation!.latitude,longitude: usersLocation!.longitude);
@@ -188,22 +197,24 @@ class NearbyFoodsController extends GetxController {
     QuerySnapshot querySnapshot;
     double lat = 0.0144927536231884;
     double lon = 0.0181818181818182;
-    double distance = 1500*0.000621371;
+    double distance = 1500 * 0.000621371;
     double lowerLat = usersLocation!.latitude - (lat * distance);
     double lowerLon = usersLocation!.longitude - (lon * distance);
     double greaterLat = usersLocation!.latitude + (lat * distance);
     double greaterLon = usersLocation!.longitude + (lon * distance);
-    GeoPoint lesserGeopoint = GeoPoint(lowerLat,lowerLon);
-    GeoPoint greaterGeopoint = GeoPoint(greaterLat,greaterLon);
+    GeoPoint lesserGeopoint = GeoPoint(lowerLat, lowerLon);
+    GeoPoint greaterGeopoint = GeoPoint(greaterLat, greaterLon);
     // querySnapshot = await usersRef
     //     .get();
     //print("location before getting posts: ${usersLocation!.latitude},${usersLocation!.longitude}" );
-    await firestore.collection("posts")
-    //this should be checked again
-    // .where("location", isGreaterThan: lesserGeopoint)
+    await firestore
+        .collection("posts")
+        //this should be checked again
+        // .where("location", isGreaterThan: lesserGeopoint)
         // .where("location", isLessThan: greaterGeopoint)
         .limit(100)
-        .get().then((value) {
+        .get()
+        .then((value) {
       //print(value.size);
       value.docs.forEach((element) {
         final food = Food.fromJson(element.data());
@@ -216,22 +227,34 @@ class NearbyFoodsController extends GetxController {
     });
     return foods;
   }
+
   @override
   void onClose() {}
   void increment() => count.value++;
-  Widget getSingleFoodOrderForId(String id){
+  Widget getSingleFoodOrderForId(String id) {
     final food = getFoodById(id);
-    return SingleFoodOrder(id: food.id, onPressed: (){
-      FoodPreviewBinding().dependencies();
-      Get.find<FoodPreviewController>().foodModel = food;
-      Get.toNamed("/food-preview");
-    }, title: food.title!, price: food.price!, location: food.city!, isDonation: food.isDonation ?? false, photo_url: food.photo_url ?? "no", postedTimestamp: food.postedTimestamp, isEatable: food.isEatable ?? true, isTop: food.isTop ?? false,);
+    return SingleFoodOrder(
+      id: food.id,
+      onPressed: () {
+        FoodPreviewBinding().dependencies();
+        Get.find<FoodPreviewController>().foodModel = food;
+        Get.toNamed("/food-preview");
+      },
+      title: food.title!,
+      price: food.price!,
+      location: food.city!,
+      isDonation: food.isDonation ?? false,
+      photo_url: food.photo_url ?? "no",
+      postedTimestamp: food.postedTimestamp,
+      isEatable: food.isEatable ?? true,
+      isTop: food.isTop ?? false,
+    );
   }
-  Food getFoodById(String id){
 
-    for(int i=0;i<foods.value.length; i++){
+  Food getFoodById(String id) {
+    for (int i = 0; i < foods.value.length; i++) {
       //print(foods.value[i].)
-      if(foods.value[i].id == id) return foods.value[i];
+      if (foods.value[i].id == id) return foods.value[i];
     }
     print("Food not found getFoodById: " + id);
     return Food();

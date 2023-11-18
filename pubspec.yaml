@@ -1,5 +1,5 @@
 name: dont_waste
-version: 1.1.0+2
+version: 1.2.0+3
 publish_to: none
 description: A new Flutter project.
 environment: 
@@ -12,21 +12,27 @@ dependencies:
     sdk: flutter
   sizer: ^2.0.15
   google_fonts: ^2.2.0
-  firebase_core: 1.12.0
-  cloud_firestore: 3.1.8
+  # firebase_core: 1.12.0
+  firebase_core: ^2.22.0
+  # cloud_firestore: 3.1.8
+  cloud_firestore: ^4.13.1
   google_maps_flutter: ^2.1.1
-  firebase_auth: 3.3.7
+  # firebase_auth: 3.3.7
+  firebase_auth: ^4.14.0
   permission_handler: ^9.1.0
   geocoding: ^2.0.2
   url_launcher: ^6.0.20
-  firebase_storage: ^10.2.9
+  # firebase_storage: ^10.2.9
+  firebase_storage: ^11.5.1
   image_picker: ^0.8.4+11
   uuid: ^3.0.6
   easy_localization: ^3.0.0
-  geoflutterfire: ^3.0.3
+  # geoflutterfire: ^3.0.3
+  geoflutterfire2: ^2.3.15
   geolocator: ^8.2.0
   shared_preferences: ^2.0.13
-  firebase_messaging: ^11.4.1
+  # firebase_messaging: ^11.4.1
+  firebase_messaging: ^14.7.4
 
 dev_dependencies: 
   flutter_lints: ^1.0.0

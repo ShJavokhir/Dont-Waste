@@ -11,7 +11,8 @@ import 'package:dont_waste/app/widgets/custom_loader_dialog.dart';
 import 'package:dont_waste/app/widgets/single_food_order.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:geoflutterfire/geoflutterfire.dart';
+// import 'package:geoflutterfire/geoflutterfire.dart';
+import 'package:geoflutterfire2/geoflutterfire2.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart' hide Trans;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -32,7 +33,7 @@ class DonationLocationsController extends GetxController {
 
   //TODO: Implement NearbyFoodsController
   GoogleMapController? controller;
-  final geo = Geoflutterfire();
+  final geo = GeoFlutterFire();
 
   Map<MarkerId, Marker> markers = <MarkerId, Marker>{}.obs;
   final foods = <Food>[].obs;
